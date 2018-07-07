@@ -24,8 +24,8 @@ target_link_libraries(nibbler)
 
 include_directories(inc/
         nibbler_glfw/inc
-        nibbler_glfw/libGlew/inc
-        nibbler_glfw/glfw/include
-        nibbler_glfw/stb/
-        nibbler_glfw/glm/
+        nibbler_glfw/lib/glad/build/include/
+        nibbler_glfw/lib/glfw/include
+        nibbler_glfw/lib/stb/
+        nibbler_glfw/lib/glm/
                     )

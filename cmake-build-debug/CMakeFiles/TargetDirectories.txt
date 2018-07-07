@@ -1,3 +1,0 @@
-/Users/vkozlov/Documents/nibbler_game/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/Users/vkozlov/Documents/nibbler_game/cmake-build-debug/CMakeFiles/edit_cache.dir
-/Users/vkozlov/Documents/nibbler_game/cmake-build-debug/CMakeFiles/nibbler.dir
