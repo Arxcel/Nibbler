@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.9)
 
-set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17")
 project(nibbler)
 
 set(SOURCE_EXE
@@ -16,7 +16,8 @@ set(SOURCE_EXE
         nibbler_glfw/inc/CustomException.hpp
         nibbler_glfw/inc/ResourceManager.hpp
         nibbler_glfw/src/ResourceManager.cpp
-        nibbler_glfw/inc/Drawer.hpp nibbler_glfw/src/Drawer.cpp nibbler_glfw/src/Drawer.hpp)
+        nibbler_glfw/inc/Drawer.hpp
+        nibbler_glfw/src/Drawer.cpp)
 
 add_executable(nibbler ${SOURCE_EXE})
 
