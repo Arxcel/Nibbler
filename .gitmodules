@@ -1,0 +1,3 @@
+[submodule "nibbler_glfw"]
+	path = nibbler_glfw
+	url = https://Arxcel@bitbucket.org/Arxcel/nibbler_glfw.git
