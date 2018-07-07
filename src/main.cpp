@@ -23,7 +23,7 @@
 int main()
 {
 	Game game;
-	game.start();
+//	game.start();
 //	glfwInit();
 //	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 //	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
