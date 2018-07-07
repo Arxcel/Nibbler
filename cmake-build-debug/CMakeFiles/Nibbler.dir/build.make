@@ -49,119 +49,200 @@ CMAKE_SOURCE_DIR = /Users/vkozlov/Documents/nibbler_game
 CMAKE_BINARY_DIR = /Users/vkozlov/Documents/nibbler_game/cmake-build-debug
 
 # Include any dependencies generated for this target.
-include CMakeFiles/Nibbler.dir/depend.make
+include CMakeFiles/nibbler.dir/depend.make
 
 # Include the progress variables for this target.
-include CMakeFiles/Nibbler.dir/progress.make
+include CMakeFiles/nibbler.dir/progress.make
 
 # Include the compile flags for this target's objects.
-include CMakeFiles/Nibbler.dir/flags.make
+include CMakeFiles/nibbler.dir/flags.make
 
-CMakeFiles/Nibbler.dir/nibbler_glfw/src/nibbler_glfw.cpp.o: CMakeFiles/Nibbler.dir/flags.make
-CMakeFiles/Nibbler.dir/nibbler_glfw/src/nibbler_glfw.cpp.o: ../nibbler_glfw/src/nibbler_glfw.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/vkozlov/Documents/nibbler_game/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Nibbler.dir/nibbler_glfw/src/nibbler_glfw.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Nibbler.dir/nibbler_glfw/src/nibbler_glfw.cpp.o -c /Users/vkozlov/Documents/nibbler_game/nibbler_glfw/src/nibbler_glfw.cpp
+CMakeFiles/nibbler.dir/src/main.cpp.o: CMakeFiles/nibbler.dir/flags.make
+CMakeFiles/nibbler.dir/src/main.cpp.o: ../src/main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/vkozlov/Documents/nibbler_game/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/nibbler.dir/src/main.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/nibbler.dir/src/main.cpp.o -c /Users/vkozlov/Documents/nibbler_game/src/main.cpp
 
-CMakeFiles/Nibbler.dir/nibbler_glfw/src/nibbler_glfw.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Nibbler.dir/nibbler_glfw/src/nibbler_glfw.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/vkozlov/Documents/nibbler_game/nibbler_glfw/src/nibbler_glfw.cpp > CMakeFiles/Nibbler.dir/nibbler_glfw/src/nibbler_glfw.cpp.i
+CMakeFiles/nibbler.dir/src/main.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/nibbler.dir/src/main.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/vkozlov/Documents/nibbler_game/src/main.cpp > CMakeFiles/nibbler.dir/src/main.cpp.i
 
-CMakeFiles/Nibbler.dir/nibbler_glfw/src/nibbler_glfw.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Nibbler.dir/nibbler_glfw/src/nibbler_glfw.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/vkozlov/Documents/nibbler_game/nibbler_glfw/src/nibbler_glfw.cpp -o CMakeFiles/Nibbler.dir/nibbler_glfw/src/nibbler_glfw.cpp.s
+CMakeFiles/nibbler.dir/src/main.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/nibbler.dir/src/main.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/vkozlov/Documents/nibbler_game/src/main.cpp -o CMakeFiles/nibbler.dir/src/main.cpp.s
 
-CMakeFiles/Nibbler.dir/nibbler_glfw/src/nibbler_glfw.cpp.o.requires:
+CMakeFiles/nibbler.dir/src/main.cpp.o.requires:
 
-.PHONY : CMakeFiles/Nibbler.dir/nibbler_glfw/src/nibbler_glfw.cpp.o.requires
+.PHONY : CMakeFiles/nibbler.dir/src/main.cpp.o.requires
 
-CMakeFiles/Nibbler.dir/nibbler_glfw/src/nibbler_glfw.cpp.o.provides: CMakeFiles/Nibbler.dir/nibbler_glfw/src/nibbler_glfw.cpp.o.requires
-	$(MAKE) -f CMakeFiles/Nibbler.dir/build.make CMakeFiles/Nibbler.dir/nibbler_glfw/src/nibbler_glfw.cpp.o.provides.build
-.PHONY : CMakeFiles/Nibbler.dir/nibbler_glfw/src/nibbler_glfw.cpp.o.provides
+CMakeFiles/nibbler.dir/src/main.cpp.o.provides: CMakeFiles/nibbler.dir/src/main.cpp.o.requires
+	$(MAKE) -f CMakeFiles/nibbler.dir/build.make CMakeFiles/nibbler.dir/src/main.cpp.o.provides.build
+.PHONY : CMakeFiles/nibbler.dir/src/main.cpp.o.provides
 
-CMakeFiles/Nibbler.dir/nibbler_glfw/src/nibbler_glfw.cpp.o.provides.build: CMakeFiles/Nibbler.dir/nibbler_glfw/src/nibbler_glfw.cpp.o
-
-
-CMakeFiles/Nibbler.dir/nibbler_glfw/src/Shader.cpp.o: CMakeFiles/Nibbler.dir/flags.make
-CMakeFiles/Nibbler.dir/nibbler_glfw/src/Shader.cpp.o: ../nibbler_glfw/src/Shader.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/vkozlov/Documents/nibbler_game/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/Nibbler.dir/nibbler_glfw/src/Shader.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Nibbler.dir/nibbler_glfw/src/Shader.cpp.o -c /Users/vkozlov/Documents/nibbler_game/nibbler_glfw/src/Shader.cpp
-
-CMakeFiles/Nibbler.dir/nibbler_glfw/src/Shader.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Nibbler.dir/nibbler_glfw/src/Shader.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/vkozlov/Documents/nibbler_game/nibbler_glfw/src/Shader.cpp > CMakeFiles/Nibbler.dir/nibbler_glfw/src/Shader.cpp.i
-
-CMakeFiles/Nibbler.dir/nibbler_glfw/src/Shader.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Nibbler.dir/nibbler_glfw/src/Shader.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/vkozlov/Documents/nibbler_game/nibbler_glfw/src/Shader.cpp -o CMakeFiles/Nibbler.dir/nibbler_glfw/src/Shader.cpp.s
-
-CMakeFiles/Nibbler.dir/nibbler_glfw/src/Shader.cpp.o.requires:
-
-.PHONY : CMakeFiles/Nibbler.dir/nibbler_glfw/src/Shader.cpp.o.requires
-
-CMakeFiles/Nibbler.dir/nibbler_glfw/src/Shader.cpp.o.provides: CMakeFiles/Nibbler.dir/nibbler_glfw/src/Shader.cpp.o.requires
-	$(MAKE) -f CMakeFiles/Nibbler.dir/build.make CMakeFiles/Nibbler.dir/nibbler_glfw/src/Shader.cpp.o.provides.build
-.PHONY : CMakeFiles/Nibbler.dir/nibbler_glfw/src/Shader.cpp.o.provides
-
-CMakeFiles/Nibbler.dir/nibbler_glfw/src/Shader.cpp.o.provides.build: CMakeFiles/Nibbler.dir/nibbler_glfw/src/Shader.cpp.o
+CMakeFiles/nibbler.dir/src/main.cpp.o.provides.build: CMakeFiles/nibbler.dir/src/main.cpp.o
 
 
-CMakeFiles/Nibbler.dir/nibbler_glfw/src/Texture.cpp.o: CMakeFiles/Nibbler.dir/flags.make
-CMakeFiles/Nibbler.dir/nibbler_glfw/src/Texture.cpp.o: ../nibbler_glfw/src/Texture.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/vkozlov/Documents/nibbler_game/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/Nibbler.dir/nibbler_glfw/src/Texture.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Nibbler.dir/nibbler_glfw/src/Texture.cpp.o -c /Users/vkozlov/Documents/nibbler_game/nibbler_glfw/src/Texture.cpp
+CMakeFiles/nibbler.dir/src/Game.cpp.o: CMakeFiles/nibbler.dir/flags.make
+CMakeFiles/nibbler.dir/src/Game.cpp.o: ../src/Game.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/vkozlov/Documents/nibbler_game/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/nibbler.dir/src/Game.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/nibbler.dir/src/Game.cpp.o -c /Users/vkozlov/Documents/nibbler_game/src/Game.cpp
 
-CMakeFiles/Nibbler.dir/nibbler_glfw/src/Texture.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Nibbler.dir/nibbler_glfw/src/Texture.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/vkozlov/Documents/nibbler_game/nibbler_glfw/src/Texture.cpp > CMakeFiles/Nibbler.dir/nibbler_glfw/src/Texture.cpp.i
+CMakeFiles/nibbler.dir/src/Game.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/nibbler.dir/src/Game.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/vkozlov/Documents/nibbler_game/src/Game.cpp > CMakeFiles/nibbler.dir/src/Game.cpp.i
 
-CMakeFiles/Nibbler.dir/nibbler_glfw/src/Texture.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Nibbler.dir/nibbler_glfw/src/Texture.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/vkozlov/Documents/nibbler_game/nibbler_glfw/src/Texture.cpp -o CMakeFiles/Nibbler.dir/nibbler_glfw/src/Texture.cpp.s
+CMakeFiles/nibbler.dir/src/Game.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/nibbler.dir/src/Game.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/vkozlov/Documents/nibbler_game/src/Game.cpp -o CMakeFiles/nibbler.dir/src/Game.cpp.s
 
-CMakeFiles/Nibbler.dir/nibbler_glfw/src/Texture.cpp.o.requires:
+CMakeFiles/nibbler.dir/src/Game.cpp.o.requires:
 
-.PHONY : CMakeFiles/Nibbler.dir/nibbler_glfw/src/Texture.cpp.o.requires
+.PHONY : CMakeFiles/nibbler.dir/src/Game.cpp.o.requires
 
-CMakeFiles/Nibbler.dir/nibbler_glfw/src/Texture.cpp.o.provides: CMakeFiles/Nibbler.dir/nibbler_glfw/src/Texture.cpp.o.requires
-	$(MAKE) -f CMakeFiles/Nibbler.dir/build.make CMakeFiles/Nibbler.dir/nibbler_glfw/src/Texture.cpp.o.provides.build
-.PHONY : CMakeFiles/Nibbler.dir/nibbler_glfw/src/Texture.cpp.o.provides
+CMakeFiles/nibbler.dir/src/Game.cpp.o.provides: CMakeFiles/nibbler.dir/src/Game.cpp.o.requires
+	$(MAKE) -f CMakeFiles/nibbler.dir/build.make CMakeFiles/nibbler.dir/src/Game.cpp.o.provides.build
+.PHONY : CMakeFiles/nibbler.dir/src/Game.cpp.o.provides
 
-CMakeFiles/Nibbler.dir/nibbler_glfw/src/Texture.cpp.o.provides.build: CMakeFiles/Nibbler.dir/nibbler_glfw/src/Texture.cpp.o
+CMakeFiles/nibbler.dir/src/Game.cpp.o.provides.build: CMakeFiles/nibbler.dir/src/Game.cpp.o
 
 
-# Object files for target Nibbler
-Nibbler_OBJECTS = \
-"CMakeFiles/Nibbler.dir/nibbler_glfw/src/nibbler_glfw.cpp.o" \
-"CMakeFiles/Nibbler.dir/nibbler_glfw/src/Shader.cpp.o" \
-"CMakeFiles/Nibbler.dir/nibbler_glfw/src/Texture.cpp.o"
+CMakeFiles/nibbler.dir/nibbler_glfw/src/nibbler_glfw.cpp.o: CMakeFiles/nibbler.dir/flags.make
+CMakeFiles/nibbler.dir/nibbler_glfw/src/nibbler_glfw.cpp.o: ../nibbler_glfw/src/nibbler_glfw.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/vkozlov/Documents/nibbler_game/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/nibbler.dir/nibbler_glfw/src/nibbler_glfw.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/nibbler.dir/nibbler_glfw/src/nibbler_glfw.cpp.o -c /Users/vkozlov/Documents/nibbler_game/nibbler_glfw/src/nibbler_glfw.cpp
 
-# External object files for target Nibbler
-Nibbler_EXTERNAL_OBJECTS =
+CMakeFiles/nibbler.dir/nibbler_glfw/src/nibbler_glfw.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/nibbler.dir/nibbler_glfw/src/nibbler_glfw.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/vkozlov/Documents/nibbler_game/nibbler_glfw/src/nibbler_glfw.cpp > CMakeFiles/nibbler.dir/nibbler_glfw/src/nibbler_glfw.cpp.i
 
-Nibbler: CMakeFiles/Nibbler.dir/nibbler_glfw/src/nibbler_glfw.cpp.o
-Nibbler: CMakeFiles/Nibbler.dir/nibbler_glfw/src/Shader.cpp.o
-Nibbler: CMakeFiles/Nibbler.dir/nibbler_glfw/src/Texture.cpp.o
-Nibbler: CMakeFiles/Nibbler.dir/build.make
-Nibbler: CMakeFiles/Nibbler.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/vkozlov/Documents/nibbler_game/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable Nibbler"
-	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/Nibbler.dir/link.txt --verbose=$(VERBOSE)
+CMakeFiles/nibbler.dir/nibbler_glfw/src/nibbler_glfw.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/nibbler.dir/nibbler_glfw/src/nibbler_glfw.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/vkozlov/Documents/nibbler_game/nibbler_glfw/src/nibbler_glfw.cpp -o CMakeFiles/nibbler.dir/nibbler_glfw/src/nibbler_glfw.cpp.s
+
+CMakeFiles/nibbler.dir/nibbler_glfw/src/nibbler_glfw.cpp.o.requires:
+
+.PHONY : CMakeFiles/nibbler.dir/nibbler_glfw/src/nibbler_glfw.cpp.o.requires
+
+CMakeFiles/nibbler.dir/nibbler_glfw/src/nibbler_glfw.cpp.o.provides: CMakeFiles/nibbler.dir/nibbler_glfw/src/nibbler_glfw.cpp.o.requires
+	$(MAKE) -f CMakeFiles/nibbler.dir/build.make CMakeFiles/nibbler.dir/nibbler_glfw/src/nibbler_glfw.cpp.o.provides.build
+.PHONY : CMakeFiles/nibbler.dir/nibbler_glfw/src/nibbler_glfw.cpp.o.provides
+
+CMakeFiles/nibbler.dir/nibbler_glfw/src/nibbler_glfw.cpp.o.provides.build: CMakeFiles/nibbler.dir/nibbler_glfw/src/nibbler_glfw.cpp.o
+
+
+CMakeFiles/nibbler.dir/nibbler_glfw/src/Shader.cpp.o: CMakeFiles/nibbler.dir/flags.make
+CMakeFiles/nibbler.dir/nibbler_glfw/src/Shader.cpp.o: ../nibbler_glfw/src/Shader.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/vkozlov/Documents/nibbler_game/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/nibbler.dir/nibbler_glfw/src/Shader.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/nibbler.dir/nibbler_glfw/src/Shader.cpp.o -c /Users/vkozlov/Documents/nibbler_game/nibbler_glfw/src/Shader.cpp
+
+CMakeFiles/nibbler.dir/nibbler_glfw/src/Shader.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/nibbler.dir/nibbler_glfw/src/Shader.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/vkozlov/Documents/nibbler_game/nibbler_glfw/src/Shader.cpp > CMakeFiles/nibbler.dir/nibbler_glfw/src/Shader.cpp.i
+
+CMakeFiles/nibbler.dir/nibbler_glfw/src/Shader.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/nibbler.dir/nibbler_glfw/src/Shader.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/vkozlov/Documents/nibbler_game/nibbler_glfw/src/Shader.cpp -o CMakeFiles/nibbler.dir/nibbler_glfw/src/Shader.cpp.s
+
+CMakeFiles/nibbler.dir/nibbler_glfw/src/Shader.cpp.o.requires:
+
+.PHONY : CMakeFiles/nibbler.dir/nibbler_glfw/src/Shader.cpp.o.requires
+
+CMakeFiles/nibbler.dir/nibbler_glfw/src/Shader.cpp.o.provides: CMakeFiles/nibbler.dir/nibbler_glfw/src/Shader.cpp.o.requires
+	$(MAKE) -f CMakeFiles/nibbler.dir/build.make CMakeFiles/nibbler.dir/nibbler_glfw/src/Shader.cpp.o.provides.build
+.PHONY : CMakeFiles/nibbler.dir/nibbler_glfw/src/Shader.cpp.o.provides
+
+CMakeFiles/nibbler.dir/nibbler_glfw/src/Shader.cpp.o.provides.build: CMakeFiles/nibbler.dir/nibbler_glfw/src/Shader.cpp.o
+
+
+CMakeFiles/nibbler.dir/nibbler_glfw/src/Texture.cpp.o: CMakeFiles/nibbler.dir/flags.make
+CMakeFiles/nibbler.dir/nibbler_glfw/src/Texture.cpp.o: ../nibbler_glfw/src/Texture.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/vkozlov/Documents/nibbler_game/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/nibbler.dir/nibbler_glfw/src/Texture.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/nibbler.dir/nibbler_glfw/src/Texture.cpp.o -c /Users/vkozlov/Documents/nibbler_game/nibbler_glfw/src/Texture.cpp
+
+CMakeFiles/nibbler.dir/nibbler_glfw/src/Texture.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/nibbler.dir/nibbler_glfw/src/Texture.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/vkozlov/Documents/nibbler_game/nibbler_glfw/src/Texture.cpp > CMakeFiles/nibbler.dir/nibbler_glfw/src/Texture.cpp.i
+
+CMakeFiles/nibbler.dir/nibbler_glfw/src/Texture.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/nibbler.dir/nibbler_glfw/src/Texture.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/vkozlov/Documents/nibbler_game/nibbler_glfw/src/Texture.cpp -o CMakeFiles/nibbler.dir/nibbler_glfw/src/Texture.cpp.s
+
+CMakeFiles/nibbler.dir/nibbler_glfw/src/Texture.cpp.o.requires:
+
+.PHONY : CMakeFiles/nibbler.dir/nibbler_glfw/src/Texture.cpp.o.requires
+
+CMakeFiles/nibbler.dir/nibbler_glfw/src/Texture.cpp.o.provides: CMakeFiles/nibbler.dir/nibbler_glfw/src/Texture.cpp.o.requires
+	$(MAKE) -f CMakeFiles/nibbler.dir/build.make CMakeFiles/nibbler.dir/nibbler_glfw/src/Texture.cpp.o.provides.build
+.PHONY : CMakeFiles/nibbler.dir/nibbler_glfw/src/Texture.cpp.o.provides
+
+CMakeFiles/nibbler.dir/nibbler_glfw/src/Texture.cpp.o.provides.build: CMakeFiles/nibbler.dir/nibbler_glfw/src/Texture.cpp.o
+
+
+CMakeFiles/nibbler.dir/nibbler_glfw/src/ResourceManager.cpp.o: CMakeFiles/nibbler.dir/flags.make
+CMakeFiles/nibbler.dir/nibbler_glfw/src/ResourceManager.cpp.o: ../nibbler_glfw/src/ResourceManager.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/vkozlov/Documents/nibbler_game/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/nibbler.dir/nibbler_glfw/src/ResourceManager.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/nibbler.dir/nibbler_glfw/src/ResourceManager.cpp.o -c /Users/vkozlov/Documents/nibbler_game/nibbler_glfw/src/ResourceManager.cpp
+
+CMakeFiles/nibbler.dir/nibbler_glfw/src/ResourceManager.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/nibbler.dir/nibbler_glfw/src/ResourceManager.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/vkozlov/Documents/nibbler_game/nibbler_glfw/src/ResourceManager.cpp > CMakeFiles/nibbler.dir/nibbler_glfw/src/ResourceManager.cpp.i
+
+CMakeFiles/nibbler.dir/nibbler_glfw/src/ResourceManager.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/nibbler.dir/nibbler_glfw/src/ResourceManager.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/vkozlov/Documents/nibbler_game/nibbler_glfw/src/ResourceManager.cpp -o CMakeFiles/nibbler.dir/nibbler_glfw/src/ResourceManager.cpp.s
+
+CMakeFiles/nibbler.dir/nibbler_glfw/src/ResourceManager.cpp.o.requires:
+
+.PHONY : CMakeFiles/nibbler.dir/nibbler_glfw/src/ResourceManager.cpp.o.requires
+
+CMakeFiles/nibbler.dir/nibbler_glfw/src/ResourceManager.cpp.o.provides: CMakeFiles/nibbler.dir/nibbler_glfw/src/ResourceManager.cpp.o.requires
+	$(MAKE) -f CMakeFiles/nibbler.dir/build.make CMakeFiles/nibbler.dir/nibbler_glfw/src/ResourceManager.cpp.o.provides.build
+.PHONY : CMakeFiles/nibbler.dir/nibbler_glfw/src/ResourceManager.cpp.o.provides
+
+CMakeFiles/nibbler.dir/nibbler_glfw/src/ResourceManager.cpp.o.provides.build: CMakeFiles/nibbler.dir/nibbler_glfw/src/ResourceManager.cpp.o
+
+
+# Object files for target nibbler
+nibbler_OBJECTS = \
+"CMakeFiles/nibbler.dir/src/main.cpp.o" \
+"CMakeFiles/nibbler.dir/src/Game.cpp.o" \
+"CMakeFiles/nibbler.dir/nibbler_glfw/src/nibbler_glfw.cpp.o" \
+"CMakeFiles/nibbler.dir/nibbler_glfw/src/Shader.cpp.o" \
+"CMakeFiles/nibbler.dir/nibbler_glfw/src/Texture.cpp.o" \
+"CMakeFiles/nibbler.dir/nibbler_glfw/src/ResourceManager.cpp.o"
+
+# External object files for target nibbler
+nibbler_EXTERNAL_OBJECTS =
+
+nibbler: CMakeFiles/nibbler.dir/src/main.cpp.o
+nibbler: CMakeFiles/nibbler.dir/src/Game.cpp.o
+nibbler: CMakeFiles/nibbler.dir/nibbler_glfw/src/nibbler_glfw.cpp.o
+nibbler: CMakeFiles/nibbler.dir/nibbler_glfw/src/Shader.cpp.o
+nibbler: CMakeFiles/nibbler.dir/nibbler_glfw/src/Texture.cpp.o
+nibbler: CMakeFiles/nibbler.dir/nibbler_glfw/src/ResourceManager.cpp.o
+nibbler: CMakeFiles/nibbler.dir/build.make
+nibbler: CMakeFiles/nibbler.dir/link.txt
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/vkozlov/Documents/nibbler_game/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX executable nibbler"
+	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/nibbler.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
-CMakeFiles/Nibbler.dir/build: Nibbler
+CMakeFiles/nibbler.dir/build: nibbler
 
-.PHONY : CMakeFiles/Nibbler.dir/build
+.PHONY : CMakeFiles/nibbler.dir/build
 
-CMakeFiles/Nibbler.dir/requires: CMakeFiles/Nibbler.dir/nibbler_glfw/src/nibbler_glfw.cpp.o.requires
-CMakeFiles/Nibbler.dir/requires: CMakeFiles/Nibbler.dir/nibbler_glfw/src/Shader.cpp.o.requires
-CMakeFiles/Nibbler.dir/requires: CMakeFiles/Nibbler.dir/nibbler_glfw/src/Texture.cpp.o.requires
+CMakeFiles/nibbler.dir/requires: CMakeFiles/nibbler.dir/src/main.cpp.o.requires
+CMakeFiles/nibbler.dir/requires: CMakeFiles/nibbler.dir/src/Game.cpp.o.requires
+CMakeFiles/nibbler.dir/requires: CMakeFiles/nibbler.dir/nibbler_glfw/src/nibbler_glfw.cpp.o.requires
+CMakeFiles/nibbler.dir/requires: CMakeFiles/nibbler.dir/nibbler_glfw/src/Shader.cpp.o.requires
+CMakeFiles/nibbler.dir/requires: CMakeFiles/nibbler.dir/nibbler_glfw/src/Texture.cpp.o.requires
+CMakeFiles/nibbler.dir/requires: CMakeFiles/nibbler.dir/nibbler_glfw/src/ResourceManager.cpp.o.requires
 
-.PHONY : CMakeFiles/Nibbler.dir/requires
+.PHONY : CMakeFiles/nibbler.dir/requires
 
-CMakeFiles/Nibbler.dir/clean:
-	$(CMAKE_COMMAND) -P CMakeFiles/Nibbler.dir/cmake_clean.cmake
-.PHONY : CMakeFiles/Nibbler.dir/clean
+CMakeFiles/nibbler.dir/clean:
+	$(CMAKE_COMMAND) -P CMakeFiles/nibbler.dir/cmake_clean.cmake
+.PHONY : CMakeFiles/nibbler.dir/clean
 
-CMakeFiles/Nibbler.dir/depend:
-	cd /Users/vkozlov/Documents/nibbler_game/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/vkozlov/Documents/nibbler_game /Users/vkozlov/Documents/nibbler_game /Users/vkozlov/Documents/nibbler_game/cmake-build-debug /Users/vkozlov/Documents/nibbler_game/cmake-build-debug /Users/vkozlov/Documents/nibbler_game/cmake-build-debug/CMakeFiles/Nibbler.dir/DependInfo.cmake --color=$(COLOR)
-.PHONY : CMakeFiles/Nibbler.dir/depend
+CMakeFiles/nibbler.dir/depend:
+	cd /Users/vkozlov/Documents/nibbler_game/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/vkozlov/Documents/nibbler_game /Users/vkozlov/Documents/nibbler_game /Users/vkozlov/Documents/nibbler_game/cmake-build-debug /Users/vkozlov/Documents/nibbler_game/cmake-build-debug /Users/vkozlov/Documents/nibbler_game/cmake-build-debug/CMakeFiles/nibbler.dir/DependInfo.cmake --color=$(COLOR)
+.PHONY : CMakeFiles/nibbler.dir/depend
 

@@ -60,39 +60,39 @@ CMAKE_SOURCE_DIR = /Users/vkozlov/Documents/nibbler_game
 CMAKE_BINARY_DIR = /Users/vkozlov/Documents/nibbler_game/cmake-build-debug
 
 #=============================================================================
-# Target rules for target CMakeFiles/Nibbler.dir
+# Target rules for target CMakeFiles/nibbler.dir
 
 # All Build rule for target.
-CMakeFiles/Nibbler.dir/all:
-	$(MAKE) -f CMakeFiles/Nibbler.dir/build.make CMakeFiles/Nibbler.dir/depend
-	$(MAKE) -f CMakeFiles/Nibbler.dir/build.make CMakeFiles/Nibbler.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/vkozlov/Documents/nibbler_game/cmake-build-debug/CMakeFiles --progress-num=1,2,3,4 "Built target Nibbler"
-.PHONY : CMakeFiles/Nibbler.dir/all
+CMakeFiles/nibbler.dir/all:
+	$(MAKE) -f CMakeFiles/nibbler.dir/build.make CMakeFiles/nibbler.dir/depend
+	$(MAKE) -f CMakeFiles/nibbler.dir/build.make CMakeFiles/nibbler.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/vkozlov/Documents/nibbler_game/cmake-build-debug/CMakeFiles --progress-num=1,2,3,4,5,6,7 "Built target nibbler"
+.PHONY : CMakeFiles/nibbler.dir/all
 
 # Include target in all.
-all: CMakeFiles/Nibbler.dir/all
+all: CMakeFiles/nibbler.dir/all
 
 .PHONY : all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/Nibbler.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/vkozlov/Documents/nibbler_game/cmake-build-debug/CMakeFiles 4
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/Nibbler.dir/all
+CMakeFiles/nibbler.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/vkozlov/Documents/nibbler_game/cmake-build-debug/CMakeFiles 7
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/nibbler.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/vkozlov/Documents/nibbler_game/cmake-build-debug/CMakeFiles 0
-.PHONY : CMakeFiles/Nibbler.dir/rule
+.PHONY : CMakeFiles/nibbler.dir/rule
 
 # Convenience name for target.
-Nibbler: CMakeFiles/Nibbler.dir/rule
+nibbler: CMakeFiles/nibbler.dir/rule
 
-.PHONY : Nibbler
-
-# clean rule for target.
-CMakeFiles/Nibbler.dir/clean:
-	$(MAKE) -f CMakeFiles/Nibbler.dir/build.make CMakeFiles/Nibbler.dir/clean
-.PHONY : CMakeFiles/Nibbler.dir/clean
+.PHONY : nibbler
 
 # clean rule for target.
-clean: CMakeFiles/Nibbler.dir/clean
+CMakeFiles/nibbler.dir/clean:
+	$(MAKE) -f CMakeFiles/nibbler.dir/build.make CMakeFiles/nibbler.dir/clean
+.PHONY : CMakeFiles/nibbler.dir/clean
+
+# clean rule for target.
+clean: CMakeFiles/nibbler.dir/clean
 
 .PHONY : clean
 

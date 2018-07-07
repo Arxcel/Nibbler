@@ -111,17 +111,44 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named Nibbler
+# Target rules for targets named nibbler
 
 # Build rule for target.
-Nibbler: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 Nibbler
-.PHONY : Nibbler
+nibbler: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 nibbler
+.PHONY : nibbler
 
 # fast build rule for target.
-Nibbler/fast:
-	$(MAKE) -f CMakeFiles/Nibbler.dir/build.make CMakeFiles/Nibbler.dir/build
-.PHONY : Nibbler/fast
+nibbler/fast:
+	$(MAKE) -f CMakeFiles/nibbler.dir/build.make CMakeFiles/nibbler.dir/build
+.PHONY : nibbler/fast
+
+nibbler_glfw/src/ResourceManager.o: nibbler_glfw/src/ResourceManager.cpp.o
+
+.PHONY : nibbler_glfw/src/ResourceManager.o
+
+# target to build an object file
+nibbler_glfw/src/ResourceManager.cpp.o:
+	$(MAKE) -f CMakeFiles/nibbler.dir/build.make CMakeFiles/nibbler.dir/nibbler_glfw/src/ResourceManager.cpp.o
+.PHONY : nibbler_glfw/src/ResourceManager.cpp.o
+
+nibbler_glfw/src/ResourceManager.i: nibbler_glfw/src/ResourceManager.cpp.i
+
+.PHONY : nibbler_glfw/src/ResourceManager.i
+
+# target to preprocess a source file
+nibbler_glfw/src/ResourceManager.cpp.i:
+	$(MAKE) -f CMakeFiles/nibbler.dir/build.make CMakeFiles/nibbler.dir/nibbler_glfw/src/ResourceManager.cpp.i
+.PHONY : nibbler_glfw/src/ResourceManager.cpp.i
+
+nibbler_glfw/src/ResourceManager.s: nibbler_glfw/src/ResourceManager.cpp.s
+
+.PHONY : nibbler_glfw/src/ResourceManager.s
+
+# target to generate assembly for a file
+nibbler_glfw/src/ResourceManager.cpp.s:
+	$(MAKE) -f CMakeFiles/nibbler.dir/build.make CMakeFiles/nibbler.dir/nibbler_glfw/src/ResourceManager.cpp.s
+.PHONY : nibbler_glfw/src/ResourceManager.cpp.s
 
 nibbler_glfw/src/Shader.o: nibbler_glfw/src/Shader.cpp.o
 
@@ -129,7 +156,7 @@ nibbler_glfw/src/Shader.o: nibbler_glfw/src/Shader.cpp.o
 
 # target to build an object file
 nibbler_glfw/src/Shader.cpp.o:
-	$(MAKE) -f CMakeFiles/Nibbler.dir/build.make CMakeFiles/Nibbler.dir/nibbler_glfw/src/Shader.cpp.o
+	$(MAKE) -f CMakeFiles/nibbler.dir/build.make CMakeFiles/nibbler.dir/nibbler_glfw/src/Shader.cpp.o
 .PHONY : nibbler_glfw/src/Shader.cpp.o
 
 nibbler_glfw/src/Shader.i: nibbler_glfw/src/Shader.cpp.i
@@ -138,7 +165,7 @@ nibbler_glfw/src/Shader.i: nibbler_glfw/src/Shader.cpp.i
 
 # target to preprocess a source file
 nibbler_glfw/src/Shader.cpp.i:
-	$(MAKE) -f CMakeFiles/Nibbler.dir/build.make CMakeFiles/Nibbler.dir/nibbler_glfw/src/Shader.cpp.i
+	$(MAKE) -f CMakeFiles/nibbler.dir/build.make CMakeFiles/nibbler.dir/nibbler_glfw/src/Shader.cpp.i
 .PHONY : nibbler_glfw/src/Shader.cpp.i
 
 nibbler_glfw/src/Shader.s: nibbler_glfw/src/Shader.cpp.s
@@ -147,7 +174,7 @@ nibbler_glfw/src/Shader.s: nibbler_glfw/src/Shader.cpp.s
 
 # target to generate assembly for a file
 nibbler_glfw/src/Shader.cpp.s:
-	$(MAKE) -f CMakeFiles/Nibbler.dir/build.make CMakeFiles/Nibbler.dir/nibbler_glfw/src/Shader.cpp.s
+	$(MAKE) -f CMakeFiles/nibbler.dir/build.make CMakeFiles/nibbler.dir/nibbler_glfw/src/Shader.cpp.s
 .PHONY : nibbler_glfw/src/Shader.cpp.s
 
 nibbler_glfw/src/Texture.o: nibbler_glfw/src/Texture.cpp.o
@@ -156,7 +183,7 @@ nibbler_glfw/src/Texture.o: nibbler_glfw/src/Texture.cpp.o
 
 # target to build an object file
 nibbler_glfw/src/Texture.cpp.o:
-	$(MAKE) -f CMakeFiles/Nibbler.dir/build.make CMakeFiles/Nibbler.dir/nibbler_glfw/src/Texture.cpp.o
+	$(MAKE) -f CMakeFiles/nibbler.dir/build.make CMakeFiles/nibbler.dir/nibbler_glfw/src/Texture.cpp.o
 .PHONY : nibbler_glfw/src/Texture.cpp.o
 
 nibbler_glfw/src/Texture.i: nibbler_glfw/src/Texture.cpp.i
@@ -165,7 +192,7 @@ nibbler_glfw/src/Texture.i: nibbler_glfw/src/Texture.cpp.i
 
 # target to preprocess a source file
 nibbler_glfw/src/Texture.cpp.i:
-	$(MAKE) -f CMakeFiles/Nibbler.dir/build.make CMakeFiles/Nibbler.dir/nibbler_glfw/src/Texture.cpp.i
+	$(MAKE) -f CMakeFiles/nibbler.dir/build.make CMakeFiles/nibbler.dir/nibbler_glfw/src/Texture.cpp.i
 .PHONY : nibbler_glfw/src/Texture.cpp.i
 
 nibbler_glfw/src/Texture.s: nibbler_glfw/src/Texture.cpp.s
@@ -174,7 +201,7 @@ nibbler_glfw/src/Texture.s: nibbler_glfw/src/Texture.cpp.s
 
 # target to generate assembly for a file
 nibbler_glfw/src/Texture.cpp.s:
-	$(MAKE) -f CMakeFiles/Nibbler.dir/build.make CMakeFiles/Nibbler.dir/nibbler_glfw/src/Texture.cpp.s
+	$(MAKE) -f CMakeFiles/nibbler.dir/build.make CMakeFiles/nibbler.dir/nibbler_glfw/src/Texture.cpp.s
 .PHONY : nibbler_glfw/src/Texture.cpp.s
 
 nibbler_glfw/src/nibbler_glfw.o: nibbler_glfw/src/nibbler_glfw.cpp.o
@@ -183,7 +210,7 @@ nibbler_glfw/src/nibbler_glfw.o: nibbler_glfw/src/nibbler_glfw.cpp.o
 
 # target to build an object file
 nibbler_glfw/src/nibbler_glfw.cpp.o:
-	$(MAKE) -f CMakeFiles/Nibbler.dir/build.make CMakeFiles/Nibbler.dir/nibbler_glfw/src/nibbler_glfw.cpp.o
+	$(MAKE) -f CMakeFiles/nibbler.dir/build.make CMakeFiles/nibbler.dir/nibbler_glfw/src/nibbler_glfw.cpp.o
 .PHONY : nibbler_glfw/src/nibbler_glfw.cpp.o
 
 nibbler_glfw/src/nibbler_glfw.i: nibbler_glfw/src/nibbler_glfw.cpp.i
@@ -192,7 +219,7 @@ nibbler_glfw/src/nibbler_glfw.i: nibbler_glfw/src/nibbler_glfw.cpp.i
 
 # target to preprocess a source file
 nibbler_glfw/src/nibbler_glfw.cpp.i:
-	$(MAKE) -f CMakeFiles/Nibbler.dir/build.make CMakeFiles/Nibbler.dir/nibbler_glfw/src/nibbler_glfw.cpp.i
+	$(MAKE) -f CMakeFiles/nibbler.dir/build.make CMakeFiles/nibbler.dir/nibbler_glfw/src/nibbler_glfw.cpp.i
 .PHONY : nibbler_glfw/src/nibbler_glfw.cpp.i
 
 nibbler_glfw/src/nibbler_glfw.s: nibbler_glfw/src/nibbler_glfw.cpp.s
@@ -201,8 +228,62 @@ nibbler_glfw/src/nibbler_glfw.s: nibbler_glfw/src/nibbler_glfw.cpp.s
 
 # target to generate assembly for a file
 nibbler_glfw/src/nibbler_glfw.cpp.s:
-	$(MAKE) -f CMakeFiles/Nibbler.dir/build.make CMakeFiles/Nibbler.dir/nibbler_glfw/src/nibbler_glfw.cpp.s
+	$(MAKE) -f CMakeFiles/nibbler.dir/build.make CMakeFiles/nibbler.dir/nibbler_glfw/src/nibbler_glfw.cpp.s
 .PHONY : nibbler_glfw/src/nibbler_glfw.cpp.s
+
+src/Game.o: src/Game.cpp.o
+
+.PHONY : src/Game.o
+
+# target to build an object file
+src/Game.cpp.o:
+	$(MAKE) -f CMakeFiles/nibbler.dir/build.make CMakeFiles/nibbler.dir/src/Game.cpp.o
+.PHONY : src/Game.cpp.o
+
+src/Game.i: src/Game.cpp.i
+
+.PHONY : src/Game.i
+
+# target to preprocess a source file
+src/Game.cpp.i:
+	$(MAKE) -f CMakeFiles/nibbler.dir/build.make CMakeFiles/nibbler.dir/src/Game.cpp.i
+.PHONY : src/Game.cpp.i
+
+src/Game.s: src/Game.cpp.s
+
+.PHONY : src/Game.s
+
+# target to generate assembly for a file
+src/Game.cpp.s:
+	$(MAKE) -f CMakeFiles/nibbler.dir/build.make CMakeFiles/nibbler.dir/src/Game.cpp.s
+.PHONY : src/Game.cpp.s
+
+src/main.o: src/main.cpp.o
+
+.PHONY : src/main.o
+
+# target to build an object file
+src/main.cpp.o:
+	$(MAKE) -f CMakeFiles/nibbler.dir/build.make CMakeFiles/nibbler.dir/src/main.cpp.o
+.PHONY : src/main.cpp.o
+
+src/main.i: src/main.cpp.i
+
+.PHONY : src/main.i
+
+# target to preprocess a source file
+src/main.cpp.i:
+	$(MAKE) -f CMakeFiles/nibbler.dir/build.make CMakeFiles/nibbler.dir/src/main.cpp.i
+.PHONY : src/main.cpp.i
+
+src/main.s: src/main.cpp.s
+
+.PHONY : src/main.s
+
+# target to generate assembly for a file
+src/main.cpp.s:
+	$(MAKE) -f CMakeFiles/nibbler.dir/build.make CMakeFiles/nibbler.dir/src/main.cpp.s
+.PHONY : src/main.cpp.s
 
 # Help Target
 help:
@@ -212,7 +293,10 @@ help:
 	@echo "... depend"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
-	@echo "... Nibbler"
+	@echo "... nibbler"
+	@echo "... nibbler_glfw/src/ResourceManager.o"
+	@echo "... nibbler_glfw/src/ResourceManager.i"
+	@echo "... nibbler_glfw/src/ResourceManager.s"
 	@echo "... nibbler_glfw/src/Shader.o"
 	@echo "... nibbler_glfw/src/Shader.i"
 	@echo "... nibbler_glfw/src/Shader.s"
@@ -222,6 +306,12 @@ help:
 	@echo "... nibbler_glfw/src/nibbler_glfw.o"
 	@echo "... nibbler_glfw/src/nibbler_glfw.i"
 	@echo "... nibbler_glfw/src/nibbler_glfw.s"
+	@echo "... src/Game.o"
+	@echo "... src/Game.i"
+	@echo "... src/Game.s"
+	@echo "... src/main.o"
+	@echo "... src/main.i"
+	@echo "... src/main.s"
 .PHONY : help
 
 

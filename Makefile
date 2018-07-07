@@ -14,7 +14,7 @@ CC = clang++
 
 NAME = nibbler
 
-FLAGS = -std=c++11 -Wall -Wextra -Werror
+FLAGS = -std=c++11 -Wall -Wextra -Werror -g
 
 I_DIR = ./inc
 
@@ -26,11 +26,12 @@ LIB1 = ./nibbler_glfw
 
 EXTENSIONS = $(addprefix $(I_DIR)/,$(EXT))
 
-EXT =
+EXT = Game.hpp
 
 HEADERS = -I$(I_DIR)
 
-SOURCES =	main.cpp
+SOURCES =	main.cpp \
+			Game.cpp
 
 SRCS = $(addprefix $(S_DIR)/,$(SOURCES))
 
