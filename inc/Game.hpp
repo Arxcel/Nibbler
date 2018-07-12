@@ -8,9 +8,11 @@
 #include <dlfcn.h>
 #include <iostream>
 
-typedef void (*initFunction)(int width, int height, std::string const winName);
-typedef void (*drawFunction)();
-typedef void (*processInputFunction)(bool &);
+typedef void (*initFunction)(int , int , std::string const &);
+typedef void (*preFrameFunction)();
+typedef void (*drawFunction)(int,int,int);
+typedef void (*postFrameFunction)();
+typedef int (*processInputFunction)(bool &);
 typedef void (*deinitFunction)();
 
 enum GameState {
@@ -36,6 +38,8 @@ private:
 	drawFunction			draw{nullptr};
 	processInputFunction	getUserInput{nullptr};
 	deinitFunction			deinitApi{nullptr};
+	preFrameFunction		preFrame{nullptr};
+	postFrameFunction		postFrame{nullptr};
 	bool					mIsRunning{true};
 };
 

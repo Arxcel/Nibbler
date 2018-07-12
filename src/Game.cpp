@@ -50,7 +50,9 @@ bool Game::loadAPI(std::string const &path)
 	initApi = reinterpret_cast<initFunction>(dlsym(mLib, "initializeApi"));
 	draw = reinterpret_cast<drawFunction>(dlsym(mLib, "draw"));
 	getUserInput = reinterpret_cast<processInputFunction>(dlsym(mLib, "getInput"));
-	deinitApi= reinterpret_cast<deinitFunction>(dlsym(mLib, "deinitializeApi"));
+	deinitApi = reinterpret_cast<deinitFunction>(dlsym(mLib, "deinitializeApi"));
+	preFrame = reinterpret_cast<preFrameFunction>(dlsym(mLib, "preFrame"));
+	postFrame = reinterpret_cast<postFrameFunction>(dlsym(mLib, "postFrame"));
 	result &= (initApi != nullptr);
 	result &= (draw != nullptr);
 	result &= (getUserInput != nullptr);
@@ -62,9 +64,14 @@ bool Game::loadAPI(std::string const &path)
 
 void Game::start()
 {
+	int i = 0;
 	while (mIsRunning)
 	{
-		getUserInput(mIsRunning);
-		draw();
+		preFrame();
+		int key = getUserInput(mIsRunning);
+		if (key == 1)
+			i++;
+		draw(300 + i,300,2);
+		postFrame();
 	}
 }
