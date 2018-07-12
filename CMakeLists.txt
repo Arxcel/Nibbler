@@ -17,7 +17,9 @@ set(SOURCE_EXE
         nibbler_glfw/inc/ResourceManager.hpp
         nibbler_glfw/src/ResourceManager.cpp
         nibbler_glfw/inc/Drawer.hpp
-        nibbler_glfw/src/Drawer.cpp)
+        nibbler_glfw/src/Drawer.cpp
+        nibbler_glfw/inc/SpriteRenderer.hpp
+        nibbler_glfw/src/SpriteRenderer.cpp nibbler_glfw/inc/SpriteRenderer.hpp nibbler_glfw/src/SpriteRenderer.cpp)
 
 add_executable(nibbler ${SOURCE_EXE})
 

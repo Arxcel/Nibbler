@@ -13,6 +13,12 @@ typedef void (*drawFunction)();
 typedef void (*processInputFunction)(bool &);
 typedef void (*deinitFunction)();
 
+enum GameState {
+	GAME_ACTIVE,
+	GAME_MENU,
+	GAME_WIN
+};
+
 class Game {
 public:
 	Game();
@@ -23,10 +29,8 @@ public:
 	void start();
 
 private:
-//	void processEvents();
 	bool loadAPI(std::string const &);
 private:
-//	std::vector<AGameObject *> mVertices;
 	void					*mLib{nullptr};
 	initFunction			initApi{nullptr};
 	drawFunction			draw{nullptr};
