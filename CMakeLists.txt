@@ -19,7 +19,13 @@ set(SOURCE_EXE
         nibbler_glfw/inc/Drawer.hpp
         nibbler_glfw/src/Drawer.cpp
         nibbler_glfw/inc/SpriteRenderer.hpp
-        nibbler_glfw/src/SpriteRenderer.cpp nibbler_glfw/inc/SpriteRenderer.hpp nibbler_glfw/src/SpriteRenderer.cpp)
+        nibbler_glfw/src/SpriteRenderer.cpp
+        nibbler_glfw/inc/SpriteRenderer.hpp
+        nibbler_glfw/src/SpriteRenderer.cpp
+        inc/GameObject.hpp
+        src/GameObject.cpp
+        src/GameLevel.cpp
+        inc/GameLevel.hpp src/Snake.cpp inc/Snake.hpp)
 
 add_executable(nibbler ${SOURCE_EXE})
 

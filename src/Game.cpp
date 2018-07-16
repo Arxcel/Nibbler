@@ -9,8 +9,13 @@ void mLog(std::string const & src)
 
 Game::Game()
 {
+	mWidth = 800;
+	mHeight = 600;
 	if (loadAPI("nibbler_glfw/nibbler_glfw.so"))
-		initApi(800, 600, "Nibbler");
+		initApi(mWidth, mHeight, "Nibbler");
+	mLevel.load("levels/level1", mWidth * 2, mHeight * 2);
+	std::array<float, 2> pos{{static_cast<float>(mWidth), static_cast<float>(mHeight)}};
+	mSnake = new Snake(pos, 40, 5);
 };
 
 Game::~Game()
@@ -29,13 +34,6 @@ Game &Game::operator=(Game const &)
 	return *this;
 };
 
-//void Game::processEvents()
-//{
-//	mKeyPressed = mDrawer->getKeyboardEvent();
-//	if (mKeyPressed == KeyboardEvent::EXIT)
-//		mIsRunning = false;
-//}
-
 bool Game::loadAPI(std::string const &path)
 {
 	bool result = true;
@@ -47,12 +45,13 @@ bool Game::loadAPI(std::string const &path)
 		std::cerr << "dlopen : "<< dlerror() << std::endl;
 		return false;
 	}
-	initApi = reinterpret_cast<initFunction>(dlsym(mLib, "initializeApi"));
-	draw = reinterpret_cast<drawFunction>(dlsym(mLib, "draw"));
-	getUserInput = reinterpret_cast<processInputFunction>(dlsym(mLib, "getInput"));
-	deinitApi = reinterpret_cast<deinitFunction>(dlsym(mLib, "deinitializeApi"));
-	preFrame = reinterpret_cast<preFrameFunction>(dlsym(mLib, "preFrame"));
-	postFrame = reinterpret_cast<postFrameFunction>(dlsym(mLib, "postFrame"));
+	initApi			= reinterpret_cast<initFunction>(dlsym(mLib, "initializeApi"));
+	draw			= reinterpret_cast<drawFunction>(dlsym(mLib, "draw"));
+	getUserInput	= reinterpret_cast<processInputFunction>(dlsym(mLib, "getInput"));
+	deinitApi		= reinterpret_cast<deinitFunction>(dlsym(mLib, "deinitializeApi"));
+	preFrame		= reinterpret_cast<preFrameFunction>(dlsym(mLib, "preFrame"));
+	postFrame		= reinterpret_cast<postFrameFunction>(dlsym(mLib, "postFrame"));
+	renderer		= reinterpret_cast<renderFunction >(dlsym(mLib, "renderer"));
 	result &= (initApi != nullptr);
 	result &= (draw != nullptr);
 	result &= (getUserInput != nullptr);
@@ -62,16 +61,26 @@ bool Game::loadAPI(std::string const &path)
 	return result;
 }
 
+
+void	Game::processCommand(std::string const &aCommand)
+{
+	static_cast<void>(aCommand);
+}
+
 void Game::start()
 {
-	int i = 0;
 	while (mIsRunning)
 	{
-		preFrame();
-		int key = getUserInput(mIsRunning);
-		if (key == 1)
-			i++;
-		draw(300 + i,300,2);
-		postFrame();
+		if (mState == GameState::GAME_ACTIVE)
+		{
+			preFrame();
+			draw({{static_cast<float>(mWidth * 2), static_cast<float>(mHeight * 2)}});
+			mLevel.draw(renderer);
+			mSnake->draw(renderer);
+			mSnake->move(1,1,1);
+			postFrame();
+		}
+		auto command = getUserInput(mIsRunning);
+		processCommand(command);
 	}
 }
