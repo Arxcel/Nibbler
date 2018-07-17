@@ -1,4 +1,4 @@
-
+#include <chrono>
 #include "Game.hpp"
 
 
@@ -15,7 +15,7 @@ Game::Game()
 		initApi(mWidth, mHeight, "Nibbler");
 	mLevel.load("levels/level1", mWidth * 2, mHeight * 2);
 	std::array<float, 2> pos{{static_cast<float>(mWidth), static_cast<float>(mHeight)}};
-	mSnake = new Snake(pos, 40, 5);
+	mSnake = new Snake(pos, 50, 5);
 };
 
 Game::~Game()
@@ -64,20 +64,33 @@ bool Game::loadAPI(std::string const &path)
 
 void	Game::processCommand(std::string const &aCommand)
 {
-	static_cast<void>(aCommand);
+	if (aCommand == "UP")
+		mSnake->setDirection(Direction::UP);
+	else if (aCommand == "DOWN")
+		mSnake->setDirection(Direction::BOTTOM);
+	else if (aCommand == "RIGHT")
+		mSnake->setDirection(Direction::RIGHT);
+	else if (aCommand == "LEFT")
+		mSnake->setDirection(Direction::LEFT);
 }
 
 void Game::start()
 {
+	auto before = std::chrono::high_resolution_clock::now();
 	while (mIsRunning)
 	{
 		if (mState == GameState::GAME_ACTIVE)
 		{
 			preFrame();
 			draw({{static_cast<float>(mWidth * 2), static_cast<float>(mHeight * 2)}});
-			mLevel.draw(renderer);
+//			mLevel.draw(renderer);
 			mSnake->draw(renderer);
-			mSnake->move(1,1,1);
+			std::chrono::milliseconds delta(100);
+			if (std::chrono::high_resolution_clock::now() > (before + delta))
+			{
+				mSnake->move(1,1,1);
+				before = std::chrono::high_resolution_clock::now();
+			}
 			postFrame();
 		}
 		auto command = getUserInput(mIsRunning);

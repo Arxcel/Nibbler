@@ -50,6 +50,7 @@ private:
 	GameLevel               mLevel;
 	Snake*					mSnake;
 	int 					mWidth, mHeight;
+//	std::chrono::time_point<std::chrono::high_resolution_clock> mBefore;
 };
 
 #endif //NIBBLER_GAME_HPP
