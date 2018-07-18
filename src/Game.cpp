@@ -11,11 +11,11 @@ Game::Game()
 {
 	mWidth = 800;
 	mHeight = 600;
+	mSize  = 50;
 	if (loadAPI("nibbler_glfw/nibbler_glfw.so"))
 		initApi(mWidth, mHeight, "Nibbler");
-	mLevel.load("levels/level1", mWidth * 2, mHeight * 2);
 	std::array<float, 2> pos{{static_cast<float>(mWidth), static_cast<float>(mHeight)}};
-	mSnake = new Snake(pos, 50, 5);
+	mSnake = new Snake(pos, mSize, 5);
 };
 
 Game::~Game()
@@ -46,16 +46,19 @@ bool Game::loadAPI(std::string const &path)
 		return false;
 	}
 	initApi			= reinterpret_cast<initFunction>(dlsym(mLib, "initializeApi"));
-	draw			= reinterpret_cast<drawFunction>(dlsym(mLib, "draw"));
 	getUserInput	= reinterpret_cast<processInputFunction>(dlsym(mLib, "getInput"));
 	deinitApi		= reinterpret_cast<deinitFunction>(dlsym(mLib, "deinitializeApi"));
 	preFrame		= reinterpret_cast<preFrameFunction>(dlsym(mLib, "preFrame"));
 	postFrame		= reinterpret_cast<postFrameFunction>(dlsym(mLib, "postFrame"));
 	renderer		= reinterpret_cast<renderFunction >(dlsym(mLib, "renderer"));
 	result &= (initApi != nullptr);
-	result &= (draw != nullptr);
+//	result &= (draw != nullptr);
 	result &= (getUserInput != nullptr);
 	result &= (deinitApi != nullptr);
+	result &= (preFrame != nullptr);
+	result &= (postFrame != nullptr);
+	result &= (renderer != nullptr);
+
 	if (!result)
 		std::cerr << "dlsym : "<< dlerror() << std::endl;
 	return result;
@@ -82,13 +85,11 @@ void Game::start()
 		if (mState == GameState::GAME_ACTIVE)
 		{
 			preFrame();
-			draw({{static_cast<float>(mWidth * 2), static_cast<float>(mHeight * 2)}});
-//			mLevel.draw(renderer);
 			mSnake->draw(renderer);
 			std::chrono::milliseconds delta(100);
 			if (std::chrono::high_resolution_clock::now() > (before + delta))
 			{
-				mSnake->move(1,1,1);
+				mSnake->move();
 				before = std::chrono::high_resolution_clock::now();
 			}
 			postFrame();

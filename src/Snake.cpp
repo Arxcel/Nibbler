@@ -15,43 +15,62 @@
 Snake::Snake(std::array<float, 2> pos, float size, int length) : mCurrentDir(Direction::UP), mStack(true), mLength(length), mSize(size)
 {
 	std::array<float, 2> scale{{size, size}};
-	std::array<float, 3> color{{0.5f, 0.2f, 0.2f}};
-	mBody.emplace_back(new GameObject(3, pos, scale, 180, color));
+	std::array<float, 3> color{{1.0f, 1.0f, 1.0f}};
+	mBody.emplace_back(new GameObject(3, pos[0], pos[1], size, 0, color));
 	for (int i = 1; i < mLength; ++i)
 	{
 		std::array<float, 2> nPos{{pos[0], pos[1] + size * i}};
-		mBody.emplace_back(new GameObject(2, nPos, scale, 180, color));
+		mBody.emplace_back(new GameObject(2, nPos[0], nPos[1], size, 0, color));
 	}
 };
 
-Snake::~Snake() {};
+Snake::~Snake()
+{
+	for (auto &part : mBody)
+		delete part;
+};
 Snake::Snake(Snake const &) {};
 Snake &Snake::operator=(Snake const &) { return *this; };
 
-void	Snake::move(float dt, int sWidth, int sHeight)
+void	Snake::move()
 {
-	std::array<float, 2> deltaPos{};
+	float deltaX = 0, deltaY = 0, deltaAngle = 0;
 	if (mCurrentDir == Direction::UP)
-		deltaPos = {0, -1};
+		deltaY = -1;
 	else if (mCurrentDir == Direction::LEFT)
-		deltaPos = {-1, 0};
+	{
+		deltaX = -1;
+		deltaAngle = -90;
+	}
 	else if (mCurrentDir == Direction::RIGHT)
-		deltaPos = {1, 0};
+	{
+		deltaX = 1;
+		deltaAngle = 90;
+	}
 	else if (mCurrentDir == Direction::BOTTOM)
-		deltaPos = {0, 1};
-	std::array<float, 2> prevPos{0, 0};
-	std::array<float, 2> currPos{0, 0};
+	{
+		deltaY = 1;
+		deltaAngle = 180;
+	}
+	float prevX{0}, prevY{0}, currX{0}, currY{0};
 	for (auto &part : mBody)
 	{
-		currPos = part->mPos;
-		if (part->mType == 3)
-			;
-		else if (part->mType == 2)
-			part->mPos = prevPos;
-		prevPos = currPos;
+		currX = part->mPosX;
+		currY = part->mPosY;
+		if(part->mType == 3)
+		{
+			part->mRotation = deltaAngle;
+			part->mPosX += deltaX * mSize;
+			part->mPosY += deltaY * mSize;
+		}
+		else
+		{
+			part->mPosX = prevX;
+			part->mPosY = prevY;
+		}
+		prevX = currX;
+		prevY = currY;
 	}
-	auto head = mBody.at(0);
-	head->mPos = {head->mPos[0] + deltaPos[0] * mSize, head->mPos[1] + deltaPos[1] * mSize};
 }
 
 void	Snake::draw(renderFunction const &functor)
@@ -62,12 +81,5 @@ void	Snake::draw(renderFunction const &functor)
 
 void Snake::setDirection(Direction d)
 {
-	if (d == Direction::UP && mCurrentDir != Direction::BOTTOM)
-		mCurrentDir = Direction::UP;
-	else if (d == Direction::RIGHT && mCurrentDir != Direction::LEFT)
-		mCurrentDir = Direction::RIGHT;
-	else if (d == Direction::BOTTOM && mCurrentDir != Direction::UP)
-		mCurrentDir = Direction::BOTTOM;
-	else if (d == Direction::LEFT && mCurrentDir != Direction::RIGHT)
-		mCurrentDir = Direction::LEFT;
+	mCurrentDir = d;
 }

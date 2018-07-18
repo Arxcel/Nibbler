@@ -33,7 +33,7 @@ public:
 	Snake &operator=(Snake const &);
 	std::vector<GameObject*> mBody;
 	void	draw(renderFunction const &);
-	void	move(float dt, int sWidth, int sHeight);
+	void	move();
 	void	setDirection(Direction d);
 private:
 	Direction mCurrentDir;

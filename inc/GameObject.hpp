@@ -13,25 +13,26 @@
 #define NIBBLER_GAMEOBJECT_HPP
 #include <array>
 
-typedef void (*renderFunction)(int const&
-		, std::array<float, 2> const&
-		, std::array<float, 2> const&
-		, float const&
-		, std::array<float, 3>const&);
+typedef void (*renderFunction)(int type
+		, float posX, float posY
+		, float scale
+		, float rot
+		, std::array<float, 3> color);
 
 class GameObject
 {
 public:
 	~GameObject();
 	GameObject() = delete;
-	GameObject(int, std::array<float, 2>, std::array<float, 2>, float, std::array<float, 3>);
+	GameObject(int, float, float, float, float, std::array<float, 3>);
 	GameObject(GameObject const &);
 	GameObject &operator=(GameObject const &);
 
 	// Object state
 	int						mType;
-	std::array<float, 2>	mPos;
-	std::array<float, 2>	mScale;
+	float 					mPosX;
+	float					mPosY;
+	float 					mSize;
 	float					mRotation;
 	std::array<float, 3>	mColor;
 	// Draw sprite

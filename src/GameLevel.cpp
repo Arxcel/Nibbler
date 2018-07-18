@@ -66,21 +66,21 @@ bool	GameLevel::isCompleted()
 
 void GameLevel::init(std::vector<std::vector<int>> tileData, int levelWidth, int levelHeight)
 {
-	size_t height = tileData.size();
-	size_t width = tileData[0].size();
-	float	unitWidth = levelWidth / static_cast<float>(width),
-			unitHeight = levelHeight / static_cast<float>(height);
-	for (size_t y = 0; y < height; ++y)
-	{
-		for (size_t x = 0; x < width; ++x)
-		{
-			if (tileData[y][x] > 0)
-			{
-				std::array<float, 2> pos{{unitWidth * x, unitHeight * y}};
-				std::array<float, 2> scale{{unitWidth, unitHeight}};
-				std::array<float, 3> color{{0.8f, 0.8f, 0.7f}};
-				bricks.emplace_back(new GameObject(1, pos, scale, 0, color));
-			}
-		}
-	}
+//	size_t height = tileData.size();
+//	size_t width = tileData[0].size();
+//	float	unitWidth = levelWidth / static_cast<float>(width),
+//			unitHeight = levelHeight / static_cast<float>(height);
+//	for (size_t y = 0; y < height; ++y)
+//	{
+//		for (size_t x = 0; x < width; ++x)
+//		{
+//			if (tileData[y][x] > 0)
+//			{
+//				std::array<float, 2> pos{{unitWidth * x, unitHeight * y}};
+//				std::array<float, 2> scale{{unitWidth, unitHeight}};
+//				std::array<float, 3> color{{0.8f, 0.8f, 0.7f}};
+//				bricks.emplace_back(new GameObject(1, pos, scale, 0, color));
+//			}
+//		}
+//	}
 }

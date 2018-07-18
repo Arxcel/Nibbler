@@ -12,7 +12,6 @@
 
 typedef void (*initFunction)(int , int , std::string const &);
 typedef void (*preFrameFunction)();
-typedef void (*drawFunction)(std::array<float, 2> const&);
 typedef void (*postFrameFunction)();
 typedef const char *(*processInputFunction)(bool &);
 typedef void (*deinitFunction)();
@@ -38,7 +37,6 @@ private:
 	void					processCommand(std::string const &);
 	void					*mLib{nullptr};
 	initFunction			initApi{nullptr};
-	drawFunction			draw{nullptr};
 	processInputFunction	getUserInput{nullptr};
 	deinitFunction			deinitApi{nullptr};
 	preFrameFunction		preFrame{nullptr};
@@ -46,11 +44,8 @@ private:
 	renderFunction			renderer{nullptr};
 	bool					mIsRunning{true};
 	GameState				mState;
-//	std::vector<GameLevel*>	mLevels;
-	GameLevel               mLevel;
 	Snake*					mSnake;
-	int 					mWidth, mHeight;
-//	std::chrono::time_point<std::chrono::high_resolution_clock> mBefore;
+	int 					mWidth, mHeight, mSize;
 };
 
 #endif //NIBBLER_GAME_HPP
