@@ -86,7 +86,7 @@ void Game::start()
 		{
 			preFrame();
 			mSnake->draw(renderer);
-			std::chrono::milliseconds delta(100);
+			std::chrono::milliseconds delta(1000);
 			if (std::chrono::high_resolution_clock::now() > (before + delta))
 			{
 				mSnake->move();

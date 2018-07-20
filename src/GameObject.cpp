@@ -6,7 +6,7 @@ GameObject::GameObject(int type
 		, float rotation
 		, std::array<float, 3> color)
 		: mType(type)
-		, mPosX(posX), mPosY(posY), mSize(size)
+		, x(posX), y(posY), mSize(size)
 		, mRotation(rotation)
 		, mColor(color)
 {
@@ -21,5 +21,5 @@ GameObject &GameObject::operator=(GameObject const &) { return *this; };
 
 void GameObject::draw(renderFunction const &functor)
 {
-	functor(mType, mPosX, mPosY, mSize, mRotation, mColor);
+	functor(mType, x, y, mSize, mRotation, mColor);
 }

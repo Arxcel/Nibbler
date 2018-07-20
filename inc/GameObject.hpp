@@ -30,8 +30,8 @@ public:
 
 	// Object state
 	int						mType;
-	float 					mPosX;
-	float					mPosY;
+	float 					x;
+	float					y;
 	float 					mSize;
 	float					mRotation;
 	std::array<float, 3>	mColor;
