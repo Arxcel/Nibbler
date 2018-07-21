@@ -1,4 +1,4 @@
-#include <chrono>
+#include <random>
 #include "Game.hpp"
 
 
@@ -16,6 +16,8 @@ Game::Game()
 		initApi(mWidth, mHeight, "Nibbler");
 	std::array<float, 2> pos{{static_cast<float>(mWidth), static_cast<float>(mHeight)}};
 	mSnake = new Snake(pos, mSize, 5);
+	mBefore = std::chrono::high_resolution_clock::now();
+	mLevel = new GameLevel(mWidth * 2, mHeight * 2, mSize, 5);
 };
 
 Game::~Game()
@@ -23,6 +25,8 @@ Game::~Game()
 	deinitApi();
 	if (mLib)
 		dlclose(mLib);
+	delete mSnake;
+	delete mLevel;
 };
 
 Game::Game(Game const &)
@@ -52,7 +56,6 @@ bool Game::loadAPI(std::string const &path)
 	postFrame		= reinterpret_cast<postFrameFunction>(dlsym(mLib, "postFrame"));
 	renderer		= reinterpret_cast<renderFunction >(dlsym(mLib, "renderer"));
 	result &= (initApi != nullptr);
-//	result &= (draw != nullptr);
 	result &= (getUserInput != nullptr);
 	result &= (deinitApi != nullptr);
 	result &= (preFrame != nullptr);
@@ -64,6 +67,42 @@ bool Game::loadAPI(std::string const &path)
 	return result;
 }
 
+bool	Game::checkCollision(GameObject *first, GameObject *second)
+{
+	if (first && second)
+	{
+		bool collisionX = first->x >= second->x && second->x >= first->x;
+		bool collisionY = first->y >= second->y && second->y >= first->y;
+		return collisionX && collisionY;
+	}
+	return false;
+}
+
+void	Game::update()
+{
+	GameObject *eaten = nullptr;
+	if (checkCollision(mSnake->mBody.front(), mLevel->food.front()))
+	{
+		eaten = *(mLevel->food.begin());
+		mLevel->food.clear();
+		mSnake->grow();
+		addFood();
+	}
+//	if (checkCollision(mSnake->mBody.back(), eaten))
+//	{
+//		delete eaten;
+//	}
+}
+
+void	Game::addFood()
+{
+	std::random_device rd;
+	std::mt19937 mt(rd());
+	std::uniform_int_distribution<int> randX(1, mWidth * 2 / mSize - 2);
+	std::uniform_int_distribution<int> randY(1, mHeight * 2 / mSize - 2);
+
+	mLevel->addFood(randX(mt), randY(mt));
+}
 
 void	Game::processCommand(std::string const &aCommand)
 {
@@ -75,23 +114,43 @@ void	Game::processCommand(std::string const &aCommand)
 		mSnake->setDirection(Direction::RIGHT);
 	else if (aCommand == "LEFT")
 		mSnake->setDirection(Direction::LEFT);
+	else if (aCommand == "Faster")
+		mSnake->getSpeed()++;
+	else if (aCommand == "Slower")
+		mSnake->getSpeed() = mSnake->getSpeed() - 1  > 0 ? mSnake->getSpeed() - 1 : mSnake->getSpeed();
+	else if (aCommand == "Pause")
+		mState = mState == GameState::GAME_MENU ? GameState::GAME_ACTIVE : GameState::GAME_MENU;
+}
+
+void					Game::move()
+{
+	std::chrono::milliseconds delta((1000 / mSnake->getSpeed()));
+	if (std::chrono::high_resolution_clock::now() > (mBefore + delta))
+	{
+		mSnake->move();
+		mBefore = std::chrono::high_resolution_clock::now();
+	}
 }
 
 void Game::start()
 {
-	auto before = std::chrono::high_resolution_clock::now();
+	addFood();
 	while (mIsRunning)
 	{
 		if (mState == GameState::GAME_ACTIVE)
 		{
 			preFrame();
+			move();
+			update();
+			mLevel->draw(renderer);
 			mSnake->draw(renderer);
-			std::chrono::milliseconds delta(1000);
-			if (std::chrono::high_resolution_clock::now() > (before + delta))
-			{
-				mSnake->move();
-				before = std::chrono::high_resolution_clock::now();
-			}
+			postFrame();
+		}
+		else if (mState == GameState::GAME_MENU)
+		{
+			preFrame();
+			mLevel->draw(renderer);
+			mSnake->draw(renderer);
 			postFrame();
 		}
 		auto command = getUserInput(mIsRunning);

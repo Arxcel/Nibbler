@@ -22,18 +22,22 @@ class GameLevel
 public:
 	// Level state
 	std::vector<GameObject*> bricks;
+	std::vector<GameObject*> food;
 	// Constructor
-	GameLevel();
+	GameLevel() = delete;
+	GameLevel(int width, int heigth, int difficulty, int size);
 	~GameLevel();
 	GameLevel(GameLevel const &);
 	GameLevel &operator=(GameLevel const &);
+	void	addFood(int x, int y);
 	// Loads level from file
-	void	load(std::string const & path, int levelWidth, int levelHeight);
+//	void	load(std::string const & path, int levelWidth, int levelHeight);
 	void	draw(renderFunction const &);
 	bool	isCompleted();
 private:
 	// Initialize level from tile data
-	void	init(std::vector<std::vector<int>> tileData, int levelWidth, int levelHeight);
+	void	init();
+	int		mLevelWidth, mLevelHeight, mDifficulty, mSize;
 };
 
 #endif

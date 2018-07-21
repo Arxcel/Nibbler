@@ -13,18 +13,12 @@
 #include "Snake.hpp"
 #include <iostream>
 
-Snake::Snake(std::array<float, 2> pos, float size, int length) : mCurrentDir(Direction::UP), mStack(true), mLength(length), mSize(size)
+Snake::Snake(std::array<float, 2> pos, float size, int length) : mCurrentDir(Direction::UP), mNextDir(Direction::UP), mStack(true), mLength(length), mSize(size), mSpeed(5), mColor({1.0f, 1.0f, 1.0f})
 {
-	std::array<float, 2> scale{{size, size}};
-	std::array<float, 3> color{{1.0f, 1.0f, 1.0f}};
-	mBody.emplace_back(new GameObject(1, pos[0], pos[1], size, 0, color));
+	mBody.emplace_back(new GameObject(1, pos[0], pos[1], size, 0, mColor));
 	for (int i = 1; i < mLength; ++i)
-	{
-		std::array<float, 2> nPos{{pos[0], pos[1] + size * i}};
-		mBody.emplace_back(new GameObject(2, nPos[0], nPos[1], size, 0 , color));
-	}
-	std::array<float, 2> nPos{{pos[0], pos[1] + size * (mLength)}};
-	mBody.emplace_back(new GameObject(4, nPos[0], nPos[1], size, 0, color));
+		mBody.emplace_back(new GameObject(2, pos[0], pos[1] + size * i, size, 0 , mColor));
+	mBody.emplace_back(new GameObject(5, pos[0], pos[1] + size * (mLength), size, 0, mColor));
 };
 
 Snake::~Snake()
@@ -32,10 +26,19 @@ Snake::~Snake()
 	for (auto &part : mBody)
 		delete part;
 };
+
+
+void	Snake::grow()
+{
+	mLength++;
+	mBody.emplace_back(new GameObject(2, -100, -100, mSize, 0 , mColor));
+}
+
 Snake::Snake(Snake const &) {};
 Snake &Snake::operator=(Snake const &) { return *this; };
 
 void	Snake::move() {
+	mCurrentDir = mNextDir;
 	float deltaX = 0, deltaY = 0, deltaAngle = 0;
 	if (mCurrentDir == Direction::UP)
 		deltaY = -1;
@@ -51,8 +54,6 @@ void	Snake::move() {
 	}
 	float prevX{0}, prevY{0}, prevA{0};
 	float currX{0}, currY{0}, currA{0};
-	float nextX{0}, nextY{0}, nextA{0};
-	bool turn;
 	for (size_t i = 0; i <= mLength; ++i)
 	{
 		auto part = mBody.at(i);
@@ -71,7 +72,7 @@ void	Snake::move() {
 			part->x = prevX;
 			part->y = prevY;
 			part->mRotation = mBody.at(i - 1)->mRotation;
-			part->mType = 4;
+			part->mType = 5;
 		}
 		else
 		{
@@ -88,21 +89,39 @@ void	Snake::move() {
 
 		if (i < mLength)
 		{
-			auto curr = mBody.at(i);
+			auto prev = mBody.at(i);
 			auto next = mBody.at(i + 1);
 
+			float dirX, dirY;
 			float tmpNextX, tmpNextY;
-			tmpNextX = (curr->x - next->x) / mSize;
-			tmpNextY = (curr->y - next->y) / mSize;
-			if (tmpNextX != 0 && tmpNextY != 0)
-				std::cout << tmpNextX << " " << tmpNextY << std::endl << std::endl;
-			if (tmpNextX != 0 && tmpNextY != 0)
+			tmpNextX = (prev->x - next->x) / mSize;
+			tmpNextY = (prev->y - next->y) / mSize;
+			if (i != 0)
+			{
+				dirX = (currX - prev->x) / mSize;
+				dirY = (currY - prev->y) / mSize;
+			}
+			else
+			{
+				dirX = deltaX == 0 ? 0 : -deltaX;
+				dirY = deltaY == 0 ? 0 : -deltaY;
+			}
+			if ((tmpNextX == -1		&& tmpNextY == -1	&& dirX == 1	&& dirY == 0)	||
+					(tmpNextX == -1	&& tmpNextY == 1	&& dirX == 0	&& dirY == -1)	||
+					(tmpNextX == 1	&& tmpNextY == 1	&& dirX == -1	&& dirY == 0)	||
+					(tmpNextX == 1	&& tmpNextY == -1	&& dirX == 0	&& dirY == 1))
 				next->mType = 3;
+			else if ((tmpNextX == -1	&& tmpNextY == -1	&& dirX == 0	&& dirY == 1)	||
+					(tmpNextX == 1		&& tmpNextY == -1	&& dirX == -1	&& dirY == 0)	||
+					(tmpNextX == 1		&& tmpNextY == 1	&& dirX == 0	&& dirY == -1)	||
+					(tmpNextX == -1		&& tmpNextY == 1	&& dirX == 1	&& dirY == 0))
+				next->mType = 4;
 			else
 				next->mType = 2;
 		}
 	}
 }
+
 void	Snake::draw(renderFunction const &functor)
 {
 	for (auto &part : mBody)
@@ -111,5 +130,15 @@ void	Snake::draw(renderFunction const &functor)
 
 void Snake::setDirection(Direction d)
 {
-	mCurrentDir = d;
+	if ((mCurrentDir == Direction::UP && d == Direction::BOTTOM)		||
+			(mCurrentDir == Direction::BOTTOM && d == Direction::UP)	||
+			(mCurrentDir == Direction::RIGHT && d == Direction::LEFT)	||
+			(mCurrentDir == Direction::LEFT && d == Direction::RIGHT))
+		return;
+	mNextDir = d;
+}
+
+int &Snake::getSpeed()
+{
+	return mSpeed;
 }

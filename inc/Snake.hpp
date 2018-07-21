@@ -18,10 +18,10 @@
 #include "GameObject.hpp"
 
 enum class Direction {
-	UP,
-	BOTTOM,
-	RIGHT,
-	LEFT
+	UP		= 0,
+	BOTTOM	= 1,
+	RIGHT	= 2,
+	LEFT	= 3
 };
 
 class Snake {
@@ -35,11 +35,16 @@ public:
 	void	draw(renderFunction const &);
 	void	move();
 	void	setDirection(Direction d);
+	int		&getSpeed();
+	void	grow();
 private:
-	Direction mCurrentDir;
-	bool mStack;
-	int mLength;
-	float mSize;
+	std::array<float, 3> mColor;
+	Direction	mCurrentDir;
+	Direction	mNextDir;
+	bool		mStack;
+	int			mLength;
+	float		mSize;
+	int			mSpeed;
 };
 
 #endif

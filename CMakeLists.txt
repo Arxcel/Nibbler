@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.9)
 
-set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17")
+set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 project(nibbler)
 
 set(SOURCE_EXE
@@ -36,5 +36,5 @@ include_directories(inc/
         nibbler_glfw/lib/glad/build/include/
         nibbler_glfw/lib/glfw/include
         nibbler_glfw/lib/stb/
-        nibbler_glfw/lib/glm/
-                    )
+        nibbler_glfw/lib/glm
+        )
