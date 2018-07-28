@@ -37,4 +37,5 @@ include_directories(inc/
         nibbler_glfw/lib/glfw/include
         nibbler_glfw/lib/stb/
         nibbler_glfw/lib/glm
+        nibbler_glfw/lib/freetype/include
         )
