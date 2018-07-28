@@ -80,18 +80,30 @@ bool	Game::checkCollision(GameObject *first, GameObject *second)
 
 void	Game::update()
 {
-	GameObject *eaten = nullptr;
+	GameObject *snakeHead = mSnake->mBody.front();
 	if (checkCollision(mSnake->mBody.front(), mLevel->food.front()))
 	{
-		eaten = *(mLevel->food.begin());
 		mLevel->food.clear();
 		mSnake->grow();
 		addFood();
 	}
-//	if (checkCollision(mSnake->mBody.back(), eaten))
-//	{
-//		delete eaten;
-//	}
+
+	for (auto &brick : mLevel->bricks)
+	{
+		if (checkCollision(snakeHead, brick))
+		{
+			mIsRunning = false;
+		}
+	}
+
+	for (auto &part : mSnake->mBody)
+	{
+
+		if (part != snakeHead && checkCollision(snakeHead, part))
+		{
+			mIsRunning = false;
+		}
+	}
 }
 
 void	Game::addFood()
@@ -100,8 +112,23 @@ void	Game::addFood()
 	std::mt19937 mt(rd());
 	std::uniform_int_distribution<int> randX(1, mWidth * 2 / mSize - 2);
 	std::uniform_int_distribution<int> randY(1, mHeight * 2 / mSize - 2);
-
-	mLevel->addFood(randX(mt), randY(mt));
+	std::array<float, 3> color{{1.0f, 1.0f, 1.0f}};
+	for (bool isPlaced = false; !isPlaced;)
+	{
+		auto food = new GameObject(6, randX(mt) * mSize, randY(mt) * mSize, mSize, 180, color);
+		isPlaced = true;
+		for (auto &part : mSnake->mBody)
+		{
+			if (checkCollision(food, part))
+			{
+				delete food;
+				isPlaced = false;
+				break;
+			}
+		}
+		if (isPlaced)
+			mLevel->addFood(food);
+	}
 }
 
 void	Game::processCommand(std::string const &aCommand)

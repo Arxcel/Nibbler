@@ -29,7 +29,7 @@ public:
 	~GameLevel();
 	GameLevel(GameLevel const &);
 	GameLevel &operator=(GameLevel const &);
-	void	addFood(int x, int y);
+	void	addFood(GameObject *aFood);
 	// Loads level from file
 //	void	load(std::string const & path, int levelWidth, int levelHeight);
 	void	draw(renderFunction const &);

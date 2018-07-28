@@ -45,10 +45,9 @@ bool	GameLevel::isCompleted()
 	return false;
 }
 
-void	GameLevel::addFood(int x, int y)
+void	GameLevel::addFood(GameObject *aFood)
 {
-	std::array<float, 3> color{{1.0f, 1.0f, 1.0f}};
-	food.emplace_back(new GameObject(6, x * mSize, y * mSize, mSize, 180, color));
+	food.emplace_back(aFood);//new GameObject(6, x * mSize, y * mSize, mSize, 180, color));
 //	std::cout << x << std::endl;
 //	std::cout << y << std::endl;
 }
