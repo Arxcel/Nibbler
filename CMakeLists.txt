@@ -25,7 +25,11 @@ set(SOURCE_EXE
         inc/GameObject.hpp
         src/GameObject.cpp
         src/GameLevel.cpp
-        inc/GameLevel.hpp src/Snake.cpp inc/Snake.hpp)
+        inc/GameLevel.hpp
+        src/Snake.cpp
+        inc/Snake.hpp
+        nibbler_glfw/inc/TextRenderer.hpp
+        nibbler_glfw/src/TextRenderer.cpp)
 
 add_executable(nibbler ${SOURCE_EXE})
 
