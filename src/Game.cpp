@@ -12,12 +12,15 @@ Game::Game()
 	mWidth = 800;
 	mHeight = 600;
 	mSize  = 50;
+	mScore = 0;
 	if (loadAPI("nibbler_glfw/nibbler_glfw.so"))
 		initApi(mWidth, mHeight, "Nibbler");
 	std::array<float, 2> pos{{static_cast<float>(mWidth), static_cast<float>(mHeight)}};
 	mSnake = new Snake(pos, mSize, 5);
 	mBefore = std::chrono::high_resolution_clock::now();
 	mLevel = new GameLevel(mWidth * 2, mHeight * 2, mSize, 5);
+	mCommands.clear();
+	mState = GameState::GAME_MENU;
 };
 
 Game::~Game()
@@ -54,14 +57,15 @@ bool Game::loadAPI(std::string const &path)
 	deinitApi		= reinterpret_cast<deinitFunction>(dlsym(mLib, "deinitializeApi"));
 	preFrame		= reinterpret_cast<preFrameFunction>(dlsym(mLib, "preFrame"));
 	postFrame		= reinterpret_cast<postFrameFunction>(dlsym(mLib, "postFrame"));
-	renderer		= reinterpret_cast<renderFunction >(dlsym(mLib, "renderer"));
+	drawer			= reinterpret_cast<renderFunction >(dlsym(mLib, "draw"));
+	putText			= reinterpret_cast<textFunction >(dlsym(mLib, "putText"));
 	result &= (initApi != nullptr);
 	result &= (getUserInput != nullptr);
 	result &= (deinitApi != nullptr);
 	result &= (preFrame != nullptr);
 	result &= (postFrame != nullptr);
-	result &= (renderer != nullptr);
-
+	result &= (drawer != nullptr);
+	result &= (putText != nullptr);
 	if (!result)
 		std::cerr << "dlsym : "<< dlerror() << std::endl;
 	return result;
@@ -85,6 +89,9 @@ void	Game::update()
 	{
 		mLevel->food.clear();
 		mSnake->grow();
+		mScore += 10;
+		if (mScore % 100 == 0)
+			mSnake->getSpeed() += 3;
 		addFood();
 	}
 
@@ -131,22 +138,29 @@ void	Game::addFood()
 	}
 }
 
-void	Game::processCommand(std::string const &aCommand)
+void	Game::processCommand()
 {
-	if (aCommand == "UP")
-		mSnake->setDirection(Direction::UP);
-	else if (aCommand == "DOWN")
-		mSnake->setDirection(Direction::BOTTOM);
-	else if (aCommand == "RIGHT")
-		mSnake->setDirection(Direction::RIGHT);
-	else if (aCommand == "LEFT")
-		mSnake->setDirection(Direction::LEFT);
-	else if (aCommand == "Faster")
-		mSnake->getSpeed()++;
-	else if (aCommand == "Slower")
-		mSnake->getSpeed() = mSnake->getSpeed() - 1  > 0 ? mSnake->getSpeed() - 1 : mSnake->getSpeed();
-	else if (aCommand == "Pause")
-		mState = mState == GameState::GAME_MENU ? GameState::GAME_ACTIVE : GameState::GAME_MENU;
+	if (!mCommands.empty())
+	{
+		auto first = mCommands.begin();
+		auto cmd = *first;
+		std::cout << cmd << std::endl;
+		if (cmd == "UP")
+			mSnake->setDirection(Direction::UP);
+		else if (cmd == "DOWN")
+			mSnake->setDirection(Direction::BOTTOM);
+		else if (cmd == "RIGHT")
+			mSnake->setDirection(Direction::RIGHT);
+		else if (cmd == "LEFT")
+			mSnake->setDirection(Direction::LEFT);
+		else if (cmd == "Faster")
+			mSnake->getSpeed()++;
+		else if (cmd == "Slower")
+			mSnake->getSpeed() = mSnake->getSpeed() - 1  > 0 ? mSnake->getSpeed() - 1 : mSnake->getSpeed();
+		else if (cmd == "Pause")
+			mState = mState == GameState::GAME_MENU ? GameState::GAME_ACTIVE : GameState::GAME_MENU;
+		mCommands.erase(first);
+	}
 }
 
 void					Game::move()
@@ -164,23 +178,31 @@ void Game::start()
 	addFood();
 	while (mIsRunning)
 	{
+		const char *input = getUserInput(mIsRunning);
+		if (input != nullptr)
+		{
+			mCommands.insert(std::string(input));
+		}
 		if (mState == GameState::GAME_ACTIVE)
 		{
 			preFrame();
 			move();
 			update();
-			mLevel->draw(renderer);
-			mSnake->draw(renderer);
+			mLevel->draw(drawer);
+			mSnake->draw(drawer);
+			putText("Score: " + std::to_string(mScore), 5, 5, 0.7, {1, 1, 1});
+			putText("Speed: " + std::to_string(mSnake->getSpeed()), 5, mHeight - 24 * 0.7f, 0.7, {1, 1, 1});
 			postFrame();
 		}
 		else if (mState == GameState::GAME_MENU)
 		{
 			preFrame();
-			mLevel->draw(renderer);
-			mSnake->draw(renderer);
+			mLevel->draw(drawer);
+			mSnake->draw(drawer);
+			putText("Score: " + std::to_string(mScore), 5, 5, 0.7, {1, 1, 1});
+			putText("Paused", mWidth / 2 - 75, mHeight / 2 - 30, 2, {1, 0.5, 0.5});
 			postFrame();
 		}
-		auto command = getUserInput(mIsRunning);
-		processCommand(command);
+		processCommand();
 	}
 }

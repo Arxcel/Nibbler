@@ -14,6 +14,7 @@ set(SOURCE_EXE
         nibbler_glfw/inc/Texture.hpp
         nibbler_glfw/src/Texture.cpp
         nibbler_glfw/inc/CustomException.hpp
+        nibbler_glfw/src/CustomException.cpp
         nibbler_glfw/inc/ResourceManager.hpp
         nibbler_glfw/src/ResourceManager.cpp
         nibbler_glfw/inc/Drawer.hpp
@@ -29,7 +30,10 @@ set(SOURCE_EXE
         src/Snake.cpp
         inc/Snake.hpp
         nibbler_glfw/inc/TextRenderer.hpp
-        nibbler_glfw/src/TextRenderer.cpp)
+        nibbler_glfw/src/TextRenderer.cpp
+        nibbler_glfw/inc/Character.hpp
+        nibbler_glfw/src/Character.cpp
+        )
 
 add_executable(nibbler ${SOURCE_EXE})
 
