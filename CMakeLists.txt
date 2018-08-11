@@ -23,16 +23,39 @@ set(SOURCE_EXE
         nibbler_glfw/src/SpriteRenderer.cpp
         nibbler_glfw/inc/SpriteRenderer.hpp
         nibbler_glfw/src/SpriteRenderer.cpp
+        nibbler_glfw/inc/TextRenderer.hpp
+        nibbler_glfw/src/TextRenderer.cpp
+        nibbler_glfw/inc/Character.hpp
+        nibbler_glfw/src/Character.cpp
+
+        nibbler_sdl/inc/nibbler_sdl.hpp
+        nibbler_sdl/src/nibbler_sdl.cpp
+        nibbler_sdl/inc/Shader.hpp
+        nibbler_sdl/src/Shader.cpp
+        nibbler_sdl/inc/Texture.hpp
+        nibbler_sdl/src/Texture.cpp
+        nibbler_sdl/inc/CustomException.hpp
+        nibbler_sdl/src/CustomException.cpp
+        nibbler_sdl/inc/ResourceManager.hpp
+        nibbler_sdl/src/ResourceManager.cpp
+        nibbler_sdl/inc/Drawer.hpp
+        nibbler_sdl/src/Drawer.cpp
+        nibbler_sdl/inc/SpriteRenderer.hpp
+        nibbler_sdl/src/SpriteRenderer.cpp
+        nibbler_sdl/inc/SpriteRenderer.hpp
+        nibbler_sdl/src/SpriteRenderer.cpp
+        nibbler_sdl/inc/TextRenderer.hpp
+        nibbler_sdl/src/TextRenderer.cpp
+        nibbler_sdl/inc/Character.hpp
+        nibbler_sdl/src/Character.cpp
+
         inc/GameObject.hpp
         src/GameObject.cpp
         src/GameLevel.cpp
         inc/GameLevel.hpp
         src/Snake.cpp
         inc/Snake.hpp
-        nibbler_glfw/inc/TextRenderer.hpp
-        nibbler_glfw/src/TextRenderer.cpp
-        nibbler_glfw/inc/Character.hpp
-        nibbler_glfw/src/Character.cpp
+
         )
 
 add_executable(nibbler ${SOURCE_EXE})
@@ -46,4 +69,5 @@ include_directories(inc/
         nibbler_glfw/lib/stb/
         nibbler_glfw/lib/glm
         nibbler_glfw/lib/freetype/include
+        nibbler_sdl/inc
         )
