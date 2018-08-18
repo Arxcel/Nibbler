@@ -49,6 +49,27 @@ set(SOURCE_EXE
         nibbler_sdl/inc/Character.hpp
         nibbler_sdl/src/Character.cpp
 
+        nibbler_sfml/inc/nibbler_sfml.hpp
+        nibbler_sfml/src/nibbler_sfml.cpp
+        nibbler_sfml/inc/Shader.hpp
+        nibbler_sfml/src/Shader.cpp
+        nibbler_sfml/inc/Texture.hpp
+        nibbler_sfml/src/Texture.cpp
+        nibbler_sfml/inc/CustomException.hpp
+        nibbler_sfml/src/CustomException.cpp
+        nibbler_sfml/inc/ResourceManager.hpp
+        nibbler_sfml/src/ResourceManager.cpp
+        nibbler_sfml/inc/Drawer.hpp
+        nibbler_sfml/src/Drawer.cpp
+        nibbler_sfml/inc/SpriteRenderer.hpp
+        nibbler_sfml/src/SpriteRenderer.cpp
+        nibbler_sfml/inc/SpriteRenderer.hpp
+        nibbler_sfml/src/SpriteRenderer.cpp
+        nibbler_sfml/inc/TextRenderer.hpp
+        nibbler_sfml/src/TextRenderer.cpp
+        nibbler_sfml/inc/Character.hpp
+        nibbler_sfml/src/Character.cpp
+        
         inc/GameObject.hpp
         src/GameObject.cpp
         src/GameLevel.cpp
@@ -70,5 +91,7 @@ include_directories(inc/
         nibbler_glfw/lib/glm
         nibbler_glfw/lib/freetype/include
         nibbler_sdl/inc
-        nibbler_sdl/lib/sdl/include
+        nibbler_sdl/lib/sdl/SDL2.framework/Headers/
+        nibbler_sfml/inc
+        nibbler_sfml/lib/sfml/SFML.framework/Headers/
         )

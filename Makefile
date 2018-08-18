@@ -26,6 +26,8 @@ LIB1 = ./nibbler_glfw
 
 LIB2 = ./nibbler_sdl
 
+LIB3 = ./nibbler_sfml
+
 EXTENSIONS = $(addprefix $(I_DIR)/,$(EXT))
 
 EXT =	Game.hpp \
@@ -56,6 +58,7 @@ obj:
 libs:
 	make -C $(LIB1)
 	make -C $(LIB2)
+	make -C $(LIB3)
 
 $(O_DIR)/%.o: $(S_DIR)/%.cpp $(DEPS) $(EXTENSIONS)
 		$(CC) -c -o $@ $< $(FLAGS) $(HEADERS)
@@ -65,11 +68,13 @@ clean:
 		rm -rf $(O_DIR)
 		make clean -C $(LIB1)
 		make clean -C $(LIB2)
+		make clean -C $(LIB3)
 
 fclean: clean
 		rm -f $(NAME)
 		make fclean -C $(LIB1)
 		make fclean -C $(LIB2)
+		make fclean -C $(LIB3)
 
 re: fclean all
 
