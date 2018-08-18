@@ -70,4 +70,5 @@ include_directories(inc/
         nibbler_glfw/lib/glm
         nibbler_glfw/lib/freetype/include
         nibbler_sdl/inc
+        nibbler_sdl/lib/sdl/include
         )

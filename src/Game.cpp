@@ -100,6 +100,7 @@ void	Game::update()
 		if (checkCollision(snakeHead, brick))
 		{
 			mIsRunning = false;
+//			mState = GameState::GAME_OVER;
 		}
 	}
 
@@ -109,6 +110,7 @@ void	Game::update()
 		if (part != snakeHead && checkCollision(snakeHead, part))
 		{
 			mIsRunning = false;
+//			mState = GameState::GAME_OVER;
 		}
 	}
 }
@@ -158,7 +160,7 @@ void	Game::processCommand()
 		else if (cmd == "Slower")
 			mSnake->getSpeed() = mSnake->getSpeed() - 1  > 0 ? mSnake->getSpeed() - 1 : mSnake->getSpeed();
 		else if (cmd == "Pause")
-			mState = mState == GameState::GAME_MENU ? GameState::GAME_ACTIVE : GameState::GAME_MENU;
+			mState = mState == GameState::GAME_MENU || mState == GameState::GAME_OVER ? GameState::GAME_ACTIVE : GameState::GAME_MENU;
 		mCommands.erase(first);
 	}
 }

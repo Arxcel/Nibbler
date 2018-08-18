@@ -22,7 +22,8 @@ typedef void		(*textFunction)(std::string, float, float, float, std::array<float
 
 enum GameState {
 	GAME_ACTIVE,
-	GAME_MENU
+	GAME_MENU,
+	GAME_OVER
 };
 
 class Game {
