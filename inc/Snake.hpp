@@ -15,6 +15,7 @@
 
 #include <vector>
 #include <string>
+#include <memory>
 #include "GameObject.hpp"
 
 enum class Direction {
@@ -31,7 +32,7 @@ public:
 	~Snake();
 	Snake(Snake const &);
 	Snake &operator=(Snake const &);
-	std::vector<GameObject*> mBody;
+	std::vector<std::shared_ptr<GameObject>> mBody;
 	void	draw(renderFunction const &);
 	void	move();
 	void	setDirection(Direction d);

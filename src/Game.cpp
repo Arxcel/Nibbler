@@ -40,7 +40,7 @@ Game &Game::operator=(Game const &)
 	return *this;
 };
 
-bool	Game::checkCollision(GameObject *first, GameObject *second)
+bool	Game::checkCollision(std::shared_ptr<GameObject> first, std::shared_ptr<GameObject> second)
 {
 	if (first && second)
 	{
@@ -53,7 +53,7 @@ bool	Game::checkCollision(GameObject *first, GameObject *second)
 
 void	Game::update()
 {
-	GameObject *snakeHead = mSnake->mBody.front();
+	auto snakeHead = mSnake->mBody.front();
 	if (checkCollision(mSnake->mBody.front(), mLevel->food.front()))
 	{
 		mLevel->food.clear();
@@ -93,13 +93,12 @@ void	Game::addFood()
 	std::array<float, 3> color{{1.0f, 1.0f, 1.0f}};
 	for (bool isPlaced = false; !isPlaced;)
 	{
-		auto food = new GameObject(6, randX(mt) * mSize, randY(mt) * mSize, mSize, 180, color);
+		auto food = std::make_shared<GameObject>(6, randX(mt) * mSize, randY(mt) * mSize, mSize, 180, color);
 		isPlaced = true;
 		for (auto &part : mSnake->mBody)
 		{
 			if (checkCollision(food, part))
 			{
-				delete food;
 				isPlaced = false;
 				break;
 			}

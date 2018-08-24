@@ -14,7 +14,7 @@ CC = clang++
 
 NAME = nibbler
 
-FLAGS = -std=c++11
+FLAGS = -g -std=c++11 -fsanitize=address
 
 I_DIR = ./inc
 

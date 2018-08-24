@@ -15,23 +15,21 @@
 
 Snake::Snake(std::array<float, 2> pos, float size, int length) : mCurrentDir(Direction::UP), mNextDir(Direction::UP), mStack(true), mLength(length), mSize(size), mSpeed(5), mColor({1.0f, 1.0f, 1.0f})
 {
-	mBody.emplace_back(new GameObject(1, pos[0], pos[1], size, 0, mColor));
+	mBody.emplace_back(std::make_shared<GameObject>(1, pos[0], pos[1], size, 0, mColor));
 	for (int i = 1; i < mLength; ++i)
-		mBody.emplace_back(new GameObject(2, pos[0], pos[1] + size * i, size, 0 , mColor));
-	mBody.emplace_back(new GameObject(5, pos[0], pos[1] + size * (mLength), size, 0, mColor));
+		mBody.emplace_back(std::make_shared<GameObject>(2, pos[0], pos[1] + size * i, size, 0 , mColor));
+	mBody.emplace_back(std::make_shared<GameObject>(5, pos[0], pos[1] + size * (mLength), size, 0, mColor));
 };
 
 Snake::~Snake()
 {
-	for (auto &part : mBody)
-		delete part;
 };
 
 
 void	Snake::grow()
 {
 	mLength++;
-	mBody.emplace_back(new GameObject(2, -100, -100, mSize, 0 , mColor));
+	mBody.emplace_back(std::make_shared<GameObject>(2, -100, -100, mSize, 0 , mColor));
 }
 
 Snake::Snake(Snake const &) {};

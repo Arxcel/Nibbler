@@ -14,7 +14,6 @@
 #include <iostream>
 #include "GameLevel.hpp"
 
-//GameLevel::GameLevel() {};
 GameLevel::GameLevel(int width, int height, int size, int difficulty) : mLevelWidth(width), mLevelHeight(height), mDifficulty(difficulty), mSize(size)
 {
 	init();
@@ -22,10 +21,6 @@ GameLevel::GameLevel(int width, int height, int size, int difficulty) : mLevelWi
 
 GameLevel::~GameLevel()
 {
-	for (auto &brick : bricks)
-		delete brick;
-	for (auto &f : food)
-		delete f;
 };
 
 GameLevel::GameLevel(GameLevel const &) {};
@@ -45,11 +40,9 @@ bool	GameLevel::isCompleted()
 	return false;
 }
 
-void	GameLevel::addFood(GameObject *aFood)
+void	GameLevel::addFood(std::shared_ptr<GameObject> aFood)
 {
-	food.emplace_back(aFood);//new GameObject(6, x * mSize, y * mSize, mSize, 180, color));
-//	std::cout << x << std::endl;
-//	std::cout << y << std::endl;
+	food.emplace_back(aFood);
 }
 
 void GameLevel::init()
@@ -57,13 +50,13 @@ void GameLevel::init()
 	std::array<float, 3> color{{0.3f, 0.1f, 0.1f}};
 	for (size_t y = 0; y * mSize < mLevelHeight; ++y)
 	{
-		bricks.emplace_back(new GameObject(8, 0, y * mSize, mSize, 0, color));
-		bricks.emplace_back(new GameObject(8, mLevelWidth - mSize, y * mSize, mSize, 0, color));
+		bricks.emplace_back(std::make_shared<GameObject>(8, 0, y * mSize, mSize, 0, color));
+		bricks.emplace_back(std::make_shared<GameObject>(8, mLevelWidth - mSize, y * mSize, mSize, 0, color));
 	}
 	for (size_t x = 0; x * mSize < mLevelWidth ; ++x)
 	{
-		bricks.emplace_back(new GameObject(8, x * mSize, 0, mSize, 0, color));
-		bricks.emplace_back(new GameObject(8, x * mSize, mLevelHeight - mSize, mSize, 0, color));
+		bricks.emplace_back(std::make_shared<GameObject>(8, x * mSize, 0, mSize, 0, color));
+		bricks.emplace_back(std::make_shared<GameObject>(8, x * mSize, mLevelHeight - mSize, mSize, 0, color));
 
 	}
 }

@@ -42,7 +42,7 @@ void Drawer::init(int width, int height, std::string const &winName)
 	mRessourceManager.loadTexture("./drawAPI/asset/snake-2/body_turn_left.png", "body_turn_left", true);
 	mRessourceManager.loadTexture("./drawAPI/asset/snake-2/body_turn_right.png", "body_turn_right", true);
 	mRessourceManager.loadTexture("./drawAPI/asset/snake-2/tail.png", "tail", true);
-	mRessourceManager.loadTexture("./drawAPI/asset/food3.png", "food", true);
+	mRessourceManager.loadTexture("./drawAPI/asset/food1.png", "food", true);
 
 	mRessourceManager.loadTexture("./drawAPI/asset/background.jpg", "background", false);
 	mRessourceManager.loadTexture("./drawAPI/asset/block2.png", "block", false);

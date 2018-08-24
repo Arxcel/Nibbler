@@ -27,7 +27,7 @@ public:
 	void					start();
 
 private:
-	bool					checkCollision(GameObject *, GameObject *);
+	bool					checkCollision(std::shared_ptr<GameObject>, std::shared_ptr<GameObject>);
 	void					addFood();
 	void					move();
 	void					update();

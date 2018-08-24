@@ -64,7 +64,10 @@ extern "C" void draw(int type
 		default:
 			texture = "block";
 	}
-	gD->draw(texture, {posX, posY}, {scale, scale}, static_cast<float>(rot * M_PI / 180.0f), {color[0], color[1], color[2]});
+	if (type == 1 || type == 2 || type == 3 || type == 4 || type == 5)
+		gD->draw(texture, {posX, posY}, {scale, scale}, static_cast<float>(rot * M_PI / 180.0f), {0.5, 0.0, 0.5});
+	else
+		gD->draw(texture, {posX, posY}, {scale, scale}, static_cast<float>(rot * M_PI / 180.0f), {color[0], color[1], color[2]});
 }
 
 extern "C" void			putText(std::string what, float x, float y, float size, std::array<float, 3> color)
