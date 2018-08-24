@@ -1,9 +1,0 @@
-[submodule "nibbler_glfw"]
-	path = nibbler_glfw
-	url = https://Arxcel@bitbucket.org/Arxcel/nibbler_glfw.git
-[submodule "nibbler_sdl"]
-	path = nibbler_sdl
-	url = https://Arxcel@bitbucket.org/Arxcel/nibbler_sdl.git
-[submodule "nibbler_sfml"]
-	path = nibbler_sfml
-	url = https://Arxcel@bitbucket.org/Arxcel/nibbler_sfml.git
