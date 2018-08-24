@@ -12,13 +12,7 @@
 #ifndef NIBBLER_GAMEOBJECT_HPP
 #define NIBBLER_GAMEOBJECT_HPP
 #include <array>
-
-typedef void (*renderFunction)(int type
-		, float posX, float posY
-		, float scale
-		, float rot
-		, std::array<float, 3> color);
-
+#include "DrawAPIFunctions.hpp"
 class GameObject
 {
 public:

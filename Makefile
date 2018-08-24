@@ -33,15 +33,17 @@ EXTENSIONS = $(addprefix $(I_DIR)/,$(EXT))
 EXT =	Game.hpp \
 		GameLevel.hpp \
 		GameObject.hpp \
-		Snake.hpp
+		Snake.hpp \
+		DrawAPI.hpp
 
 HEADERS = -I$(I_DIR)
 
 SOURCES =	main.cpp \
+            DrawAPI.cpp \
 			Game.cpp \
 			GameLevel.cpp \
             GameObject.cpp \
-            Snake.cpp
+            Snake.cpp \
 
 SRCS = $(addprefix $(S_DIR)/,$(SOURCES))
 

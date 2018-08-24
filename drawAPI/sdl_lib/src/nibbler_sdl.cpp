@@ -7,6 +7,7 @@ std::shared_ptr<Drawer> gD;
 
 extern "C" void initializeApi(int width, int height, std::string const &winName)
 {
+	std::cout << "sdl started" << std::endl;
 	gD = std::make_shared<Drawer>(width, height, winName);
 }
 

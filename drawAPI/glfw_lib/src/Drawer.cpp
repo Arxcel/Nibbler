@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Drawer.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vkozlov <vkozlov@student.unit.ua>          +#+  +:+       +#+        */
+/*   By: vkozlov <vkozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/08 00:04:00 by vkozlov           #+#    #+#             */
-/*   Updated: 2018/07/08 00:04:00 by vkozlov          ###   ########.fr       */
+/*   Updated: 2018/08/24 15:53:11 by vkozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void Drawer::init(int width, int height, std::string const &winName)
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 	mWindow = glfwCreateWindow(width, height, winName.c_str(), nullptr, nullptr);
 	glfwMakeContextCurrent(mWindow);
-	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+	if (!gladLoadGL())
 		throw CustomException("Failed to initialize GLAD");
 	glViewport(0, 0, width * 2, height * 2);
 	glEnable(GL_CULL_FACE);
@@ -45,7 +45,7 @@ void Drawer::init(int width, int height, std::string const &winName)
 	mRessourceManager.loadTexture("./drawAPI/asset/food.png", "food", true);
 
 	mRessourceManager.loadTexture("./drawAPI/asset/background.jpg", "background", false);
-	mRessourceManager.loadTexture("./drawAPI/asset/block_solid.png", "block", true);
+	mRessourceManager.loadTexture("./drawAPI/asset/block.png", "block", true);
 
 	auto textShader = mRessourceManager.loadShader("drawAPI/shaders/text.vx.glsl", "drawAPI/shaders/text.ft.glsl", "text");
 
@@ -65,6 +65,9 @@ void Drawer::init(int width, int height, std::string const &winName)
 	mIsBtnPressed.emplace(GLFW_KEY_MINUS, std::pair<bool, std::string>(false, "Slower"));
 	mIsBtnPressed.emplace(GLFW_KEY_EQUAL, std::pair<bool, std::string>(false, "Faster"));
 	mIsBtnPressed.emplace(GLFW_KEY_SPACE, std::pair<bool, std::string>(true, "Pause"));
+	mIsBtnPressed.emplace(GLFW_KEY_1, std::pair<bool, std::string>(true, "LIB1"));
+	mIsBtnPressed.emplace(GLFW_KEY_2, std::pair<bool, std::string>(true, "LIB2"));
+	mIsBtnPressed.emplace(GLFW_KEY_3, std::pair<bool, std::string>(true, "LIB3"));
 }
 
 std::string Drawer::processKey(int key)
@@ -101,6 +104,12 @@ std::string Drawer::processInput(bool &isRunning)
 		command = processKey(GLFW_KEY_EQUAL);
 	if (command == "nothing")
 		command = processKey(GLFW_KEY_SPACE);
+	if (command == "nothing")
+		command = processKey(GLFW_KEY_1);
+	if (command == "nothing")
+		command = processKey(GLFW_KEY_2);
+	if (command == "nothing")
+		command = processKey(GLFW_KEY_3);
 	if (glfwWindowShouldClose(mWindow))
 		isRunning = false;
 	return command;
@@ -150,6 +159,7 @@ Drawer::Drawer(int width, int height, std::string const &winName)
 
 Drawer::~Drawer()
 {
+	std::cout << "glfw finished " << std::endl;
 	deinit();
 };
 

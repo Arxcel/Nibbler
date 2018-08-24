@@ -99,9 +99,7 @@ clean:
 
 fclean: clean
 		rm -f $(NAME)
-		rm -rf $(L_DIR)/build/glfw
-		rm -rf $(libFREETYPE_DIR)
-		rm -rf $(libGLAD_DIR)
+		rm -rf $(L_DIR)/build
 		rm -rf $(S_DIR)/stb_image.cpp
 
 re: fclean all

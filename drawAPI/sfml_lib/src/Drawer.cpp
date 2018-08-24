@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Drawer.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vkozlov <vkozlov@student.unit.ua>          +#+  +:+       +#+        */
+/*   By: vkozlov <vkozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/08 00:04:00 by vkozlov           #+#    #+#             */
-/*   Updated: 2018/07/08 00:04:00 by vkozlov          ###   ########.fr       */
+/*   Updated: 2018/08/24 16:15:05 by vkozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void Drawer::init(int width, int height, std::string const &winName)
 	settings.attributeFlags = sf::ContextSettings::Core;
 
 	mWindow.create(sf::VideoMode(width * 2, height * 2), winName, sf::Style::Close, settings);
-
 	if (!gladLoadGL())
 		throw CustomException("Failed to initialize GLAD");
 	glViewport(0, 0, width * 2, height * 2);
@@ -66,6 +65,9 @@ void Drawer::init(int width, int height, std::string const &winName)
 	mIsBtnPressed.emplace(sf::Keyboard::Subtract, "Slower");
 	mIsBtnPressed.emplace(sf::Keyboard::Equal, "Faster");
 	mIsBtnPressed.emplace(sf::Keyboard::Space, "Pause");
+	mIsBtnPressed.emplace(sf::Keyboard::Num1, "LIB1");
+	mIsBtnPressed.emplace(sf::Keyboard::Num2, "LIB2");
+	mIsBtnPressed.emplace(sf::Keyboard::Num3, "LIB3");
 }
 
 std::string Drawer::processInput(bool &isRunning)
@@ -79,8 +81,8 @@ std::string Drawer::processInput(bool &isRunning)
 		if(mE.key.code == sf::Keyboard::Escape)
 			isRunning = false;
 	}
-	else if(mE.type == sf::Event::Closed)
-		isRunning = false;
+	// else if(mE.type == sf::Event::Closed)
+		// isRunning = false;
 	return command;
 }
 
@@ -129,6 +131,7 @@ Drawer::Drawer(int width, int height, std::string const &winName)
 
 Drawer::~Drawer()
 {
+	std::cout << "sfml finished " << std::endl;
 	deinit();
 };
 

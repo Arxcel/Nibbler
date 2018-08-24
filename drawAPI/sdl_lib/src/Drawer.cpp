@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Drawer.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vkozlov <vkozlov@student.unit.ua>          +#+  +:+       +#+        */
+/*   By: vkozlov <vkozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/08 00:04:00 by vkozlov           #+#    #+#             */
-/*   Updated: 2018/07/08 00:04:00 by vkozlov          ###   ########.fr       */
+/*   Updated: 2018/08/24 15:53:32 by vkozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,10 @@ void Drawer::init(int width, int height, std::string const &winName)
 
 	mWindow = SDL_CreateWindow(winName.c_str(),SDL_WINDOWPOS_CENTERED,SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_OPENGL);
 	mContext = SDL_GL_CreateContext(mWindow);
-
-	if (!gladLoadGLLoader(SDL_GL_GetProcAddress))
+	SDL_GL_MakeCurrent(mWindow, mContext);
+	std::cout << "Window created" << std::endl;
+	// if (!gladLoadGLLoader(SDL_GL_GetProcAddress))
+	if (!gladLoadGL())
 		throw CustomException("Failed to initialize GLAD");
 	glViewport(0, 0, width, height);
 	glEnable(GL_CULL_FACE);
@@ -75,6 +77,10 @@ void Drawer::init(int width, int height, std::string const &winName)
 	mIsBtnPressed.emplace(SDLK_MINUS, "Slower");
 	mIsBtnPressed.emplace(SDLK_EQUALS, "Faster");
 	mIsBtnPressed.emplace(SDLK_SPACE, "Pause");
+	mIsBtnPressed.emplace(SDLK_1, "LIB1");
+	mIsBtnPressed.emplace(SDLK_2, "LIB2");
+	mIsBtnPressed.emplace(SDLK_3, "LIB3");
+
 }
 
 std::string Drawer::processInput(bool &isRunning)
@@ -86,7 +92,7 @@ std::string Drawer::processInput(bool &isRunning)
 		if	(find != mIsBtnPressed.end())
 			command = find->second;
 	}
-	if(mE.type == SDL_QUIT)
+	if(mE.type == SDL_QUIT || (mE.type == SDL_KEYDOWN && mE.key.keysym.sym == SDLK_ESCAPE))
 		isRunning = false;
 	return command;
 }
@@ -137,6 +143,7 @@ Drawer::Drawer(int width, int height, std::string const &winName)
 
 Drawer::~Drawer()
 {
+	std::cout << "sdl finished " << std::endl;
 	deinit();
 };
 

@@ -1,36 +1,35 @@
 #include <random>
 #include "Game.hpp"
-
+#include "DrawAPI.hpp"
 
 void mLog(std::string const & src)
 {
 	std::cout << src << std::endl;
 }
 
-Game::Game()
+Game::Game(unsigned i)
 {
 	mWidth = 800;
 	mHeight = 600;
 	mSize  = 50;
 	mScore = 0;
-	if (loadAPI("libSFML.so"))
-		initApi(mWidth, mHeight, "Nibbler");
+	mApi = std::make_shared<DrawAPI>(mWidth, mHeight, i);
+
 	std::array<float, 2> pos{{static_cast<float>(mWidth), static_cast<float>(mHeight)}};
-	mSnake = new Snake(pos, mSize, 5);
+	mSnake = std::make_shared<Snake>(pos, mSize, 5);
 	mBefore = std::chrono::high_resolution_clock::now();
-	mLevel = new GameLevel(mWidth * 2, mHeight * 2, mSize, 5);
+	mLevel = std::make_shared<GameLevel>(mWidth * 2, mHeight * 2, mSize, 5);
 	mCommands.clear();
-	mState = GameState::GAME_MENU;
+	mState = GameState::GAME_ACTIVE;
+	addFood();
+};
+
+Game::Game()
+{
 };
 
 Game::~Game()
-{
-	deinitApi();
-	if (mLib)
-		dlclose(mLib);
-	delete mSnake;
-	delete mLevel;
-};
+{};
 
 Game::Game(Game const &)
 {
@@ -40,36 +39,6 @@ Game &Game::operator=(Game const &)
 {
 	return *this;
 };
-
-bool Game::loadAPI(std::string const &path)
-{
-	bool result = true;
-	if (mLib)
-		dlclose(mLib);
-	mLib = dlopen(path.c_str(), RTLD_LAZY | RTLD_LOCAL);
-	if (!mLib)
-	{
-		std::cerr << "dlopen : "<< dlerror() << std::endl;
-		return false;
-	}
-	initApi			= reinterpret_cast<initFunction>(dlsym(mLib, "initializeApi"));
-	getUserInput	= reinterpret_cast<processInputFunction>(dlsym(mLib, "getInput"));
-	deinitApi		= reinterpret_cast<deinitFunction>(dlsym(mLib, "deinitializeApi"));
-	preFrame		= reinterpret_cast<preFrameFunction>(dlsym(mLib, "preFrame"));
-	postFrame		= reinterpret_cast<postFrameFunction>(dlsym(mLib, "postFrame"));
-	drawer			= reinterpret_cast<renderFunction >(dlsym(mLib, "draw"));
-	putText			= reinterpret_cast<textFunction >(dlsym(mLib, "putText"));
-	result &= (initApi != nullptr);
-	result &= (getUserInput != nullptr);
-	result &= (deinitApi != nullptr);
-	result &= (preFrame != nullptr);
-	result &= (postFrame != nullptr);
-	result &= (drawer != nullptr);
-	result &= (putText != nullptr);
-	if (!result)
-		std::cerr << "dlsym : "<< dlerror() << std::endl;
-	return result;
-}
 
 bool	Game::checkCollision(GameObject *first, GameObject *second)
 {
@@ -161,7 +130,17 @@ void	Game::processCommand()
 			mSnake->getSpeed() = mSnake->getSpeed() - 1  > 0 ? mSnake->getSpeed() - 1 : mSnake->getSpeed();
 		else if (cmd == "Pause")
 			mState = mState == GameState::GAME_MENU || mState == GameState::GAME_OVER ? GameState::GAME_ACTIVE : GameState::GAME_MENU;
-		mCommands.erase(first);
+		else if (cmd == "LIB1" || cmd == "LIB2" || cmd == "LIB3")
+		{
+			// std::cout << "WTF?" << std::endl;
+			mIsRunning = false;
+			mApi->changeAPI(cmd[3] - 48);
+			mIsRunning = true;
+			mCommands.clear();
+			start();
+		}
+		if (!mCommands.empty())
+			mCommands.erase(first);
 	}
 }
 
@@ -177,33 +156,34 @@ void					Game::move()
 
 void Game::start()
 {
-	addFood();
 	while (mIsRunning)
 	{
-		const char *input = getUserInput(mIsRunning);
+		const char *input = mApi->getUserInput(mIsRunning);
 		if (input != nullptr)
 		{
 			mCommands.insert(std::string(input));
 		}
 		if (mState == GameState::GAME_ACTIVE)
 		{
-			preFrame();
+			mApi->preFrame();
+
 			move();
 			update();
-			mLevel->draw(drawer);
-			mSnake->draw(drawer);
-			putText("Score: " + std::to_string(mScore), 5, 5, 0.7, {1, 1, 1});
-			putText("Speed: " + std::to_string(mSnake->getSpeed()), 5, mHeight - 24 * 0.7f, 0.7, {1, 1, 1});
-			postFrame();
+			mLevel->draw(mApi->drawer);
+			mSnake->draw(mApi->drawer);
+			mApi->putText("Score: " + std::to_string(mScore), 5, 5, 0.7, {1, 1, 1});
+			mApi->putText("Speed: " + std::to_string(mSnake->getSpeed()), 5, mHeight - 24 * 0.7f, 0.7, {1, 1, 1});
+			mApi->postFrame();
 		}
 		else if (mState == GameState::GAME_MENU)
 		{
-			preFrame();
-			mLevel->draw(drawer);
-			mSnake->draw(drawer);
-			putText("Score: " + std::to_string(mScore), 5, 5, 0.7, {1, 1, 1});
-			putText("Paused", mWidth / 2 - 75, mHeight / 2 - 30, 2, {1, 0.5, 0.5});
-			postFrame();
+			mApi->preFrame();
+
+			mLevel->draw(mApi->drawer);
+			mSnake->draw(mApi->drawer);
+			mApi->putText("Score: " + std::to_string(mScore), 5, 5, 0.7, {1, 1, 1});
+			mApi->putText("Paused", mWidth / 2 - 75, mHeight / 2 - 30, 2, {1, 0.5, 0.5});
+			mApi->postFrame();
 		}
 		processCommand();
 	}

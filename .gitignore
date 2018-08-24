@@ -4,3 +4,4 @@
 *.a
 nibbler
 cmake*
+stb_image.cpp
