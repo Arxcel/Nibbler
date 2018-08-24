@@ -12,7 +12,7 @@
 
 CC = clang++
 
-NAME = nibbler_sdl.so
+NAME = ../../libSDL.so
 
 F = -Wall -Werror -Wextra
 
@@ -20,7 +20,7 @@ FLAGS = -std=c++11
 
 LIB_FLAGS = -shared -fPIC
 
-L_DIR = ./lib
+L_DIR = ../../nibbler_3rdparty/
 
 I_DIR = ./inc
 
@@ -30,16 +30,18 @@ O_DIR = ./obj
 
 
 libSDL_DIR = $(L_DIR)/sdl
-libFREETYPE_DIR = $(L_DIR)/freetype
-libGLAD_DIR = $(L_DIR)/glad
+libFREETYPE_DIR = $(L_DIR)/build/freetype
+libGLAD_DIR = $(L_DIR)/build/glad
 libGLM_DIR = $(L_DIR)/glm
 libSTB_DIR = $(L_DIR)/stb
 
-libFreeType = -L $(libFREETYPE_DIR)/build/ -lfreetype
+libFreeType = -L $(libFREETYPE_DIR)/ -lfreetype
 
-SDL2_F		= -framework SDL2 -F ./lib/sdl
+SDL2_F		= -framework SDL2 -F $(libSDL_DIR)
 
-SDL2_P		= -rpath @loader_path/lib/sdl
+SDL2_P		= -rpath @loader_path/nibbler_3rdparty/sdl/
+
+libGLAD = -L $(libGLAD_DIR)/ -lglad
 
 FRAMEWORKS = -framework OpenGl -framework Cocoa -framework IOKit -framework CoreVideo $(SDL2_P) $(SDL2_F)
 
@@ -56,14 +58,13 @@ EXT =	nibbler_sdl.hpp \
 		Character.hpp
 
 HEADERS =	-I$(I_DIR) \
-			-I ./lib/sdl/SDL2.framework/Headers/ \
-			-I$(libGLAD_DIR)/build/include/ \
-			-I$(libSTB_DIR)/ \
+			-I $(libSDL_DIR)/SDL2.framework/Headers/ \
+			-I$(libGLAD_DIR)/include/ \
+			-I$(libSTB_DIR) \
 			-I$(libGLM_DIR)/ \
-			-I$(libFREETYPE_DIR)/include/
+			-I$(L_DIR)/freetype/include/
 
-SOURCES =	glad.cpp \
-			CustomException.cpp \
+SOURCES =	CustomException.cpp \
 			nibbler_sdl.cpp \
 			Drawer.cpp \
 			ResourceManager.cpp \
@@ -80,24 +81,15 @@ OBJS = $(addprefix $(O_DIR)/,$(SOURCES:.cpp=.o)) $(O_DIR)/stb_image.o
 all: obj $(NAME)
 
 $(NAME): libs $(OBJS) $(EXTENSIONS)
-		$(CC) -o $(NAME) $(OBJS) $(FLAGS) $(HEADERS) $(LIB_FLAGS) $(libSDL) $(libFreeType) $(FRAMEWORKS)
+		$(CC) -o $(NAME) $(OBJS) $(FLAGS) $(HEADERS) $(LIB_FLAGS) $(libGLAD) $(libSDL) $(libFreeType) $(FRAMEWORKS)
 
 libs:
-	! [ -d "$(libGLAD_DIR)/build" ] \
-			&& sh createBuild.sh $(libGLAD_DIR) \
-			&& make -C $(libGLAD_DIR)/build \
-			&& mv $(libGLAD_DIR)/build/src/glad.c ./src/glad.cpp \
-			|| :
+		sh $(L_DIR)/buildLibs.sh
 
-	! [ -d "$(libFREETYPE_DIR)/build" ] \
-    			&& sh createBuild.sh $(libFREETYPE_DIR) \
-    			&& make -C $(libFREETYPE_DIR)/build \
-    			|| :
-
-	[ -f "$(S_DIR)/stb_image.cpp" ] \
-			&& : \
-			|| echo "#define STB_IMAGE_IMPLEMENTATION\n#include \"stb_image.h\"" > $(S_DIR)/stb_image.cpp \
-			&& $(CC) -c -o $(O_DIR)/stb_image.o $(S_DIR)/stb_image.cpp $(HEADERS)
+		[ -f "$(S_DIR)/stb_image.cpp" ] \
+		&& : \
+		|| echo "#define STB_IMAGE_IMPLEMENTATION\n#include \"stb_image.h\"" > $(S_DIR)/stb_image.cpp \
+		&& $(CC) -c -o $(O_DIR)/stb_image.o $(S_DIR)/stb_image.cpp $(HEADERS)
 
 obj:
 	mkdir -p obj
@@ -111,9 +103,8 @@ clean:
 
 fclean: clean
 		rm -f $(NAME)
-		rm -rf $(libSDL_DIR)/build
-		rm -rf $(libFREETYPE_DIR)/build
-		rm -rf $(libGLAD_DIR)/build src/glad.cpp
+		rm -rf $(libFREETYPE_DIR)
+		rm -rf $(libGLAD_DIR)
 		rm -rf $(S_DIR)/stb_image.cpp
 
 re: fclean all

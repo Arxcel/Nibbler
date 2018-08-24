@@ -24,46 +24,31 @@ void Drawer::init(int width, int height, std::string const &winName)
 
 	mWindow.create(sf::VideoMode(width * 2, height * 2), winName, sf::Style::Close, settings);
 
-//	glfwInit();
-//	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-//	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-//	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-//	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-//	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
-//	mWindow = glfwCreateWindow(width, height, winName.c_str(), nullptr, nullptr);
-//	glfwMakeContextCurrent(mWindow);
-//	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
-//		throw CustomException("Failed to initialize GLAD");
-//	glViewport(0, 0, width * 2, height * 2);
-//	glEnable(GL_CULL_FACE);
-//	glEnable(GL_BLEND);
-//	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-
-	glViewport(0, 0, width, height);
+	if (!gladLoadGL())
+		throw CustomException("Failed to initialize GLAD");
+	glViewport(0, 0, width * 2, height * 2);
 	glEnable(GL_CULL_FACE);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-	auto shader = mRessourceManager.loadShader("nibbler_sfml/shaders/sprite.vx.glsl", "nibbler_sfml/shaders/sprite.ft.glsl", "sprite");
+	auto shader = mRessourceManager.loadShader("drawAPI/shaders/sprite.vx.glsl", "drawAPI/shaders/sprite.ft.glsl", "sprite");
 	glm::mat4 projection = glm::ortho(0.0f, static_cast<GLfloat>(width * 2), static_cast<GLfloat>(height * 2), 0.0f, -1.0f, 1.0f);
 
 	shader->use();
 	shader->setInt("image", 0);
 	shader->setMat4("projection", projection);
 	mSpriteRenderer = std::make_shared<SpriteRenderer>(shader);
-	mRessourceManager.loadTexture("./nibbler_sfml/asset/head.png", "head", true);
-	mRessourceManager.loadTexture("./nibbler_sfml/asset/body.png", "body", true);
-	mRessourceManager.loadTexture("./nibbler_sfml/asset/body_turn_left.png", "body_turn_left", true);
-	mRessourceManager.loadTexture("./nibbler_sfml/asset/body_turn_right.png", "body_turn_right", true);
-	mRessourceManager.loadTexture("./nibbler_sfml/asset/tail.png", "tail", true);
-	mRessourceManager.loadTexture("./nibbler_sfml/asset/food.png", "food", true);
+	mRessourceManager.loadTexture("./drawAPI/asset/snake-2/head.png", "head", true);
+	mRessourceManager.loadTexture("./drawAPI/asset/snake-2/body.png", "body", true);
+	mRessourceManager.loadTexture("./drawAPI/asset/snake-2/body_turn_left.png", "body_turn_left", true);
+	mRessourceManager.loadTexture("./drawAPI/asset/snake-2/body_turn_right.png", "body_turn_right", true);
+	mRessourceManager.loadTexture("./drawAPI/asset/snake-2/tail.png", "tail", true);
+	mRessourceManager.loadTexture("./drawAPI/asset/food3.png", "food", true);
 
-	mRessourceManager.loadTexture("./nibbler_sfml/asset/background.jpg", "background", false);
-	mRessourceManager.loadTexture("./nibbler_sfml/asset/block.png", "block", false);
-	mRessourceManager.loadTexture("./nibbler_sfml/asset/block_solid.png", "block_solid", false);
+	mRessourceManager.loadTexture("./drawAPI/asset/background.jpg", "background", false);
+	mRessourceManager.loadTexture("./drawAPI/asset/block2.png", "block", false);
 
-	auto textShader = mRessourceManager.loadShader("nibbler_sfml/shaders/text.vx.glsl", "nibbler_sfml/shaders/text.ft.glsl", "text");
+	auto textShader = mRessourceManager.loadShader("drawAPI/shaders/text.vx.glsl", "drawAPI/shaders/text.ft.glsl", "text");
 
 	projection = glm::ortho(0.0f, static_cast<GLfloat>(width), static_cast<GLfloat>(height), 0.0f);
 
@@ -72,7 +57,7 @@ void Drawer::init(int width, int height, std::string const &winName)
 	textShader->setInt("text", 0);
 	textShader->setMat4("projection", projection);
 	mTextRenderer = std::make_shared<TextRenderer>(textShader);
-	mTextRenderer->loadFont("./nibbler_sfml/fonts/font.ttf", 24);
+	mTextRenderer->loadFont("./drawAPI/fonts/font.ttf", 24);
 
 	mIsBtnPressed.emplace(sf::Keyboard::W, "UP");
 	mIsBtnPressed.emplace(sf::Keyboard::S, "DOWN");
@@ -96,11 +81,6 @@ std::string Drawer::processInput(bool &isRunning)
 	}
 	else if(mE.type == sf::Event::Closed)
 		isRunning = false;
-//	else if (mE.type == sf::Event::Resized)
-//	{
-		// adjust the viewport when the window is resized
-//		glViewport(0, 0, mE.size.width, mE.size.height);
-//	}
 	return command;
 }
 
@@ -134,10 +114,7 @@ void Drawer::putString(std::string const&what,glm::vec2 where, float size, glm::
 
 void Drawer::deinit()
 {
-//	SDL_GL_DeleteContext(mContext);
-//	SDL_DestroyWindow(mWindow);
-//	SDL_Quit();
-
+	mWindow.close();
 }
 
 

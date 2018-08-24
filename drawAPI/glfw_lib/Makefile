@@ -12,7 +12,7 @@
 
 CC = clang++
 
-NAME = ../../libSFML.so
+NAME = ../../libGLFW.so
 
 F = -Wall -Werror -Wextra
 
@@ -28,7 +28,6 @@ S_DIR = ./src
 
 O_DIR = ./obj
 
-libSFML_DIR = $(L_DIR)/sfml
 libFREETYPE_DIR = $(L_DIR)/build/freetype
 libGLAD_DIR = $(L_DIR)/build/glad
 libGLM_DIR = $(L_DIR)/glm
@@ -36,17 +35,15 @@ libSTB_DIR = $(L_DIR)/stb
 
 libFreeType = -L $(libFREETYPE_DIR)/ -lfreetype
 
-SFML_F		= -framework SFML -framework SFML-window -framework SFML-system -F $(libSFML_DIR)
-
-SFML_P		= -rpath @loader_path/nibbler_3rdparty/sfml/
+libGLFW = -L $(L_DIR)/build/glfw/src/ -lglfw3
 
 libGLAD = -L $(libGLAD_DIR)/ -lglad
 
-FRAMEWORKS = -framework OpenGl -framework Cocoa -framework IOKit -framework CoreVideo $(SFML_P) $(SFML_F)
+FRAMEWORKS = -framework OpenGl -framework Cocoa -framework IOKit -framework CoreVideo
 
 EXTENSIONS = $(addprefix $(I_DIR)/,$(EXT))
 
-EXT =	nibbler_sfml.hpp \
+EXT =	nibbler_glfw.hpp \
 		Shader.hpp \
 		CustomException.hpp \
 		Texture.hpp \
@@ -57,14 +54,14 @@ EXT =	nibbler_sfml.hpp \
 		Character.hpp
 
 HEADERS =	-I$(I_DIR) \
-			-I $(libSFML_DIR)/SFML.framework/Headers/ \
+			-I$(L_DIR)/glfw/include/ \
 			-I$(libGLAD_DIR)/include/ \
 			-I$(libSTB_DIR) \
 			-I$(libGLM_DIR)/ \
 			-I$(L_DIR)/freetype/include/
 
 SOURCES =	CustomException.cpp \
-			nibbler_sfml.cpp \
+			nibbler_glfw.cpp \
 			Drawer.cpp \
 			ResourceManager.cpp \
 			Shader.cpp \
@@ -80,7 +77,7 @@ OBJS = $(addprefix $(O_DIR)/,$(SOURCES:.cpp=.o)) $(O_DIR)/stb_image.o
 all: obj $(NAME)
 
 $(NAME): libs $(OBJS) $(EXTENSIONS)
-		$(CC) -o $(NAME) $(OBJS) $(FLAGS) $(HEADERS) $(LIB_FLAGS) $(libGLAD) $(libFreeType) $(FRAMEWORKS)
+		$(CC) -o $(NAME) $(OBJS) $(FLAGS) $(HEADERS) $(LIB_FLAGS) $(libGLAD) $(libGLFW) $(libFreeType) $(FRAMEWORKS)
 
 libs:
 		sh $(L_DIR)/buildLibs.sh
@@ -102,6 +99,7 @@ clean:
 
 fclean: clean
 		rm -f $(NAME)
+		rm -rf $(L_DIR)/build/glfw
 		rm -rf $(libFREETYPE_DIR)
 		rm -rf $(libGLAD_DIR)
 		rm -rf $(S_DIR)/stb_image.cpp

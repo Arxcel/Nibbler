@@ -17,7 +17,7 @@
 #include <fstream>
 #include <sstream>
 
-#include <SFML/OpenGL.hpp>
+#include "glad/glad.h"
 
 #include "CustomException.hpp"
 #include "glm/mat4x4.hpp"

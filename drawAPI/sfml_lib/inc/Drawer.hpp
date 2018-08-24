@@ -12,8 +12,8 @@
 #ifndef DRAWER_H
 # define DRAWER_H
 
+#include "glad/glad.h"
 #include <SFML/Window.hpp>
-#include <SFML/OpenGL.hpp>
 
 #include "CustomException.hpp"
 #include "ResourceManager.hpp"

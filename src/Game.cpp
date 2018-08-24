@@ -13,7 +13,7 @@ Game::Game()
 	mHeight = 600;
 	mSize  = 50;
 	mScore = 0;
-	if (loadAPI("nibbler_sfml/nibbler_sfml.so"))
+	if (loadAPI("libSFML.so"))
 		initApi(mWidth, mHeight, "Nibbler");
 	std::array<float, 2> pos{{static_cast<float>(mWidth), static_cast<float>(mHeight)}};
 	mSnake = new Snake(pos, mSize, 5);

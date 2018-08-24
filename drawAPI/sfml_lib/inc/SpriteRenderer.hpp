@@ -12,7 +12,7 @@
 #ifndef NIBBLER_SPRITERENDERER_HPP
 #define NIBBLER_SPRITERENDERER_HPP
 
-#include <SFML/OpenGL.hpp>
+#include "glad/glad.h"
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 

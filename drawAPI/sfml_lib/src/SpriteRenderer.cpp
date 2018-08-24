@@ -8,7 +8,7 @@ SpriteRenderer::SpriteRenderer(std::shared_ptr<Shader> aShader)
 
 SpriteRenderer::~SpriteRenderer()
 {
-	glDeleteVertexArraysAPPLE(1, &mQuadVAO);
+	glDeleteVertexArrays(1, &mQuadVAO);
 }
 
 void SpriteRenderer::drawSprite(std::shared_ptr<Texture2D> texture, glm::vec2 position, glm::vec2 size, GLfloat rotate, glm::vec3 color)
@@ -27,9 +27,9 @@ void SpriteRenderer::drawSprite(std::shared_ptr<Texture2D> texture, glm::vec2 po
 	glActiveTexture(GL_TEXTURE0);
 	texture->bind();
 
-	glBindVertexArrayAPPLE(mQuadVAO);
+	glBindVertexArray(mQuadVAO);
 	glDrawArrays(GL_TRIANGLES, 0, 6);
-	glBindVertexArrayAPPLE(0);
+	glBindVertexArray(0);
 }
 
 void SpriteRenderer::initRenderData()
@@ -45,17 +45,17 @@ void SpriteRenderer::initRenderData()
 			1.0f, 0.0f, 1.0f, 0.0f
 	};
 
-	glGenVertexArraysAPPLE(1, &mQuadVAO);
+	glGenVertexArrays(1, &mQuadVAO);
 	glGenBuffers(1, &VBO);
 
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
-	glBindVertexArrayAPPLE(mQuadVAO);
+	glBindVertexArray(mQuadVAO);
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), (GLvoid*)0);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	glBindVertexArrayAPPLE(0);
+	glBindVertexArray(0);
 }
 
 SpriteRenderer::SpriteRenderer()

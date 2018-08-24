@@ -8,7 +8,7 @@
 #include <map>
 #include <string>
 
-#include <SFML/OpenGL.hpp>
+#include "glad/glad.h"
 #include "Texture.hpp"
 #include "Shader.hpp"
 

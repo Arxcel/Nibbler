@@ -18,15 +18,15 @@
 
 TextRenderer::TextRenderer(std::shared_ptr<Shader> shader) : mTextShader(shader)
 {
-	glGenVertexArraysAPPLE(1, &mVAO);
+	glGenVertexArrays(1, &mVAO);
 	glGenBuffers(1, &mVBO);
-	glBindVertexArrayAPPLE(mVAO);
+	glBindVertexArray(mVAO);
 	glBindBuffer(GL_ARRAY_BUFFER, mVBO);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * 6 * 4, nullptr, GL_DYNAMIC_DRAW);
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), 0);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	glBindVertexArrayAPPLE(0);
+	glBindVertexArray(0);
 }
 
 void TextRenderer::loadFont(std::string font, GLuint fontSize)
@@ -59,7 +59,7 @@ void TextRenderer::putString(std::string text, GLfloat x, GLfloat y, GLfloat sca
 	mTextShader->use();
 	mTextShader->setVec3("textColor", color);
 	glActiveTexture(GL_TEXTURE0);
-	glBindVertexArrayAPPLE(mVAO);
+	glBindVertexArray(mVAO);
 	for (auto &c : text)
 	{
 		auto ch = mChars[c];
@@ -84,7 +84,7 @@ void TextRenderer::putString(std::string text, GLfloat x, GLfloat y, GLfloat sca
 		glDrawArrays(GL_TRIANGLES, 0, 6);
 		x += (ch->mAdvance >> 6) * scale;
 	}
-	glBindVertexArrayAPPLE(0);
+	glBindVertexArray(0);
 	glBindTexture(GL_TEXTURE_2D, 0);
 }
 
@@ -92,7 +92,7 @@ void TextRenderer::putString(std::string text, GLfloat x, GLfloat y, GLfloat sca
 TextRenderer::~TextRenderer()
 {
 	glDeleteBuffers(1, &mVBO);
-	glDeleteVertexArraysAPPLE(1, &mVAO);
+	glDeleteVertexArrays(1, &mVAO);
 	mChars.clear();
 };
 

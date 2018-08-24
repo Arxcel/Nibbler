@@ -22,11 +22,11 @@ S_DIR = ./src
 
 O_DIR = ./obj
 
-LIB1 = ./nibbler_glfw
+LIB1 = ./drawAPI/glfw_lib
 
-LIB2 = ./nibbler_sdl
+LIB2 = ./drawAPI/sdl_lib
 
-LIB3 = ./nibbler_sfml
+LIB3 = ./drawAPI/sfml_lib
 
 EXTENSIONS = $(addprefix $(I_DIR)/,$(EXT))
 

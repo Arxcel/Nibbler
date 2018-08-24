@@ -41,25 +41,23 @@ void Drawer::init(int width, int height, std::string const &winName)
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-	auto shader = mRessourceManager.loadShader("nibbler_sdl/shaders/sprite.vx.glsl", "nibbler_sdl/shaders/sprite.ft.glsl", "sprite");
+	auto shader = mRessourceManager.loadShader("drawAPI/shaders/sprite.vx.glsl", "drawAPI/shaders/sprite.ft.glsl", "sprite");
 	glm::mat4 projection = glm::ortho(0.0f, static_cast<GLfloat>(width * 2), static_cast<GLfloat>(height * 2), 0.0f, -1.0f, 1.0f);
 
 	shader->use();
 	shader->setInt("image", 0);
 	shader->setMat4("projection", projection);
 	mSpriteRenderer = std::make_shared<SpriteRenderer>(shader);
-	mRessourceManager.loadTexture("./nibbler_sdl/asset/head.png", "head", true);
-	mRessourceManager.loadTexture("./nibbler_sdl/asset/body.png", "body", true);
-	mRessourceManager.loadTexture("./nibbler_sdl/asset/body_turn_left.png", "body_turn_left", true);
-	mRessourceManager.loadTexture("./nibbler_sdl/asset/body_turn_right.png", "body_turn_right", true);
-	mRessourceManager.loadTexture("./nibbler_sdl/asset/tail.png", "tail", true);
-	mRessourceManager.loadTexture("./nibbler_sdl/asset/food.png", "food", true);
+	mRessourceManager.loadTexture("./drawAPI/asset/snake-2/head.png", "head", true);
+	mRessourceManager.loadTexture("./drawAPI/asset/snake-2/body.png", "body", true);
+	mRessourceManager.loadTexture("./drawAPI/asset/snake-2/body_turn_left.png", "body_turn_left", true);
+	mRessourceManager.loadTexture("./drawAPI/asset/snake-2/body_turn_right.png", "body_turn_right", true);
+	mRessourceManager.loadTexture("./drawAPI/asset/snake-2/tail.png", "tail", true);
+	mRessourceManager.loadTexture("./drawAPI/asset/food3.png", "food", true);
+	mRessourceManager.loadTexture("./drawAPI/asset/background.jpg", "background", false);
+	mRessourceManager.loadTexture("./drawAPI/asset/block2.png", "block", false);
 
-	mRessourceManager.loadTexture("./nibbler_sdl/asset/background.jpg", "background", false);
-	mRessourceManager.loadTexture("./nibbler_sdl/asset/block.png", "block", false);
-	mRessourceManager.loadTexture("./nibbler_sdl/asset/block_solid.png", "block_solid", false);
-
-	auto textShader = mRessourceManager.loadShader("nibbler_sdl/shaders/text.vx.glsl", "nibbler_sdl/shaders/text.ft.glsl", "text");
+	auto textShader = mRessourceManager.loadShader("drawAPI/shaders/text.vx.glsl", "drawAPI/shaders/text.ft.glsl", "text");
 
 	projection = glm::ortho(0.0f, static_cast<GLfloat>(width), static_cast<GLfloat>(height), 0.0f);
 
@@ -68,7 +66,7 @@ void Drawer::init(int width, int height, std::string const &winName)
 	textShader->setInt("text", 0);
 	textShader->setMat4("projection", projection);
 	mTextRenderer = std::make_shared<TextRenderer>(textShader);
-	mTextRenderer->loadFont("./nibbler_sdl/fonts/font.ttf", 24);
+	mTextRenderer->loadFont("./drawAPI/fonts/font.ttf", 24);
 
 	mIsBtnPressed.emplace(SDLK_w, "UP");
 	mIsBtnPressed.emplace(SDLK_s, "DOWN");

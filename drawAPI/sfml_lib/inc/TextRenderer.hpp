@@ -15,7 +15,7 @@
 
 #include <map>
 
-#include <SFML/OpenGL.hpp>
+#include "glad/glad.h"
 #include <glm/glm.hpp>
 
 #include "Texture.hpp"
