@@ -1,0 +1,3 @@
+[submodule "nibbler_3rdparty"]
+	path = nibbler_3rdparty
+	url = https://Arxcel@bitbucket.org/Arxcel/nibbler_3rdparty.git
