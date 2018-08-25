@@ -21,7 +21,7 @@ enum GameState {
 class DrawAPI;
 class Game {
 public:
-	Game(unsigned);
+	Game(unsigned lib = 0, int w = 800, int h = 600, int s = 50);
 	~Game();
 	Game(Game const &);
 	Game &operator=(Game const &);

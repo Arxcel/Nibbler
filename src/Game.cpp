@@ -2,20 +2,10 @@
 #include "Game.hpp"
 #include "DrawAPI.hpp"
 
-void mLog(std::string const & src)
+Game::Game(unsigned lib, int w, int h, int s) : mWidth(w), mHeight(h), mSize(s), mScore(0)
 {
-	std::cout << src << std::endl;
-}
-
-Game::Game(unsigned i)
-{
-	mWidth = 800;
-	mHeight = 600;
-	mSize  = 50;
-	mScore = 0;
-	mApi = std::make_shared<DrawAPI>(mWidth, mHeight, i);
-
-	mCurrLib = static_cast<int>(i);
+	mApi = std::make_shared<DrawAPI>(mWidth, mHeight, lib);
+	mCurrLib = static_cast<int>(lib);
 	std::array<float, 2> pos{{static_cast<float>(mWidth), static_cast<float>(mHeight)}};
 	mSnake = std::make_shared<Snake>(pos, mSize, 5);
 	mBefore = std::chrono::high_resolution_clock::now();
