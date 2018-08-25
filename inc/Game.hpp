@@ -41,6 +41,7 @@ private:
 	int 						mWidth, mHeight, mSize;
 	int 						mScore;
 	int							mPostAction{-1};
+	int							mCurrLib;
 	std::unordered_set<std::string> mCommands;
 	std::chrono::high_resolution_clock::time_point	mBefore;
 	Game();
