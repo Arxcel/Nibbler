@@ -44,7 +44,7 @@ int main(int ac, char *av[])
 	try
 	{
 		processCommand(ac, av, w, h, s, lib);
-		while (lib != -1)
+		while (lib != static_cast<unsigned >(-1))
 		{
 			std::cout << w << std::endl;
 			std::cout << h << std::endl;

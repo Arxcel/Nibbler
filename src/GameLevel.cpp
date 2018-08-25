@@ -14,7 +14,10 @@
 #include <iostream>
 #include "GameLevel.hpp"
 
-GameLevel::GameLevel(int width, int height, int size, int difficulty) : mLevelWidth(width), mLevelHeight(height), mDifficulty(difficulty), mSize(size)
+GameLevel::GameLevel(int width, int height, int size) :
+		mLevelWidth(static_cast<size_t>(width)),
+		mLevelHeight(static_cast<size_t>(height)),
+		mSize(static_cast<size_t>(size))
 {
 	init();
 };

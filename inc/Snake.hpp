@@ -42,8 +42,7 @@ private:
 	std::array<float, 3> mColor;
 	Direction	mCurrentDir;
 	Direction	mNextDir;
-	bool		mStack;
-	int			mLength;
+	size_t		mLength;
 	float		mSize;
 	int			mSpeed;
 };

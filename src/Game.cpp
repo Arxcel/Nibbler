@@ -15,7 +15,7 @@ bool	Game::init(unsigned lib, int w, int h, int s)
 		std::array<float, 2> pos{{static_cast<float>(mWidth), static_cast<float>(mHeight)}};
 		mSnake = std::make_shared<Snake>(pos, mSize, 5);
 		mBefore = std::chrono::high_resolution_clock::now();
-		mLevel = std::make_shared<GameLevel>(mWidth * 2, mHeight * 2, mSize, 5);
+		mLevel = std::make_shared<GameLevel>(mWidth * 2, mHeight * 2, mSize);
 		mCommands.clear();
 		mState = GameState::GAME_START;
 		addFood();
@@ -164,14 +164,14 @@ unsigned Game::start()
 			update();
 			mLevel->draw(mApi->drawer);
 			mSnake->draw(mApi->drawer);
-			mApi->putText("Score: " + std::to_string(mScore), 5, 5, 0.7, {1, 1, 1});
-			mApi->putText("Speed: " + std::to_string(mSnake->getSpeed()), 5, mHeight - 24 * 0.7f, 0.7, {1, 1, 1});
+			mApi->putText("Score: " + std::to_string(mScore), 5, 5, 0.7, {{1, 1, 1}});
+			mApi->putText("Speed: " + std::to_string(mSnake->getSpeed()), 5, mHeight - 24 * 0.7f, 0.7, {{1, 1, 1}});
 			mApi->postFrame();
 		}
 		else if (mState == GameState::GAME_START)
 		{
 			mApi->preFrame();
-			mApi->putText("Press 'SPACE' to start", mWidth / 2 - 125, mHeight / 2, 1, {1, 0.5, 0.5});
+			mApi->putText("Press 'SPACE' to start", mWidth / 2 - 125, mHeight / 2, 1, {{1, 0.5, 0.5}});
 			mApi->postFrame();
 		}
 		else if (mState == GameState::GAME_PAUSED)
@@ -179,16 +179,16 @@ unsigned Game::start()
 			mApi->preFrame();
 			mLevel->draw(mApi->drawer);
 			mSnake->draw(mApi->drawer);
-			mApi->putText("Score: " + std::to_string(mScore), 5, 5, 0.7, {1, 1, 1});
-			mApi->putText("Paused", mWidth / 2 - 75, mHeight / 2 - 30, 2, {1, 0.5, 0.5});
+			mApi->putText("Score: " + std::to_string(mScore), 5, 5, 0.7, {{1, 1, 1}});
+			mApi->putText("Paused", mWidth / 2 - 75, mHeight / 2 - 30, 2, {{1, 0.5, 0.5}});
 			mApi->postFrame();
 		}
 		else if (mState == GameState::GAME_OVER)
 		{
 			mApi->preFrame();
-			mApi->putText("GAME is OVER", mWidth / 2 - 200, mHeight / 2 - 30, 1.5, {1, 0.5, 0.5});
-			mApi->putText("Final score: " + std::to_string(mScore), mWidth / 2 - 200, mHeight / 2 + 30, 1, {1, 0.5, 0.5});
-			mApi->putText("Press 'SPACE' to start 'New Game'", mWidth / 2 - 200, mHeight / 2 + 90, 1, {1, 0.5, 0.5});
+			mApi->putText("GAME is OVER", mWidth / 2 - 200, mHeight / 2 - 30, 1.5, {{1, 0.5, 0.5}});
+			mApi->putText("Final score: " + std::to_string(mScore), mWidth / 2 - 200, mHeight / 2 + 30, 1, {{1, 0.5, 0.5}});
+			mApi->putText("Press 'SPACE' to start 'New Game'", mWidth / 2 - 200, mHeight / 2 + 90, 1, {{1, 0.5, 0.5}});
 			mApi->postFrame();
 		}
 		processCommand();

@@ -13,10 +13,15 @@
 #include "Snake.hpp"
 #include <iostream>
 
-Snake::Snake(std::array<float, 2> pos, float size, int length) : mCurrentDir(Direction::UP), mNextDir(Direction::UP), mStack(true), mLength(length), mSize(size), mSpeed(5), mColor({1.0f, 1.0f, 1.0f})
+Snake::Snake(std::array<float, 2> pos, float size, int length) : mColor({{1.0f, 1.0f, 1.0f}}),
+																 mCurrentDir(Direction::UP),
+																 mNextDir(Direction::UP),
+																 mLength(static_cast<size_t>(length)),
+																 mSize(size),
+																 mSpeed(5)
 {
 	mBody.emplace_back(std::make_shared<GameObject>(1, pos[0], pos[1], size, 0, mColor));
-	for (int i = 1; i < mLength; ++i)
+	for (size_t i = 1; i < mLength; ++i)
 		mBody.emplace_back(std::make_shared<GameObject>(2, pos[0], pos[1] + size * i, size, 0 , mColor));
 	mBody.emplace_back(std::make_shared<GameObject>(5, pos[0], pos[1] + size * (mLength), size, 0, mColor));
 };
