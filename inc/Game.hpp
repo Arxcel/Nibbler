@@ -12,8 +12,9 @@
 #include <unordered_set>
 
 enum GameState {
+	GAME_START,
 	GAME_ACTIVE,
-	GAME_MENU,
+	GAME_PAUSED,
 	GAME_OVER
 };
 

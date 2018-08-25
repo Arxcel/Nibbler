@@ -21,7 +21,7 @@ Game::Game(unsigned i)
 	mBefore = std::chrono::high_resolution_clock::now();
 	mLevel = std::make_shared<GameLevel>(mWidth * 2, mHeight * 2, mSize, 5);
 	mCommands.clear();
-	mState = GameState::GAME_MENU;
+	mState = GameState::GAME_START;
 	addFood();
 };
 
@@ -64,21 +64,12 @@ void	Game::update()
 	}
 
 	for (auto &brick : mLevel->bricks)
-	{
 		if (checkCollision(snakeHead, brick))
-		{
 			mState = GameState::GAME_OVER;
-		}
-	}
 
 	for (auto &part : mSnake->mBody)
-	{
-
 		if (part != snakeHead && checkCollision(snakeHead, part))
-		{
 			mState = GameState::GAME_OVER;
-		}
-	}
 }
 
 void	Game::addFood()
@@ -132,7 +123,7 @@ void	Game::processCommand()
 				mIsRunning = false;
 			}
 			else
-				mState = mState == GameState::GAME_MENU ? GameState::GAME_ACTIVE : GameState::GAME_MENU;
+				mState = mState == GameState::GAME_PAUSED || mState == GAME_START ? GameState::GAME_ACTIVE : GameState::GAME_PAUSED;
 		}
 		else if (cmd == "LIB1" || cmd == "LIB2" || cmd == "LIB3")
 		{
@@ -175,10 +166,15 @@ unsigned Game::start()
 			mApi->putText("Speed: " + std::to_string(mSnake->getSpeed()), 5, mHeight - 24 * 0.7f, 0.7, {1, 1, 1});
 			mApi->postFrame();
 		}
-		else if (mState == GameState::GAME_MENU)
+		else if (mState == GameState::GAME_START)
 		{
 			mApi->preFrame();
-
+			mApi->putText("Press 'SPACE' to start", mWidth / 2 - 125, mHeight / 2, 1, {1, 0.5, 0.5});
+			mApi->postFrame();
+		}
+		else if (mState == GameState::GAME_PAUSED)
+		{
+			mApi->preFrame();
 			mLevel->draw(mApi->drawer);
 			mSnake->draw(mApi->drawer);
 			mApi->putText("Score: " + std::to_string(mScore), 5, 5, 0.7, {1, 1, 1});
