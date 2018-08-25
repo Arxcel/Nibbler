@@ -19,7 +19,9 @@ namespace
 				lW = std::stoi(width) / 2;
 				lH = std::stoi(height) / 2;
 				lS = w / lW;
-				if (lS > 5 && lS < 100 && lS * lH < 1200 && lS * lH > 400)
+				if (lS > 10)
+					lS = lS - lS % 10;
+				if (lS > 9 && lS < 100 && lS * lH < 1200 && lS * lH > 400)
 				{
 					h = lS * lH;
 					s = lS;
