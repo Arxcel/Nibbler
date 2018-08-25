@@ -24,7 +24,7 @@ public:
 	~Game();
 	Game(Game const &);
 	Game &operator=(Game const &);
-	void					start();
+	unsigned	start();
 
 private:
 	bool					checkCollision(std::shared_ptr<GameObject>, std::shared_ptr<GameObject>);
@@ -40,6 +40,7 @@ private:
 	std::shared_ptr<GameLevel>	mLevel;
 	int 						mWidth, mHeight, mSize;
 	int 						mScore;
+	int							mPostAction{-1};
 	std::unordered_set<std::string> mCommands;
 	std::chrono::high_resolution_clock::time_point	mBefore;
 	Game();

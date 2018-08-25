@@ -25,15 +25,13 @@ Game::Game(unsigned i)
 };
 
 Game::Game()
-{
-};
+{};
 
 Game::~Game()
 {};
 
 Game::Game(Game const &)
-{
-};
+{};
 
 Game &Game::operator=(Game const &)
 {
@@ -131,12 +129,8 @@ void	Game::processCommand()
 			mState = mState == GameState::GAME_MENU || mState == GameState::GAME_OVER ? GameState::GAME_ACTIVE : GameState::GAME_MENU;
 		else if (cmd == "LIB1" || cmd == "LIB2" || cmd == "LIB3")
 		{
-			// std::cout << "WTF?" << std::endl;
+			mPostAction = (cmd[3] - 48);
 			mIsRunning = false;
-			mApi->changeAPI(cmd[3] - 48);
-			mIsRunning = true;
-			mCommands.clear();
-			start();
 		}
 		if (!mCommands.empty())
 			mCommands.erase(first);
@@ -153,7 +147,7 @@ void					Game::move()
 	}
 }
 
-void Game::start()
+unsigned Game::start()
 {
 	while (mIsRunning)
 	{
@@ -186,4 +180,5 @@ void Game::start()
 		}
 		processCommand();
 	}
+	return static_cast<unsigned>(mPostAction);
 }
