@@ -6,6 +6,8 @@
 #define NIBBLER_DRAWAPI_HPP
 
 #include "DrawAPIFunctions.hpp"
+#include <vector>
+#include <exception>
 
 class DrawAPI {
 public:
@@ -27,6 +29,7 @@ private:
 	int 						mWidth, mHeight;
 	DrawAPI();
 
+	static const std::vector<std::string const> gclibs;
 };
 
 

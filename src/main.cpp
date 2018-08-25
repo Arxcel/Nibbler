@@ -1,5 +1,4 @@
 #include "Game.hpp"
-#include <string>
 
 namespace
 {
@@ -9,6 +8,7 @@ namespace
 		h = 600;
 		s = 50;
 		lib = 0;
+		bool success = false;
 		if (ac == 3)
 		{
 			std::string width(av[1]);
@@ -19,36 +19,45 @@ namespace
 				lW = std::stoi(width) / 2;
 				lH = std::stoi(height) / 2;
 				lS = w / lW;
-				if (lS > 5 && lS < 100 && lS * lH < 1200 && lH > 400)
+				if (lS > 5 && lS < 100 && lS * lH < 1200 && lS * lH > 400)
 				{
 					h = lS * lH;
 					s = lS;
-					return;
+					success = true;
 				}
 			}
 			catch(...)
+			{}
+			if (!success)
 			{
+				std::cerr << "ERROR: Not valid parameters." << std::endl;
+				throw std::exception();
 			}
 		}
-		std::cout << "Not valid parameters.\nStarted with default parameters" << std::endl;
 	}
-
 }
 
 int main(int ac, char *av[])
 {
 	int w{0},h{0},s{0};
 	unsigned lib{0};
-
-	processCommand(ac, av, w, h, s, lib);
-	while (lib != -1)
+	try
 	{
-		std::cout << w << std::endl;
-		std::cout << h << std::endl;
-		std::cout << s << std::endl;
-		Game game(lib, w, h, s);
-		lib = game.start();
-	}
+		processCommand(ac, av, w, h, s, lib);
+		while (lib != -1)
+		{
+			std::cout << w << std::endl;
+			std::cout << h << std::endl;
+			std::cout << s << std::endl;
+
+			Game game;
+			if (game.init(lib, w, h, s))
+				lib = game.start();
+			else
+				break;
+		}
+	} catch (...)
+	{}
 	return 0;
 
 }

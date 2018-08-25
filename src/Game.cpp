@@ -2,17 +2,29 @@
 #include "Game.hpp"
 #include "DrawAPI.hpp"
 
-Game::Game(unsigned lib, int w, int h, int s) : mWidth(w), mHeight(h), mSize(s), mScore(0)
+bool	Game::init(unsigned lib, int w, int h, int s)
 {
-	mApi = std::make_shared<DrawAPI>(mWidth, mHeight, lib);
-	mCurrLib = static_cast<int>(lib);
-	std::array<float, 2> pos{{static_cast<float>(mWidth), static_cast<float>(mHeight)}};
-	mSnake = std::make_shared<Snake>(pos, mSize, 5);
-	mBefore = std::chrono::high_resolution_clock::now();
-	mLevel = std::make_shared<GameLevel>(mWidth * 2, mHeight * 2, mSize, 5);
-	mCommands.clear();
-	mState = GameState::GAME_START;
-	addFood();
+	try
+	{
+		mWidth = w;
+		mHeight = h;
+		mSize = s;
+		mScore = 0;
+		mApi = std::make_shared<DrawAPI>(mWidth, mHeight, lib);
+		mCurrLib = static_cast<int>(lib);
+		std::array<float, 2> pos{{static_cast<float>(mWidth), static_cast<float>(mHeight)}};
+		mSnake = std::make_shared<Snake>(pos, mSize, 5);
+		mBefore = std::chrono::high_resolution_clock::now();
+		mLevel = std::make_shared<GameLevel>(mWidth * 2, mHeight * 2, mSize, 5);
+		mCommands.clear();
+		mState = GameState::GAME_START;
+		addFood();
+		return true;
+	}
+	catch (std::exception &e)
+	{
+		return false;
+	}
 };
 
 Game::Game()

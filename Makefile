@@ -43,7 +43,7 @@ SOURCES =	main.cpp \
 			Game.cpp \
 			GameLevel.cpp \
             GameObject.cpp \
-            Snake.cpp \
+            Snake.cpp
 
 SRCS = $(addprefix $(S_DIR)/,$(SOURCES))
 

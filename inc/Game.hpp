@@ -21,10 +21,11 @@ enum GameState {
 class DrawAPI;
 class Game {
 public:
-	Game(unsigned lib = 0, int w = 800, int h = 600, int s = 50);
+	Game();
 	~Game();
 	Game(Game const &);
 	Game &operator=(Game const &);
+	bool		init(unsigned lib = 0, int w = 800, int h = 600, int s = 50);
 	unsigned	start();
 
 private:
@@ -34,7 +35,6 @@ private:
 	void					update();
 	void					processCommand();
 	std::shared_ptr<DrawAPI>	mApi;
-
 	bool						mIsRunning{true};
 	GameState					mState;
 	std::shared_ptr<Snake>		mSnake;
@@ -45,7 +45,6 @@ private:
 	int							mCurrLib;
 	std::unordered_set<std::string> mCommands;
 	std::chrono::high_resolution_clock::time_point	mBefore;
-	Game();
 };
 
 #endif //NIBBLER_GAME_HPP

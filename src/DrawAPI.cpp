@@ -3,10 +3,9 @@
 //
 #include <dlfcn.h>
 #include "DrawAPI.hpp"
-#include <vector>
 #include <iostream>
-std::vector<std::string const> gclibs = {"libSFML.so", "libSDL.so", "libGLFW.so"};
 
+const std::vector<std::string const> DrawAPI::gclibs{"libSFML.so", "libSDL.so", "libGLFW.so"};
 DrawAPI::DrawAPI()
 {
 };
@@ -15,6 +14,8 @@ DrawAPI::DrawAPI(int width, int height, unsigned lib)
 {
 	if (loadAPI(gclibs[lib % 3]))
 		initApi(width, height, "Nibbler - " + gclibs[lib % 3]);
+	else
+		throw std::exception();
 };
 
 DrawAPI::~DrawAPI()
@@ -36,15 +37,12 @@ DrawAPI &DrawAPI::operator=(DrawAPI const &)
 bool DrawAPI::loadAPI(std::string const &path)
 {
 	bool result = true;
-	if (mLib)
-	{
-		dlclose(mLib);
-	}
 	mLib = dlopen(path.c_str(), RTLD_LAZY | RTLD_LOCAL);
 	if (!mLib)
 	{
-		std::cerr << "dlopen : "<< dlerror() << std::endl;
-		return false;
+		std::cerr << "Error loading the lib: " << std::endl;
+		std::cerr << std::string("dlopen : ") + dlerror() << std::endl;
+		throw std::exception();
 	}
 	initApi			= reinterpret_cast<initFunction>(dlsym(mLib, "initializeApi"));
 	getUserInput	= reinterpret_cast<processInputFunction>(dlsym(mLib, "getInput"));
@@ -61,9 +59,10 @@ bool DrawAPI::loadAPI(std::string const &path)
 	result 			&= (drawer != nullptr);
 	result 			&= (putText != nullptr);
 	if (!result)
-		std::cerr << "dlsym : "<< dlerror() << std::endl;
-	else
-		std::cout << path << " was loaded." << std::endl;
+	{
+		std::cerr << std::string("dlsym : ") + dlerror() << std::endl;
+		throw std::exception();
+	}
 	return result;
 }
 
