@@ -6,7 +6,7 @@
 #    By: vkozlov <vkozlov@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/21 13:49:03 by vkozlov           #+#    #+#              #
-#    Updated: 2018/03/18 15:51:46 by vkozlov          ###   ########.fr        #
+#    Updated: 2018/08/25 11:16:37 by vkozlov          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,8 @@ S_DIR = ./src
 
 O_DIR = ./obj
 
+GS_DIR = ../src
+GI_DIR = ../inc
 
 libSDL_DIR = $(L_DIR)/sdl
 libFREETYPE_DIR = $(L_DIR)/build/freetype
@@ -48,25 +50,28 @@ FRAMEWORKS = -framework OpenGl -framework Cocoa -framework IOKit -framework Core
 EXTENSIONS = $(addprefix $(I_DIR)/,$(EXT))
 
 EXT =	nibbler_sdl.hpp \
-		Shader.hpp \
+		drawer_sdl.hpp 
+
+GEXT = 	Shader.hpp \
 		CustomException.hpp \
 		Texture.hpp \
 		ResourceManager.hpp \
-		Drawer.hpp \
 		SpriteRenderer.hpp \
 		TextRenderer.hpp \
 		Character.hpp
 
 HEADERS =	-I$(I_DIR) \
+			-I$(GI_DIR) \
 			-I $(libSDL_DIR)/SDL2.framework/Headers/ \
 			-I$(libGLAD_DIR)/include/ \
 			-I$(libSTB_DIR) \
 			-I$(libGLM_DIR)/ \
 			-I$(L_DIR)/freetype/include/
 
-SOURCES =	CustomException.cpp \
-			nibbler_sdl.cpp \
-			Drawer.cpp \
+SOURCES =	nibbler_sdl.cpp \
+			drawer_sdl.cpp 
+
+GSOURCES =	CustomException.cpp \
 			ResourceManager.cpp \
 			Shader.cpp \
 			Texture.cpp \
@@ -78,10 +83,14 @@ SRCS = $(addprefix $(S_DIR)/,$(SOURCES))
 
 OBJS = $(addprefix $(O_DIR)/,$(SOURCES:.cpp=.o)) $(O_DIR)/stb_image.o
 
+GSRCS = $(addprefix $(GS_DIR)/,$(GSOURCES))
+
+GOBJS = $(addprefix $(O_DIR)/,$(GSOURCES:.cpp=.o))
+
 all: obj $(NAME)
 
-$(NAME): libs $(OBJS) $(EXTENSIONS)
-		$(CC) -o $(NAME) $(OBJS) $(FLAGS) $(HEADERS) $(LIB_FLAGS) $(libGLAD) $(libSDL) $(libFreeType) $(FRAMEWORKS)
+$(NAME): libs $(OBJS) $(GOBJS) $(EXTENSIONS)
+		$(CC) -o $(NAME) $(OBJS) $(GOBJS) $(FLAGS) $(F) $(HEADERS) $(LIB_FLAGS) $(libGLAD) $(libSDL) $(libFreeType) $(FRAMEWORKS)
 
 libs:
 		sh $(L_DIR)/buildLibs.sh
@@ -95,10 +104,12 @@ obj:
 	mkdir -p obj
 
 $(O_DIR)/%.o: $(S_DIR)/%.cpp $(DEPS) $(EXTENSIONS)
-		$(CC) -c -o $@ $< $(FLAGS) $(HEADERS)
+		$(CC) -c -o $@ $< $(FLAGS) $(F) $(HEADERS)
+
+$(O_DIR)/%.o: $(GS_DIR)/%.cpp $(DEPS) $(EXTENSIONS)
+		$(CC) -c -o $@ $< $(FLAGS) $(F) $(HEADERS)
 
 clean:
-		rm -f $(OBJS)
 		rm -rf $(O_DIR)
 
 fclean: clean

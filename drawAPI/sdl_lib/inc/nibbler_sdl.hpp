@@ -5,9 +5,7 @@
 #ifndef NIBBLER_SDL_HPP
 #define NIBBLER_SDL_HPP
 
-//#include <>
-
-#include "Drawer.hpp"
+#include "drawer_sdl.hpp"
 #include <string>
 #include <array>
 

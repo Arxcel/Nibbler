@@ -1,14 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Drawer.hpp                                         :+:      :+:    :+:   */
+/*   drawer_glfw.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vkozlov <vkozlov@student.unit.ua>          +#+  +:+       +#+        */
+/*   By: vkozlov <vkozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/08 00:03:00 by vkozlov           #+#    #+#             */
-/*   Updated: 2018/07/08 00:03:00 by vkozlov          ###   ########.fr       */
+/*   Updated: 2018/08/25 11:27:02 by vkozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #ifndef DRAWER_H
 # define DRAWER_H
 
@@ -38,7 +39,7 @@ private:
 	GLFWwindow*						mWindow;
 private:
 	std::string		processKey(int key);
-	void			init(int width, int height, std::string const &winName);
+	void			init(std::string const &winName);
 	void			deinit();
 	Drawer(Drawer const &);
 	Drawer &operator=(Drawer const &);

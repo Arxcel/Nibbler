@@ -1,31 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Drawer.cpp                                         :+:      :+:    :+:   */
+/*   drawer_sdl.cpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vkozlov <vkozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/08 00:04:00 by vkozlov           #+#    #+#             */
-/*   Updated: 2018/08/24 16:15:05 by vkozlov          ###   ########.fr       */
+/*   Updated: 2018/08/25 11:17:40 by vkozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Drawer.hpp"
+#include "drawer_sdl.hpp"
 
 void Drawer::init(int width, int height, std::string const &winName)
 {
-	sf::ContextSettings settings;
-	settings.depthBits = 24;
-	settings.stencilBits = 8;
-	settings.antialiasingLevel = 4;
-	settings.majorVersion = 3;
-	settings.minorVersion = 3;
-	settings.attributeFlags = sf::ContextSettings::Core;
+	SDL_Init(SDL_INIT_EVERYTHING);
 
-	mWindow.create(sf::VideoMode(width * 2, height * 2), winName, sf::Style::Close, settings);
+	int context_flags = SDL_GL_CONTEXT_FORWARD_COMPATIBLE_FLAG;
+
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_FLAGS, context_flags);
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 2);
+
+	SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 8);
+	SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, 8);
+	SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE, 8);
+	SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE, 8);
+	SDL_GL_SetAttribute(SDL_GL_BUFFER_SIZE, 32);
+	SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 16);
+	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+
+	mWindow = SDL_CreateWindow(winName.c_str(),SDL_WINDOWPOS_CENTERED,SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_OPENGL);
+	mContext = SDL_GL_CreateContext(mWindow);
+	SDL_GL_MakeCurrent(mWindow, mContext);
+	std::cout << "Window created" << std::endl;
+	// if (!gladLoadGLLoader(SDL_GL_GetProcAddress))
 	if (!gladLoadGL())
 		throw CustomException("Failed to initialize GLAD");
-	glViewport(0, 0, width * 2, height * 2);
+	glViewport(0, 0, width, height);
 	glEnable(GL_CULL_FACE);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -42,8 +55,7 @@ void Drawer::init(int width, int height, std::string const &winName)
 	mRessourceManager.loadTexture("./drawAPI/asset/snake-2/body_turn_left.png", "body_turn_left", true);
 	mRessourceManager.loadTexture("./drawAPI/asset/snake-2/body_turn_right.png", "body_turn_right", true);
 	mRessourceManager.loadTexture("./drawAPI/asset/snake-2/tail.png", "tail", true);
-	mRessourceManager.loadTexture("./drawAPI/asset/food1.png", "food", true);
-
+	mRessourceManager.loadTexture("./drawAPI/asset/food3.png", "food", true);
 	mRessourceManager.loadTexture("./drawAPI/asset/background.jpg", "background", false);
 	mRessourceManager.loadTexture("./drawAPI/asset/block2.png", "block", false);
 
@@ -58,45 +70,43 @@ void Drawer::init(int width, int height, std::string const &winName)
 	mTextRenderer = std::make_shared<TextRenderer>(textShader);
 	mTextRenderer->loadFont("./drawAPI/fonts/font.ttf", 24);
 
-	mIsBtnPressed.emplace(sf::Keyboard::W, "UP");
-	mIsBtnPressed.emplace(sf::Keyboard::S, "DOWN");
-	mIsBtnPressed.emplace(sf::Keyboard::A, "LEFT");
-	mIsBtnPressed.emplace(sf::Keyboard::D, "RIGHT");
-	mIsBtnPressed.emplace(sf::Keyboard::Subtract, "Slower");
-	mIsBtnPressed.emplace(sf::Keyboard::Equal, "Faster");
-	mIsBtnPressed.emplace(sf::Keyboard::Space, "Pause");
-	mIsBtnPressed.emplace(sf::Keyboard::Num1, "LIB1");
-	mIsBtnPressed.emplace(sf::Keyboard::Num2, "LIB2");
-	mIsBtnPressed.emplace(sf::Keyboard::Num3, "LIB3");
+	mIsBtnPressed.emplace(SDLK_w, "UP");
+	mIsBtnPressed.emplace(SDLK_s, "DOWN");
+	mIsBtnPressed.emplace(SDLK_a, "LEFT");
+	mIsBtnPressed.emplace(SDLK_d, "RIGHT");
+	mIsBtnPressed.emplace(SDLK_MINUS, "Slower");
+	mIsBtnPressed.emplace(SDLK_EQUALS, "Faster");
+	mIsBtnPressed.emplace(SDLK_SPACE, "Pause");
+	mIsBtnPressed.emplace(SDLK_1, "LIB1");
+	mIsBtnPressed.emplace(SDLK_2, "LIB2");
+	mIsBtnPressed.emplace(SDLK_3, "LIB3");
+
 }
 
 std::string Drawer::processInput(bool &isRunning)
 {
 	std::string command{"nothing"};
-	if (mE.type == sf::Event::KeyPressed)
+	if (mE.type == SDL_KEYDOWN)
 	{
-		auto find = mIsBtnPressed.find(mE.key.code);
+		auto find = mIsBtnPressed.find(mE.key.keysym.sym);
 		if	(find != mIsBtnPressed.end())
 			command = find->second;
-		if(mE.key.code == sf::Keyboard::Escape)
-			isRunning = false;
 	}
-	// else if(mE.type == sf::Event::Closed)
-		// isRunning = false;
+	if(mE.type == SDL_QUIT || (mE.type == SDL_KEYDOWN && mE.key.keysym.sym == SDLK_ESCAPE))
+		isRunning = false;
 	return command;
 }
 
 void Drawer::preFrame()
 {
 	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
+	glClear(GL_COLOR_BUFFER_BIT);
 }
 
 void Drawer::postFrame()
 {
-	mWindow.display();
-	mWindow.pollEvent(mE);
+	SDL_GL_SwapWindow(mWindow);
+	SDL_PollEvent(&mE);
 }
 
 void Drawer::draw(std::string const &tex
@@ -116,7 +126,9 @@ void Drawer::putString(std::string const&what,glm::vec2 where, float size, glm::
 
 void Drawer::deinit()
 {
-	mWindow.close();
+	SDL_GL_DeleteContext(mContext);
+	SDL_DestroyWindow(mWindow);
+	SDL_Quit();
 }
 
 
@@ -131,7 +143,7 @@ Drawer::Drawer(int width, int height, std::string const &winName)
 
 Drawer::~Drawer()
 {
-	std::cout << "sfml finished " << std::endl;
+	std::cout << "sdl finished " << std::endl;
 	deinit();
 };
 

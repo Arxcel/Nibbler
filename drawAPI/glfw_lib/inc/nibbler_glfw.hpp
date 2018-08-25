@@ -5,7 +5,7 @@
 #ifndef NIBBLER_GLFW_HPP
 #define NIBBLER_GLFW_HPP
 
-#include "Drawer.hpp"
+#include "drawer_glfw.hpp"
 #include <string>
 #include <array>
 

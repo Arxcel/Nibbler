@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Drawer.cpp                                         :+:      :+:    :+:   */
+/*   drawer_glfw.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vkozlov <vkozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/08 00:04:00 by vkozlov           #+#    #+#             */
-/*   Updated: 2018/08/24 15:53:11 by vkozlov          ###   ########.fr       */
+/*   Updated: 2018/08/25 11:26:32 by vkozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Drawer.hpp"
+#include "drawer_glfw.hpp"
 
-void Drawer::init(int width, int height, std::string const &winName)
+void Drawer::init(std::string const &winName)
 {
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -20,17 +20,17 @@ void Drawer::init(int width, int height, std::string const &winName)
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
-	mWindow = glfwCreateWindow(width, height, winName.c_str(), nullptr, nullptr);
+	mWindow = glfwCreateWindow(mWidth, mHeight, winName.c_str(), nullptr, nullptr);
 	glfwMakeContextCurrent(mWindow);
 	if (!gladLoadGL())
 		throw CustomException("Failed to initialize GLAD");
-	glViewport(0, 0, width * 2, height * 2);
+	glViewport(0, 0, mWidth * 2, mHeight * 2);
 	glEnable(GL_CULL_FACE);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	auto shader = mRessourceManager.loadShader("drawAPI/shaders/sprite.vx.glsl", "drawAPI/shaders/sprite.ft.glsl", "sprite");
-	glm::mat4 projection = glm::ortho(0.0f, static_cast<GLfloat>(width * 2), static_cast<GLfloat>(height * 2), 0.0f, -1.0f, 1.0f);
+	glm::mat4 projection = glm::ortho(0.0f, static_cast<GLfloat>(mWidth * 2), static_cast<GLfloat>(mHeight * 2), 0.0f, -1.0f, 1.0f);
 
 	shader->use();
 	shader->setInt("image", 0);
@@ -49,7 +49,7 @@ void Drawer::init(int width, int height, std::string const &winName)
 
 	auto textShader = mRessourceManager.loadShader("drawAPI/shaders/text.vx.glsl", "drawAPI/shaders/text.ft.glsl", "text");
 
-	projection = glm::ortho(0.0f, static_cast<GLfloat>(width), static_cast<GLfloat>(height), 0.0f);
+	projection = glm::ortho(0.0f, static_cast<GLfloat>(mWidth), static_cast<GLfloat>(mHeight), 0.0f);
 
 
 	textShader->use();
@@ -154,7 +154,7 @@ Drawer::Drawer(int width, int height, std::string const &winName)
 		, mHeight(height)
 
 {
-	init(width, height, winName);
+	init(winName);
 };
 
 Drawer::~Drawer()
