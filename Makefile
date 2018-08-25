@@ -55,11 +55,15 @@ OBJS = $(addprefix $(O_DIR)/,$(SOURCES:.cpp=.o))
 
 all: obj $(NAME)
 
-$(NAME): libs $(OBJS) $(EXTENSIONS)
+$(NAME): extra libs $(OBJS) $(EXTENSIONS)
 		$(CC) -o $(NAME) $(OBJS) $(FLAGS) $(HEADERS)
 
 obj:
 	mkdir -p obj
+
+extra:
+	git submodule init
+	git submodule update
 
 libs:
 	make -C $(LIB1)
