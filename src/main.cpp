@@ -2,15 +2,19 @@
 
 namespace
 {
-	void processCommand(int ac, char *av[], int &w, int &h, int &s, unsigned &lib)
+	bool processCommand(int ac, char *av[], int &w, int &h, int &s, unsigned &lib, bool &hardModOn)
 	{
 		w = 800;
 		h = 600;
 		s = 50;
 		lib = 0;
+        std::string mod;
 		bool success = false;
-		if (ac == 3)
+		if (ac == 4)
+            mod = av[3];
+        if (ac == 3 || (ac == 4 && mod == "-h"))
 		{
+		    hardModOn = mod == "-h";
 			std::string width(av[1]);
 			std::string height(av[2]);
 			int lW, lH, lS;
@@ -30,34 +34,33 @@ namespace
 			}
 			catch(...)
 			{}
-			if (!success)
-			{
-				std::cerr << "ERROR: Not valid parameters." << std::endl;
-				throw std::exception();
-			}
 		}
+
+		if (!success)
+            std::cerr << "Error: Not valid parameters" << std::endl;
+        return success;
 	}
 }
 
+// width [18;161]
+// width == 18  h[12;29]
+// width == 161 h[82;239]
 int main(int ac, char *av[])
 {
 	int w{0}, h{0}, s{0};
 	unsigned lib{0};
+	bool hardMod;
 	try
 	{
-		processCommand(ac, av, w, h, s, lib);
-		while (lib != static_cast<unsigned >(-1))
-		{
-			std::cout << w << std::endl;
-			std::cout << h << std::endl;
-			std::cout << s << std::endl;
-
-			Game game;
-			if (game.init(lib, w, h, s))
-				lib = game.start();
-			else
-				break;
-		}
+		if (processCommand(ac, av, w, h, s, lib, hardMod))
+			while (lib != static_cast<unsigned >(-1))
+			{
+				Game game;
+				if (game.init(lib, w, h, s, hardMod))
+					lib = game.start();
+				else
+					break;
+			}
 	} catch (...)
 	{}
 	return 0;

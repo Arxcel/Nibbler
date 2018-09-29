@@ -4,7 +4,7 @@
 
 std::vector<std::string> cActions = { "UP", "DOWN", "RIGHT", "LEFT", "Faster", "Slower", "Pause", "LIB1", "LIB2", "LIB3"};
 
-bool	Game::init(unsigned lib, int w, int h, int s)
+bool	Game::init(unsigned lib, int w, int h, int s, bool hardMod)
 {
 	try
 	{
@@ -14,10 +14,10 @@ bool	Game::init(unsigned lib, int w, int h, int s)
 		mScore = 0;
 		mApi = std::make_shared<DrawAPI>(mWidth, mHeight, lib);
 		mCurrLib = static_cast<int>(lib);
-		std::array<float, 2> pos{{static_cast<float>(mWidth), static_cast<float>(mHeight)}};
+		std::array<float, 2> pos{{static_cast<float>(mWidth % 2 == 0 ? mWidth : mWidth + 1), static_cast<float>(mHeight % 2 == 0 ? mHeight : mHeight + 1)}};
 		mSnake = std::make_shared<Snake>(pos, mSize, 5);
 		mBefore = std::chrono::high_resolution_clock::now();
-		mLevel = std::make_shared<GameLevel>(mWidth * 2, mHeight * 2, mSize);
+		mLevel = std::make_shared<GameLevel>(mWidth * 2, mHeight * 2, mSize, hardMod);
 		mCommands.clear();
 		mState = GameState::GAME_START;
 		addFood();
@@ -87,6 +87,7 @@ void	Game::addFood()
 	{
 		auto food = std::make_shared<GameObject>(6, randX(mt) * mSize, randY(mt) * mSize, mSize, 180, color);
 		isPlaced = true;
+
 		for (auto &part : mSnake->mBody)
 		{
 			if (checkCollision(food, part))
@@ -95,6 +96,15 @@ void	Game::addFood()
 				break;
 			}
 		}
+
+        for (auto &part : mLevel->bricks)
+        {
+            if (checkCollision(food, part))
+            {
+                isPlaced = false;
+                break;
+            }
+        }
 		if (isPlaced)
 			mLevel->addFood(food);
 	}
@@ -173,41 +183,34 @@ unsigned Game::start()
 		{
 			mCommands.insert(std::string(input));
 		}
+		mApi->preFrame();
 		if (mState == GameState::GAME_ACTIVE)
 		{
-			mApi->preFrame();
-
 			move();
 			update();
 			mLevel->draw(mApi);
 			mSnake->draw(mApi);
 			mApi->putText("Score: " + std::to_string(mScore), 5, 5, 0.7, {{1, 1, 1}});
 			mApi->putText("Speed: " + std::to_string(mSnake->getSpeed()), 5, mHeight - 24 * 0.7f, 0.7, {{1, 1, 1}});
-			mApi->postFrame();
 		}
 		else if (mState == GameState::GAME_START)
 		{
-			mApi->preFrame();
 			mApi->putText("Press 'SPACE' to start", mWidth / 2.0f- 125, mHeight / 2.0f, 1, {{1, 0.5, 0.5}});
-			mApi->postFrame();
 		}
 		else if (mState == GameState::GAME_PAUSED)
 		{
-			mApi->preFrame();
 			mLevel->draw(mApi);
 			mSnake->draw(mApi);
 			mApi->putText("Score: " + std::to_string(mScore), 5, 5, 0.7, {{1, 1, 1}});
 			mApi->putText("Paused", mWidth / 2.0f - 75, mHeight / 2.0f - 30, 2, {{1, 0.5, 0.5}});
-			mApi->postFrame();
 		}
 		else if (mState == GameState::GAME_OVER)
 		{
-			mApi->preFrame();
 			mApi->putText("GAME is OVER", mWidth / 2.0f - 200, mHeight / 2.0f - 30, 1.5, {{1, 0.5, 0.5}});
 			mApi->putText("Final score: " + std::to_string(mScore), mWidth / 2.0f - 200, mHeight / 2.0f + 30, 1, {{1, 0.5, 0.5}});
 			mApi->putText("Press 'SPACE' to start 'New Game'", mWidth / 2.0f - 200, mHeight / 2.0f + 90, 1, {{1, 0.5, 0.5}});
-			mApi->postFrame();
 		}
+		mApi->postFrame();
 		processCommand();
 	}
 	return static_cast<unsigned>(mPostAction);

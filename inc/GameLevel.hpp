@@ -26,7 +26,7 @@ public:
 	std::vector< std::shared_ptr<GameObject> > food;
 	// Constructor
 	GameLevel() = delete;
-	GameLevel(int width, int heigth, int size);
+	GameLevel(int width, int heigth, int size, bool hardMod);
 	~GameLevel();
 	GameLevel(GameLevel const &);
 	GameLevel &operator=(GameLevel const &);
@@ -39,6 +39,7 @@ private:
 	// Initialize level from tile data
 	void	init();
 	size_t	mLevelWidth, mLevelHeight, mSize;
+	bool mIsHard;
 };
 
 #endif

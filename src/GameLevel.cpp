@@ -14,11 +14,12 @@
 #include <iostream>
 #include "GameLevel.hpp"
 
-GameLevel::GameLevel(int width, int height, int size) :
+GameLevel::GameLevel(int width, int height, int size, bool hardMod) :
 		mLevelWidth(static_cast<size_t>(width)),
 		mLevelHeight(static_cast<size_t>(height)),
 		mSize(static_cast<size_t>(size))
 {
+	mIsHard = hardMod;
 	init();
 };
 
@@ -53,13 +54,13 @@ void GameLevel::init()
 	std::array<float, 3> color{{0.3f, 0.1f, 0.1f}};
 	for (size_t y = 0; y * mSize < mLevelHeight; ++y)
 	{
-		bricks.emplace_back(std::make_shared<GameObject>(8, 0, y * mSize, mSize, 0, color));
-		bricks.emplace_back(std::make_shared<GameObject>(8, mLevelWidth - mSize, y * mSize, mSize, 0, color));
+		for (size_t x = 0; x * mSize <= mLevelWidth; ++x)
+		{
+            if ((x == 0 || x == mLevelWidth / mSize - 1 || y == 0 || y == mLevelHeight / mSize - 1) || (x % 2 != 0 && y % 2 != 0 && mIsHard))
+			{
+				bricks.emplace_back(std::make_shared<GameObject>(8, x * mSize, y * mSize, mSize, 0, color));
+			}
+		}
 	}
-	for (size_t x = 0; x * mSize < mLevelWidth ; ++x)
-	{
-		bricks.emplace_back(std::make_shared<GameObject>(8, x * mSize, 0, mSize, 0, color));
-		bricks.emplace_back(std::make_shared<GameObject>(8, x * mSize, mLevelHeight - mSize, mSize, 0, color));
 
-	}
 }
