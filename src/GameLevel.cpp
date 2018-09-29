@@ -30,12 +30,12 @@ GameLevel::GameLevel(GameLevel const &) {};
 
 GameLevel &GameLevel::operator=(GameLevel const &) { return *this; };
 
-void	GameLevel::draw(renderFunction const &functor)
+void GameLevel::draw(std::shared_ptr<DrawAPI> const &api)
 {
 	for (auto &brick : bricks)
-		brick->draw(functor);
+		brick->draw(api);
 	for (auto &f : food)
-		f->draw(functor);
+		f->draw(api);
 }
 
 bool	GameLevel::isCompleted()

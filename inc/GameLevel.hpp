@@ -33,7 +33,7 @@ public:
 	void	addFood(std::shared_ptr<GameObject> aFood);
 	// Loads level from file
 //	void	load(std::string const & path, int levelWidth, int levelHeight);
-	void	draw(renderFunction const &);
+    void draw(std::shared_ptr<DrawAPI> const &);
 	bool	isCompleted();
 private:
 	// Initialize level from tile data

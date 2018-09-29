@@ -90,26 +90,11 @@ std::string Drawer::processInput(bool &isRunning)
 	{
 		glfwSetWindowShouldClose(mWindow, true);
 	}
-	if (command == "nothing")
-		command = processKey(GLFW_KEY_W);
-	if (command == "nothing")
-		command = processKey(GLFW_KEY_S);
-	if (command == "nothing")
-		command = processKey(GLFW_KEY_A);
-	if (command == "nothing")
-		command = processKey(GLFW_KEY_D);
-	if (command == "nothing")
-		command = processKey(GLFW_KEY_MINUS);
-	if (command == "nothing")
-		command = processKey(GLFW_KEY_EQUAL);
-	if (command == "nothing")
-		command = processKey(GLFW_KEY_SPACE);
-	if (command == "nothing")
-		command = processKey(GLFW_KEY_1);
-	if (command == "nothing")
-		command = processKey(GLFW_KEY_2);
-	if (command == "nothing")
-		command = processKey(GLFW_KEY_3);
+	for (auto &btn : mIsBtnPressed)
+	{
+		if (command == "nothing")
+			command = processKey(btn.first);
+	}
 	if (glfwWindowShouldClose(mWindow))
 		isRunning = false;
 	return command;
@@ -133,10 +118,10 @@ void Drawer::draw(std::string const &tex
 		, float const &rot
 		, glm::vec3 const &color)
 {
-	mSpriteRenderer->drawSprite(mRessourceManager.getTexture(tex) , pos, scale, rot, color);
+	mSpriteRenderer->drawSprite(mRessourceManager.getTexture(tex), pos, scale, rot, color);
 }
 
-void Drawer::putString(std::string const&what,glm::vec2 where, float size, glm::vec3 color)
+void Drawer::putString(std::string const&what, glm::vec2 where, float size, glm::vec3 color)
 {
 	mTextRenderer->putString(what, where.x, where.y, size, color);
 }

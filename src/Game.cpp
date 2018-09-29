@@ -2,6 +2,8 @@
 #include "Game.hpp"
 #include "DrawAPI.hpp"
 
+std::vector<std::string> cActions = { "UP", "DOWN", "RIGHT", "LEFT", "Faster", "Slower", "Pause", "LIB1", "LIB2", "LIB3"};
+
 bool	Game::init(unsigned lib, int w, int h, int s)
 {
 	try
@@ -104,34 +106,49 @@ void	Game::processCommand()
 	{
 		auto first = mCommands.begin();
 		auto cmd = *first;
-		std::cout << cmd << std::endl;
-		if (cmd == "UP")
-			mSnake->setDirection(Direction::UP);
-		else if (cmd == "DOWN")
-			mSnake->setDirection(Direction::BOTTOM);
-		else if (cmd == "RIGHT")
-			mSnake->setDirection(Direction::RIGHT);
-		else if (cmd == "LEFT")
-			mSnake->setDirection(Direction::LEFT);
-		else if (cmd == "Faster")
-			mSnake->getSpeed()++;
-		else if (cmd == "Slower")
-			mSnake->getSpeed() = mSnake->getSpeed() - 1  > 0 ? mSnake->getSpeed() - 1 : mSnake->getSpeed();
-		else if (cmd == "Pause")
+		int index = 0;
+		for (auto &action : cActions)
 		{
-			if (mState == GameState::GAME_OVER)
-			{
-				mPostAction = mCurrLib;
-				mIsRunning = false;
-			}
-			else
-				mState = mState == GameState::GAME_PAUSED || mState == GAME_START ? GameState::GAME_ACTIVE : GameState::GAME_PAUSED;
-		}
-		else if (cmd == "LIB1" || cmd == "LIB2" || cmd == "LIB3")
-		{
-			mPostAction = (cmd[3] - 48);
-			mIsRunning = false;
-		}
+		    if(action == cmd)
+		        break;
+		    index++;
+        }
+        switch (index)
+        {
+            case 0:
+                mSnake->setDirection(Direction::UP);
+                break;
+            case 1:
+                mSnake->setDirection(Direction::BOTTOM);
+                break;
+            case 2:
+                mSnake->setDirection(Direction::RIGHT);
+                break;
+            case 3:
+                mSnake->setDirection(Direction::LEFT);
+                break;
+            case 4:
+                mSnake->getSpeed()++;
+                break;
+            case 5:
+                mSnake->getSpeed() = mSnake->getSpeed() - 1  > 0 ? mSnake->getSpeed() - 1 : mSnake->getSpeed();
+                break;
+            case 6:
+                if (mState == GameState::GAME_OVER)
+                {
+                    mPostAction = mCurrLib;
+                    mIsRunning = false;
+                }
+                else
+                    mState = mState == GameState::GAME_PAUSED || mState == GAME_START ? GameState::GAME_ACTIVE : GameState::GAME_PAUSED;
+                break;
+            default:
+                if (cmd == "LIB1" || cmd == "LIB2" || cmd == "LIB3")
+                {
+                    mPostAction = (cmd[3] - 48);
+                    mIsRunning = false;
+                }
+        }
 		if (!mCommands.empty())
 			mCommands.erase(first);
 	}
@@ -162,8 +179,8 @@ unsigned Game::start()
 
 			move();
 			update();
-			mLevel->draw(mApi->drawer);
-			mSnake->draw(mApi->drawer);
+			mLevel->draw(mApi);
+			mSnake->draw(mApi);
 			mApi->putText("Score: " + std::to_string(mScore), 5, 5, 0.7, {{1, 1, 1}});
 			mApi->putText("Speed: " + std::to_string(mSnake->getSpeed()), 5, mHeight - 24 * 0.7f, 0.7, {{1, 1, 1}});
 			mApi->postFrame();
@@ -171,24 +188,24 @@ unsigned Game::start()
 		else if (mState == GameState::GAME_START)
 		{
 			mApi->preFrame();
-			mApi->putText("Press 'SPACE' to start", mWidth / 2 - 125, mHeight / 2, 1, {{1, 0.5, 0.5}});
+			mApi->putText("Press 'SPACE' to start", mWidth / 2.0f- 125, mHeight / 2.0f, 1, {{1, 0.5, 0.5}});
 			mApi->postFrame();
 		}
 		else if (mState == GameState::GAME_PAUSED)
 		{
 			mApi->preFrame();
-			mLevel->draw(mApi->drawer);
-			mSnake->draw(mApi->drawer);
+			mLevel->draw(mApi);
+			mSnake->draw(mApi);
 			mApi->putText("Score: " + std::to_string(mScore), 5, 5, 0.7, {{1, 1, 1}});
-			mApi->putText("Paused", mWidth / 2 - 75, mHeight / 2 - 30, 2, {{1, 0.5, 0.5}});
+			mApi->putText("Paused", mWidth / 2.0f - 75, mHeight / 2.0f - 30, 2, {{1, 0.5, 0.5}});
 			mApi->postFrame();
 		}
 		else if (mState == GameState::GAME_OVER)
 		{
 			mApi->preFrame();
-			mApi->putText("GAME is OVER", mWidth / 2 - 200, mHeight / 2 - 30, 1.5, {{1, 0.5, 0.5}});
-			mApi->putText("Final score: " + std::to_string(mScore), mWidth / 2 - 200, mHeight / 2 + 30, 1, {{1, 0.5, 0.5}});
-			mApi->putText("Press 'SPACE' to start 'New Game'", mWidth / 2 - 200, mHeight / 2 + 90, 1, {{1, 0.5, 0.5}});
+			mApi->putText("GAME is OVER", mWidth / 2.0f - 200, mHeight / 2.0f - 30, 1.5, {{1, 0.5, 0.5}});
+			mApi->putText("Final score: " + std::to_string(mScore), mWidth / 2.0f - 200, mHeight / 2.0f + 30, 1, {{1, 0.5, 0.5}});
+			mApi->putText("Press 'SPACE' to start 'New Game'", mWidth / 2.0f - 200, mHeight / 2.0f + 90, 1, {{1, 0.5, 0.5}});
 			mApi->postFrame();
 		}
 		processCommand();

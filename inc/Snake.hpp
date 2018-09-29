@@ -33,7 +33,7 @@ public:
 	Snake(Snake const &);
 	Snake &operator=(Snake const &);
 	std::vector<std::shared_ptr<GameObject>> mBody;
-	void	draw(renderFunction const &);
+	void	draw(std::shared_ptr<DrawAPI> const &api);
 	void	move();
 	void	setDirection(Direction d);
 	int		&getSpeed();

@@ -13,6 +13,8 @@
 #define NIBBLER_GAMEOBJECT_HPP
 #include <array>
 #include "DrawAPIFunctions.hpp"
+#include "DrawAPI.hpp"
+
 class GameObject
 {
 public:
@@ -30,6 +32,6 @@ public:
 	float					mRotation;
 	std::array<float, 3>	mColor;
 	// Draw sprite
-	virtual void draw(renderFunction const &);
+	virtual void draw(std::shared_ptr<DrawAPI> const &);
 };
 #endif //NIBBLER_GAMEOBJECT_HPP

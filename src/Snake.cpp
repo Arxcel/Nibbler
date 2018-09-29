@@ -125,10 +125,10 @@ void	Snake::move() {
 	}
 }
 
-void	Snake::draw(renderFunction const &functor)
+void	Snake::draw(std::shared_ptr<DrawAPI> const &api)
 {
 	for (auto &part : mBody)
-		part->draw(functor);
+		part->draw(api);
 }
 
 void Snake::setDirection(Direction d)

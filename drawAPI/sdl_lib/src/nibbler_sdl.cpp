@@ -1,73 +1,56 @@
 //
 // Created by Vadym KOZLOV on 7/7/18.
 //
+#include <vector>
 #include "nibbler_sdl.hpp"
 
-std::shared_ptr<Drawer> gD;
+const std::vector<std::string> cTextures{ "block", "head", "body", "body_turn_left", "body_turn_right", "tail", "food"};
 
-extern "C" void initializeApi(int width, int height, std::string const &winName)
+extern "C" INibblerDisplay*			getDisplayModule(int width, int height, const char *winName)
 {
-	std::cout << "sdl started" << std::endl;
-	gD = std::make_shared<Drawer>(width, height, winName);
+	return new NibblerDisplaySDL(width, height, winName);
 }
 
-extern "C" void preFrame()
+NibblerDisplaySDL::NibblerDisplaySDL(int width, int height, const char *winName): mDrawer(width, height, winName)
 {
-	gD->preFrame();
 }
 
-extern "C" void postFrame()
+void NibblerDisplaySDL::preFrame()
 {
-	gD->postFrame();
+	mDrawer.preFrame();
 }
 
-extern "C" const char *getInput(bool &isRunning)
+void NibblerDisplaySDL::postFrame()
 {
-	std::string cmd = gD->processInput(isRunning);
+	mDrawer.postFrame();
+}
+
+const char *NibblerDisplaySDL::getInput(bool &isRunning)
+{
+	std::string cmd = mDrawer.processInput(isRunning);
 	if (cmd != "nothing")
 		return cmd.c_str();
 	return nullptr;
 }
 
-extern "C" void deinitializeApi()
+void NibblerDisplaySDL::deinitializeApi()
 {
-	gD.reset();
+	delete this;
 }
 
-extern "C" void draw(int type
+void NibblerDisplaySDL::draw(int type
 		, float posX, float posY
 		, float scale
 		, float rot
 		, std::array<float, 3> color)
 {
-	std::string texture;
-	switch (type)
-	{
-		case 1:
-			texture = "head";
-			break;
-		case 2:
-			texture = "body";
-			break;
-		case 3:
-			texture = "body_turn_left";
-			break;
-		case 4:
-			texture = "body_turn_right";
-			break;
-		case 5:
-			texture = "tail";
-			break;
-		case 6:
-			texture = "food";
-			break;
-		default:
-			texture = "block";
-	}
-	gD->draw(texture, {posX, posY}, {scale, scale}, static_cast<float>(rot * M_PI / 180.0f), {color[0], color[1], color[2]});
+    if (static_cast<size_t>(type) > cTextures.size())
+        type = 0;
+    mDrawer.draw(cTextures[type], {posX, posY}, {scale, scale}, static_cast<float>(rot * M_PI / 180.0f), {color[0], color[1], color[2]});
 }
 
-extern "C" void			putText(std::string what, float x, float y, float size, std::array<float, 3> color)
+void			NibblerDisplaySDL::putText(std::string what, float x, float y, float size, std::array<float, 3> color)
 {
-	gD->putString(what, {x, y}, size, {color[0], color[1], color[2]});
+	mDrawer.putString(what, {x, y}, size, {color[0], color[1], color[2]});
 }
+

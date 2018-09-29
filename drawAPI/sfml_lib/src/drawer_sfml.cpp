@@ -81,8 +81,6 @@ std::string Drawer::processInput(bool &isRunning)
 		if(mE.key.code == sf::Keyboard::Escape)
 			isRunning = false;
 	}
-	// else if(mE.type == sf::Event::Closed)
-		// isRunning = false;
 	return command;
 }
 

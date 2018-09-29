@@ -11,24 +11,21 @@
 
 class DrawAPI {
 public:
-	DrawAPI(int,int,unsigned);
+	DrawAPI(int, int, unsigned);
 	~DrawAPI();
-	bool 					changeAPI(unsigned);
-	processInputFunction	getUserInput{nullptr};
-	preFrameFunction		preFrame{nullptr};
-	postFrameFunction		postFrame{nullptr};
-	renderFunction			drawer{nullptr};
-	textFunction			putText{nullptr};
+	const char*     getUserInput(bool &);
+	void            preFrame();
+	void            postFrame();
+	void            drawer(int type, float posX, float posY, float scale, float rot, std::array<float, 3> color);
+	void            putText(std::string, float, float, float, std::array<float, 3>);
+	getApiFunction  getDisplayModule{nullptr};
 private:
-	bool					loadAPI(std::string const &);
-	initFunction			initApi{nullptr};
-	deinitFunction			deinitApi{nullptr};
-	void					*mLib{nullptr};
+	void            loadAPI(std::string const &);
+	void*           mLib{nullptr};
 	DrawAPI(DrawAPI const &);
 	DrawAPI &operator=(DrawAPI const &);
-	int 						mWidth, mHeight;
 	DrawAPI();
-
+	INibblerDisplay	*mAPI;
 	static const std::vector<std::string const> gclibs;
 };
 

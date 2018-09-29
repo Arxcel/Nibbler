@@ -19,7 +19,8 @@ GameObject::GameObject(GameObject const &) {};
 
 GameObject &GameObject::operator=(GameObject const &) { return *this; };
 
-void GameObject::draw(renderFunction const &functor)
+void GameObject::draw(std::shared_ptr<DrawAPI> const &api)
 {
-	functor(mType, x, y, mSize, mRotation, mColor);
+
+	api->drawer(mType, x, y, mSize, mRotation, mColor);
 }

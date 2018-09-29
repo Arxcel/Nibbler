@@ -41,7 +41,7 @@ namespace
 
 int main(int ac, char *av[])
 {
-	int w{0},h{0},s{0};
+	int w{0}, h{0}, s{0};
 	unsigned lib{0};
 	try
 	{
