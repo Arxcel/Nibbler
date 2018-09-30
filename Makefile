@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vkozlov <vkozlov@student.42.fr>            +#+  +:+       +#+         #
+#    By: arxcel <arxcel@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/21 13:49:03 by vkozlov           #+#    #+#              #
-#    Updated: 2018/03/18 15:51:46 by vkozlov          ###   ########.fr        #
+#    Updated: 2018/09/30 17:14:33 by arxcel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,18 +32,20 @@ LIB2 = ./drawAPI/sdl_lib
 
 LIB3 = ./drawAPI/sfml_lib
 
+LIB4 = ./audioAPI
+
 EXTENSIONS = $(addprefix $(I_DIR)/,$(EXT))
 
 EXT =	Game.hpp \
 		GameLevel.hpp \
 		GameObject.hpp \
 		Snake.hpp \
-		DrawAPI.hpp
+		MediaAPI.hpp
 
 HEADERS = -I$(I_DIR)
 
 SOURCES =	main.cpp \
-            DrawAPI.cpp \
+            MediaAPI.cpp \
 			Game.cpp \
 			GameLevel.cpp \
             GameObject.cpp \
@@ -69,6 +71,7 @@ libs:
 	make -C $(LIB1)
 	make -C $(LIB2)
 	make -C $(LIB3)
+	make -C $(LIB4)
 
 $(O_DIR)/%.o: $(S_DIR)/%.cpp $(DEPS) $(EXTENSIONS)
 		$(CC) -c -o $@ $< $(FLAGS) $(HEADERS)
@@ -79,12 +82,14 @@ clean:
 		make clean -C $(LIB1)
 		make clean -C $(LIB2)
 		make clean -C $(LIB3)
+		make clean -C $(LIB4)
 
 fclean: clean
 		rm -f $(NAME)
 		make fclean -C $(LIB1)
 		make fclean -C $(LIB2)
 		make fclean -C $(LIB3)
+		make fclean -C $(LIB4)
 
 re: fclean all
 

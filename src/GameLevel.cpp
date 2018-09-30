@@ -3,13 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   GameLevel.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vkozlov <vkozlov@student.unit.ua>          +#+  +:+       +#+        */
+/*   By: arxcel <arxcel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/16 21:32:00 by vkozlov           #+#    #+#             */
-/*   Updated: 2018/07/16 21:32:00 by vkozlov          ###   ########.fr       */
+/*   Updated: 2018/09/30 17:13:48 by arxcel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include <fstream>
+
 #include <sstream>
 #include <iostream>
 #include "GameLevel.hpp"
@@ -31,7 +31,7 @@ GameLevel::GameLevel(GameLevel const &) {};
 
 GameLevel &GameLevel::operator=(GameLevel const &) { return *this; };
 
-void GameLevel::draw(std::shared_ptr<DrawAPI> const &api)
+void GameLevel::draw(std::shared_ptr<MediaAPI> const &api)
 {
 	for (auto &brick : bricks)
 		brick->draw(api);

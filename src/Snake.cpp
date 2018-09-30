@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Snake.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vkozlov <vkozlov@student.unit.ua>          +#+  +:+       +#+        */
+/*   By: arxcel <arxcel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/16 23:21:00 by vkozlov           #+#    #+#             */
-/*   Updated: 2018/07/16 23:21:00 by vkozlov          ###   ########.fr       */
+/*   Updated: 2018/09/30 17:13:48 by arxcel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ void	Snake::move() {
 	}
 }
 
-void	Snake::draw(std::shared_ptr<DrawAPI> const &api)
+void	Snake::draw(std::shared_ptr<MediaAPI> const &api)
 {
 	for (auto &part : mBody)
 		part->draw(api);

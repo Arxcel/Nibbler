@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Snake.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vkozlov <vkozlov@student.unit.ua>          +#+  +:+       +#+        */
+/*   By: arxcel <arxcel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/16 23:21:00 by vkozlov           #+#    #+#             */
-/*   Updated: 2018/07/16 23:21:00 by vkozlov          ###   ########.fr       */
+/*   Updated: 2018/09/30 17:13:48 by arxcel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ public:
 	Snake(Snake const &);
 	Snake &operator=(Snake const &);
 	std::vector<std::shared_ptr<GameObject>> mBody;
-	void	draw(std::shared_ptr<DrawAPI> const &api);
+	void	draw(std::shared_ptr<MediaAPI> const &api);
 	void	move();
 	void	setDirection(Direction d);
 	int		&getSpeed();

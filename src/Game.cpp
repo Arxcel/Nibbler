@@ -1,6 +1,6 @@
 #include <random>
 #include "Game.hpp"
-#include "DrawAPI.hpp"
+#include "MediaAPI.hpp"
 
 std::vector<std::string> cActions = { "UP", "DOWN", "RIGHT", "LEFT", "Faster", "Slower", "Pause", "LIB1", "LIB2", "LIB3"};
 
@@ -12,7 +12,7 @@ bool	Game::init(unsigned lib, int w, int h, int s, bool hardMod)
 		mHeight = h;
 		mSize = s;
 		mScore = 0;
-		mApi = std::make_shared<DrawAPI>(mWidth, mHeight, lib);
+		mApi = std::make_shared<MediaAPI>(mWidth, mHeight, lib);
 		mCurrLib = static_cast<int>(lib);
 		std::array<float, 2> pos{{static_cast<float>(mWidth % 2 == 0 ? mWidth : mWidth + 1), static_cast<float>(mHeight % 2 == 0 ? mHeight : mHeight + 1)}};
 		mSnake = std::make_shared<Snake>(pos, mSize, 5);

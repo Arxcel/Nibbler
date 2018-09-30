@@ -19,7 +19,7 @@ GameObject::GameObject(GameObject const &) {};
 
 GameObject &GameObject::operator=(GameObject const &) { return *this; };
 
-void GameObject::draw(std::shared_ptr<DrawAPI> const &api)
+void GameObject::draw(std::shared_ptr<MediaAPI> const &api)
 {
 
 	api->drawer(mType, x, y, mSize, mRotation, mColor);

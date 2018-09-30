@@ -18,7 +18,7 @@ enum GameState {
 	GAME_OVER
 };
 
-class DrawAPI;
+class MediaAPI;
 class Game {
 public:
 	Game();
@@ -34,7 +34,7 @@ private:
 	void					move();
 	void					update();
 	void					processCommand();
-	std::shared_ptr<DrawAPI>	mApi;
+	std::shared_ptr<MediaAPI>	mApi;
 	bool						mIsRunning{true};
 	GameState					mState;
 	std::shared_ptr<Snake>		mSnake;

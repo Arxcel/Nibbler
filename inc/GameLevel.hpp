@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   GameLevel.hpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vkozlov <vkozlov@student.unit.ua>          +#+  +:+       +#+        */
+/*   By: arxcel <arxcel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/16 21:32:00 by vkozlov           #+#    #+#             */
-/*   Updated: 2018/07/16 21:32:00 by vkozlov          ###   ########.fr       */
+/*   Updated: 2018/09/30 17:13:48 by arxcel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ public:
 	void	addFood(std::shared_ptr<GameObject> aFood);
 	// Loads level from file
 //	void	load(std::string const & path, int levelWidth, int levelHeight);
-    void draw(std::shared_ptr<DrawAPI> const &);
+    void draw(std::shared_ptr<MediaAPI> const &);
 	bool	isCompleted();
 private:
 	// Initialize level from tile data
