@@ -19,12 +19,23 @@ MediaAPI::MediaAPI(int width, int height, unsigned lib)
 	mAudioAPI = getAudioModule();
 	if (mAPI == nullptr || mAudioAPI == nullptr)
 		throw std::exception();
-	mAudioAPI->playSound(0, false);
+	mAudioAPI->startMain();
 };
 
 const char* MediaAPI::getUserInput(bool &isRunning)
 {
     return mAPI->getInput(isRunning);
+}
+
+void MediaAPI::playAudio(int type)
+{
+	mAudioAPI->playSound(type);
+}
+
+void MediaAPI::stopMusic()
+{
+	mAudioAPI->stopMain();
+	mAudioAPI->playSound(2);
 }
 
 void MediaAPI::preFrame()

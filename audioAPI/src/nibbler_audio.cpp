@@ -16,15 +16,29 @@ NibblerAudio::NibblerAudio()
         exit(1);
     }
     Mix_OpenAudio(22050, AUDIO_S16SYS, 2, 640);
-    mCollection.emplace_back(Mix_LoadMUS("/audioAPI/assets/snake.mp3"));
+
+    mMainTheme = Mix_LoadMUS("/audioAPI/assets/main_theme.mp3");
+    mCollection.emplace_back(Mix_LoadWAV("/audioAPI/assets/speed.wav"));
+    mCollection.emplace_back(Mix_LoadWAV("/audioAPI/assets/food.wav"));
+    mCollection.emplace_back(Mix_LoadWAV("/audioAPI/assets/end.wav"));
+
 }
 
-void NibblerAudio::playSound(int type, bool repeat)
+void NibblerAudio::startMain() 
+{
+    Mix_PlayMusic(mMainTheme, -1);
+}
+
+void NibblerAudio::stopMain()
+{
+    Mix_HaltMusic();
+}
+
+void NibblerAudio::playSound(int type)
 {
     if (static_cast<size_t>(type) > mCollection.size())
-        return;    
-    Mix_AllocateChannels(1); 
-    Mix_PlayMusic(mCollection.at(type), repeat ? -1 : 1);
+        return;
+    Mix_PlayChannel(1, mCollection.at(type), 0);
 }
 
 void NibblerAudio::deinit()
@@ -35,7 +49,8 @@ void NibblerAudio::deinit()
 NibblerAudio::~NibblerAudio()
 {
     for (auto & m : mCollection)
-        Mix_FreeMusic(m);
+        Mix_FreeChunk( m );
+    Mix_CloseAudio();
     SDL_Quit();
 }
 

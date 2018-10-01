@@ -10,7 +10,9 @@ class INibblerAudio
 {
 public:
     virtual ~INibblerAudio() {};
-    virtual void playSound(int type, bool repeat) = 0;
+    virtual void startMain() = 0;
+    virtual void stopMain() = 0;
+    virtual void playSound(int type) = 0;
     virtual void deinit() = 0;
 };
 

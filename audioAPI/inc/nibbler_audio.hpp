@@ -19,11 +19,14 @@ class NibblerAudio : public INibblerAudio
 public:
 	NibblerAudio();
     ~NibblerAudio();
-    void playSound(int type, bool repeat) override;
+    void playSound(int type) override;
+    void startMain() override;
+    void stopMain() override;
     void deinit() override;
 
 private:
-    std::vector<Mix_Music *> mCollection;
-};
+    std::vector<Mix_Chunk *> mCollection;
+    Mix_Music *mMainTheme;
+ };
 
 #endif

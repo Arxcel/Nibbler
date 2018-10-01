@@ -6,7 +6,7 @@
 /*   By: arxcel <arxcel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/08 00:04:00 by vkozlov           #+#    #+#             */
-/*   Updated: 2018/09/30 17:20:10 by arxcel           ###   ########.fr       */
+/*   Updated: 2018/10/01 23:18:12 by arxcel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,6 @@ Drawer::Drawer(int width, int height, std::string const &winName)
 
 Drawer::~Drawer()
 {
-	std::cout << "sfml finished " << std::endl;
 	deinit();
 };
 

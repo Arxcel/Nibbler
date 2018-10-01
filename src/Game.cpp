@@ -61,20 +61,29 @@ void	Game::update()
 	{
 		mLevel->food.clear();
 		mSnake->grow();
+		mApi->playAudio(1);
 		mScore += 10;
 		if (mScore % 100 == 0)
+		{
 			mSnake->getSpeed() += 3;
+			mApi->playAudio(0);
+		}
 		addFood();
 	}
 
 	for (auto &brick : mLevel->bricks)
 		if (checkCollision(snakeHead, brick))
+		{
 			mState = GameState::GAME_OVER;
+			mApi->stopMusic();
+		}
 
 	for (auto &part : mSnake->mBody)
 		if (part != snakeHead && checkCollision(snakeHead, part))
+		{
 			mState = GameState::GAME_OVER;
-}
+			mApi->stopMusic();
+		}}
 
 void	Game::addFood()
 {

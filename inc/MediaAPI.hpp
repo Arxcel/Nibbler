@@ -20,6 +20,8 @@ public:
 	void            putText(std::string, float, float, float, std::array<float, 3>);
 	getDisplayApiFunction  getDisplayModule{nullptr};
 	getAudioApiFunction  getAudioModule{nullptr};
+	void					playAudio(int type);
+	void					stopMusic();
 private:
 	void            loadAPI(std::string const &);
 	void*           mLib{nullptr};
