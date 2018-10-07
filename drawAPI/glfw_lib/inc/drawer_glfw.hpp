@@ -41,6 +41,7 @@ private:
 	std::string		processKey(int key);
 	void			init(std::string const &winName);
 	void			deinit();
+	Drawer();
 	Drawer(Drawer const &);
 	Drawer &operator=(Drawer const &);
 	std::map<int , std::pair<bool, std::string> > mIsBtnPressed;

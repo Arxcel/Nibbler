@@ -54,3 +54,16 @@ void			NibblerDisplaySDL::putText(std::string what, float x, float y, float size
 	mDrawer.putString(what, {x, y}, size, {color[0], color[1], color[2]});
 }
 
+NibblerDisplaySDL::~NibblerDisplaySDL()
+{
+}
+NibblerDisplaySDL::NibblerDisplaySDL(): mDrawer(100, 100, "no name")
+{
+}
+NibblerDisplaySDL::NibblerDisplaySDL(NibblerDisplaySDL const &): mDrawer(100, 100, "no name")
+{
+}
+NibblerDisplaySDL &NibblerDisplaySDL::operator=(NibblerDisplaySDL const &)
+{
+    return *this;
+}

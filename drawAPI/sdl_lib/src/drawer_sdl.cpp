@@ -34,7 +34,6 @@ void Drawer::init(int width, int height, std::string const &winName)
 	mWindow = SDL_CreateWindow(winName.c_str(),SDL_WINDOWPOS_CENTERED,SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_OPENGL);
 	mContext = SDL_GL_CreateContext(mWindow);
 	SDL_GL_MakeCurrent(mWindow, mContext);
-	std::cout << "Window created" << std::endl;
 	// if (!gladLoadGLLoader(SDL_GL_GetProcAddress))
 	if (!gladLoadGL())
 		throw CustomException("Failed to initialize GLAD");

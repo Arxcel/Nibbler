@@ -28,7 +28,6 @@ enum class Direction {
 class Snake {
 public:
 	Snake(std::array<float, 2>, float, int);
-	Snake() = delete;
 	~Snake();
 	Snake(Snake const &);
 	Snake &operator=(Snake const &);
@@ -39,6 +38,7 @@ public:
 	int		&getSpeed();
 	void	grow();
 private:
+	Snake();
 	std::array<float, 3> mColor;
 	Direction	mCurrentDir;
 	Direction	mNextDir;

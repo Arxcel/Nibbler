@@ -16,6 +16,7 @@ class NibblerDisplaySFML : public INibblerDisplay
 {
 public:
 	NibblerDisplaySFML(int width, int height, const char *winName);
+	~NibblerDisplaySFML();
 	void preFrame() override;
 	void postFrame() override;
 	void			draw(int
@@ -28,6 +29,9 @@ public:
 	void			deinitializeApi() override;
 	const char	*getInput(bool &) override;
 private:
+	NibblerDisplaySFML();
+	NibblerDisplaySFML(NibblerDisplaySFML const &);
+	NibblerDisplaySFML &operator=(NibblerDisplaySFML const &);
 	Drawer mDrawer;
 };
 #endif

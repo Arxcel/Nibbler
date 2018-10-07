@@ -25,6 +25,8 @@ public:
     void deinit() override;
 
 private:
+    NibblerAudio(NibblerAudio const &);
+    NibblerAudio &operator=(NibblerAudio const &);
     std::vector<Mix_Chunk *> mCollection;
     Mix_Music *mMainTheme;
  };

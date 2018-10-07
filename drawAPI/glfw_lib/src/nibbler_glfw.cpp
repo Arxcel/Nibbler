@@ -56,3 +56,16 @@ void			NibblerDisplayGLFW::putText(std::string what, float x, float y, float siz
 	mDrawer.putString(what, {x, y}, size, {color[0], color[1], color[2]});
 }
 
+NibblerDisplayGLFW::~NibblerDisplayGLFW()
+{
+}
+NibblerDisplayGLFW::NibblerDisplayGLFW(): mDrawer(100, 100, "no name")
+{
+}
+NibblerDisplayGLFW::NibblerDisplayGLFW(NibblerDisplayGLFW const &): mDrawer(100, 100, "no name")
+{
+}
+NibblerDisplayGLFW &NibblerDisplayGLFW::operator=(NibblerDisplayGLFW const &)
+{
+    return *this;
+}

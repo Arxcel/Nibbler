@@ -25,11 +25,9 @@ public:
 	std::vector< std::shared_ptr<GameObject> > bricks;
 	std::vector< std::shared_ptr<GameObject> > food;
 	// Constructor
-	GameLevel() = delete;
 	GameLevel(int width, int heigth, int size, bool hardMod);
 	~GameLevel();
-	GameLevel(GameLevel const &);
-	GameLevel &operator=(GameLevel const &);
+
 	void	addFood(std::shared_ptr<GameObject> aFood);
 	// Loads level from file
 //	void	load(std::string const & path, int levelWidth, int levelHeight);
@@ -37,6 +35,9 @@ public:
 	bool	isCompleted();
 private:
 	// Initialize level from tile data
+    GameLevel();
+    GameLevel(GameLevel const &);
+    GameLevel &operator=(GameLevel const &);
 	void	init();
 	size_t	mLevelWidth, mLevelHeight, mSize;
 	bool mIsHard;

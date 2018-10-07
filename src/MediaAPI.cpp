@@ -58,6 +58,7 @@ void MediaAPI::putText(std::string text, float x, float y, float s, std::array<f
 MediaAPI::~MediaAPI()
 {
     mAPI->deinitializeApi();
+    mAudioAPI->deinit();
 	if (mLib)
 		dlclose(mLib);
 };

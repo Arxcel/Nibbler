@@ -26,17 +26,14 @@ Snake::Snake(std::array<float, 2> pos, float size, int length) : mColor({{1.0f, 
 	mBody.emplace_back(std::make_shared<GameObject>(5, pos[0], pos[1] + size * (mLength), size, 0, mColor));
 };
 
-Snake::~Snake()
-{
-};
-
-
 void	Snake::grow()
 {
 	mLength++;
 	mBody.emplace_back(std::make_shared<GameObject>(2, -100, -100, mSize, 0 , mColor));
 }
 
+Snake::~Snake() {};
+Snake::Snake() {};
 Snake::Snake(Snake const &) {};
 Snake &Snake::operator=(Snake const &) { return *this; };
 

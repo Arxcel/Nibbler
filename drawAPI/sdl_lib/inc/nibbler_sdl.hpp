@@ -16,6 +16,7 @@ class NibblerDisplaySDL : public INibblerDisplay
 {
 public:
 	NibblerDisplaySDL(int width, int height, const char *winName);
+	~NibblerDisplaySDL();
 	void preFrame() override;
 	void postFrame() override;
 	void			draw(int
@@ -28,6 +29,9 @@ public:
 	void			deinitializeApi() override;
 	const char	*getInput(bool &) override;
 private:
+    NibblerDisplaySDL();
+    NibblerDisplaySDL(NibblerDisplaySDL const &);
+    NibblerDisplaySDL &operator=(NibblerDisplaySDL const &);
 	Drawer mDrawer;
 };
 

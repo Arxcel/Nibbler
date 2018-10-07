@@ -16,6 +16,7 @@ class NibblerDisplayGLFW : public INibblerDisplay
 {
 public:
 	NibblerDisplayGLFW(int width, int height, const char *winName);
+	~NibblerDisplayGLFW();
 	void preFrame() override;
 	void postFrame() override;
 	void			draw(int
@@ -28,6 +29,9 @@ public:
 	void			deinitializeApi() override;
 	const char	*getInput(bool &) override;
 private:
+	NibblerDisplayGLFW();
+	NibblerDisplayGLFW(NibblerDisplayGLFW const &);
+	NibblerDisplayGLFW &operator=(NibblerDisplayGLFW const &);
 	Drawer mDrawer;
 };
 

@@ -20,11 +20,7 @@ class GameObject
 {
 public:
 	~GameObject();
-	GameObject() = delete;
 	GameObject(int, float, float, float, float, std::array<float, 3>);
-	GameObject(GameObject const &);
-	GameObject &operator=(GameObject const &);
-
 	// Object state
 	int						mType;
 	float 					x;
@@ -34,5 +30,9 @@ public:
 	std::array<float, 3>	mColor;
 	// Draw sprite
 	virtual void draw(std::shared_ptr<MediaAPI> const &);
+private:
+	GameObject(GameObject const &);
+	GameObject &operator=(GameObject const &);
+	GameObject();
 };
 #endif //NIBBLER_GAMEOBJECT_HPP

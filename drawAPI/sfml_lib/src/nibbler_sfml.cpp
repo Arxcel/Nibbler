@@ -54,3 +54,16 @@ void			NibblerDisplaySFML::putText(std::string what, float x, float y, float siz
 	mDrawer.putString(what, {x, y}, size, {color[0], color[1], color[2]});
 }
 
+NibblerDisplaySFML::~NibblerDisplaySFML()
+{
+}
+NibblerDisplaySFML::NibblerDisplaySFML(): mDrawer(100, 100, "no name")
+{
+}
+NibblerDisplaySFML::NibblerDisplaySFML(NibblerDisplaySFML const &): mDrawer(100, 100, "no name")
+{
+}
+NibblerDisplaySFML &NibblerDisplaySFML::operator=(NibblerDisplaySFML const &)
+{
+	return *this;
+}

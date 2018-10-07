@@ -36,7 +36,6 @@ void Drawer::init(std::string const &winName)
 	shader->setInt("image", 0);
 	shader->setMat4("projection", projection);
 	mSpriteRenderer = std::make_shared<SpriteRenderer>(shader);
-	system("pwd");
 	mRessourceManager.loadTexture("./drawAPI/asset/snake-1/head.png", "head", true);
 	mRessourceManager.loadTexture("./drawAPI/asset/snake-1/body.png", "body", true);
 	mRessourceManager.loadTexture("./drawAPI/asset/snake-1/body_turn_left.png", "body_turn_left", true);
@@ -144,9 +143,9 @@ Drawer::Drawer(int width, int height, std::string const &winName)
 
 Drawer::~Drawer()
 {
-	std::cout << "glfw finished " << std::endl;
 	deinit();
 };
 
+Drawer::Drawer(){};
 Drawer::Drawer(Drawer const &) {};
 Drawer &Drawer::operator=(Drawer const &) { return *this; };

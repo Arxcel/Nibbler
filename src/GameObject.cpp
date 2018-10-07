@@ -12,6 +12,7 @@ GameObject::GameObject(int type
 {
 };
 
+GameObject::GameObject(){ };
 
 GameObject::~GameObject() {};
 

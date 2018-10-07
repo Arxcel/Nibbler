@@ -36,11 +36,14 @@ SDL2_P		= -rpath @loader_path/nibbler_3rdparty/sdl/
 
 libSDL		= $(SDL2_P) $(SDL2_F)
 
+HH          = ../drawAPI/inc/
+
 HEADERS =	-I$(I_DIR) \
 			-I$(libSDL_DIR)/SDL2.framework/Headers/ \
 			-I$(libSDL_DIR)/SDL2_mixer.framework/Headers/
 
-SOURCES =	nibbler_audio.cpp
+SOURCES =	nibbler_audio.cpp \
+            CustomException.cpp
 
 SRCS = $(addprefix $(S_DIR)/,$(SOURCES))
 

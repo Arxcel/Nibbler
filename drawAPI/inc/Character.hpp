@@ -19,9 +19,9 @@ public:
 	glm::ivec2	mBearing;
 	GLuint		mAdvance;
 
+private:
 	Character(Character const &);
 	Character &operator=(Character const&);
-private:
 	Character();
 };
 

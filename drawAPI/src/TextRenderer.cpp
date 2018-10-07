@@ -44,7 +44,7 @@ void TextRenderer::loadFont(std::string font, GLuint fontSize)
 	{
 		if (FT_Load_Char(face, c, FT_LOAD_RENDER))
 		{
-			std::cout << "ERROR::FREETYTPE: Failed to load Glyph" << std::endl;
+			std::cerr << "ERROR::FREETYTPE: Failed to load Glyph" << std::endl;
 			continue;
 		}
 		mChars.emplace(c, std::make_shared<Character>(face));

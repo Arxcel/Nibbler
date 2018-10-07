@@ -23,6 +23,10 @@ GameLevel::GameLevel(int width, int height, int size, bool hardMod) :
 	init();
 };
 
+GameLevel::GameLevel()
+{
+};
+
 GameLevel::~GameLevel()
 {
 };
