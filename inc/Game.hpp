@@ -25,7 +25,7 @@ public:
 	~Game();
 	Game(Game const &);
 	Game &operator=(Game const &);
-	bool		init(std::shared_ptr<Snake> snake, unsigned lib = 0, int w = 800, int h = 600, int s = 50, bool hardMod = false, GameState state = GAME_PAUSED);
+	bool		init(std::shared_ptr<Snake> snake, std::shared_ptr<int> score, unsigned lib = 0, int w = 800, int h = 600, int s = 50, bool hardMod = false, GameState state = GAME_PAUSED);
 	unsigned	start();
 
 private:
@@ -40,9 +40,10 @@ private:
 	std::shared_ptr<Snake>		mSnake;
 	std::shared_ptr<GameLevel>	mLevel;
 	int 						mWidth, mHeight, mSize;
-	int 						mScore;
+	std::shared_ptr<int> 		mScore;
 	int							mPostAction{-1};
 	int							mCurrLib;
+	int							finalScore;
 	std::unordered_set<std::string> mCommands;
 	std::chrono::high_resolution_clock::time_point	mBefore;
 };

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Snake.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arxcel <arxcel@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vkozlov <vkozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/16 23:21:00 by vkozlov           #+#    #+#             */
-/*   Updated: 2018/09/30 17:13:48 by arxcel           ###   ########.fr       */
+/*   Updated: 2018/10/28 14:02:09 by vkozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,28 @@ Snake::Snake(std::array<float, 2> pos, float size, int length) : mColor({{1.0f, 
 																 mSize(size),
 																 mSpeed(5)
 {
-	mBody.emplace_back(std::make_shared<GameObject>(1, pos[0], pos[1], size, 0, mColor));
-	for (size_t i = 1; i < mLength; ++i)
-		mBody.emplace_back(std::make_shared<GameObject>(2, pos[0], pos[1] + size * i, size, 0 , mColor));
-	mBody.emplace_back(std::make_shared<GameObject>(5, pos[0], pos[1] + size * (mLength), size, 0, mColor));
+	mBasicPos = pos;
+	mBasicLength = length;
+	reset();
 };
 
 void	Snake::grow()
 {
 	mLength++;
 	mBody.emplace_back(std::make_shared<GameObject>(2, -100, -100, mSize, 0 , mColor));
+}
+
+void Snake::reset()
+{
+	mBody.clear();
+	mLength = mBasicLength;
+	mSpeed = 5;
+	mCurrentDir = Direction::UP;
+	mNextDir = Direction::UP;
+	mBody.emplace_back(std::make_shared<GameObject>(1, mBasicPos[0], mBasicPos[1], mSize, 0, mColor));
+	for (size_t i = 1; i < mLength; ++i)
+		mBody.emplace_back(std::make_shared<GameObject>(2, mBasicPos[0], mBasicPos[1] + mSize * i, mSize, 0 , mColor));
+	mBody.emplace_back(std::make_shared<GameObject>(5, mBasicPos[0], mBasicPos[1] + mSize * (mLength), mSize, 0, mColor));
 }
 
 Snake::~Snake() {};

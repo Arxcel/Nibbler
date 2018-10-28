@@ -4,18 +4,17 @@
 
 std::vector<std::string> cActions = { "UP", "DOWN", "RIGHT", "LEFT", "Faster", "Slower", "Pause", "LIB1", "LIB2", "LIB3"};
 
-bool	Game::init(std::shared_ptr<Snake> snake, unsigned lib, int w, int h, int s, bool hardMod, GameState state)
+bool	Game::init(std::shared_ptr<Snake> snake, std::shared_ptr<int> score, unsigned lib, int w, int h, int s, bool hardMod, GameState state)
 {
 	try
 	{
 		mWidth = w;
 		mHeight = h;
 		mSize = s;
-		mScore = 0;
+		mScore = score;
 		mApi = std::make_shared<MediaAPI>(mWidth, mHeight, lib);
 		mCurrLib = static_cast<int>(lib);
-		// std::array<float, 2> pos{{static_cast<float>(mWidth % 2 == 0 ? mWidth : mWidth + 1), static_cast<float>(mHeight % 2 == 0 ? mHeight : mHeight + 1)}};
-		mSnake = snake;//std::make_shared<Snake>(pos, mSize, 5);
+		mSnake = snake;
 		mBefore = std::chrono::high_resolution_clock::now();
 		mLevel = std::make_shared<GameLevel>(mWidth * 2, mHeight * 2, mSize, hardMod);
 		mCommands.clear();
@@ -62,8 +61,8 @@ void	Game::update()
 		mLevel->food.clear();
 		mSnake->grow();
 		mApi->playAudio(1);
-		mScore += 10;
-		if (mScore % 100 == 0)
+		*mScore += 10;
+		if (*mScore % 100 == 0)
 		{
 			mSnake->getSpeed() += 3;
 			mApi->playAudio(0);
@@ -76,6 +75,9 @@ void	Game::update()
 		{
 			mState = GameState::GAME_OVER;
 			mApi->stopMusic();
+			mSnake->reset();
+			finalScore = *mScore;
+			*mScore = 0;
 		}
 
 	for (auto &part : mSnake->mBody)
@@ -83,6 +85,9 @@ void	Game::update()
 		{
 			mState = GameState::GAME_OVER;
 			mApi->stopMusic();
+			mSnake->reset();
+			finalScore = *mScore;
+			*mScore = 0;
 		}}
 
 void	Game::addFood()
@@ -199,7 +204,7 @@ unsigned Game::start()
 			update();
 			mLevel->draw(mApi);
 			mSnake->draw(mApi);
-			mApi->putText("Score: " + std::to_string(mScore), 5, 5, 0.7, {{1, 1, 1}});
+			mApi->putText("Score: " + std::to_string(*mScore), 5, 5, 0.7, {{1, 1, 1}});
 			mApi->putText("Speed: " + std::to_string(mSnake->getSpeed()), 5, mHeight - 24 * 0.7f, 0.7, {{1, 1, 1}});
 		}
 		else if (mState == GameState::GAME_START)
@@ -210,13 +215,13 @@ unsigned Game::start()
 		{
 			mLevel->draw(mApi);
 			mSnake->draw(mApi);
-			mApi->putText("Score: " + std::to_string(mScore), 5, 5, 0.7, {{1, 1, 1}});
+			mApi->putText("Score: " + std::to_string(*mScore), 5, 5, 0.7, {{1, 1, 1}});
 			mApi->putText("Paused", mWidth / 2.0f - 75, mHeight / 2.0f - 30, 2, {{1, 0.5, 0.5}});
 		}
 		else if (mState == GameState::GAME_OVER)
 		{
 			mApi->putText("GAME is OVER", mWidth / 2.0f - 200, mHeight / 2.0f - 30, 1.5, {{1, 0.5, 0.5}});
-			mApi->putText("Final score: " + std::to_string(mScore), mWidth / 2.0f - 200, mHeight / 2.0f + 30, 1, {{1, 0.5, 0.5}});
+			mApi->putText("Final score: " + std::to_string(finalScore), mWidth / 2.0f - 200, mHeight / 2.0f + 30, 1, {{1, 0.5, 0.5}});
 			mApi->putText("Press 'SPACE' to start 'New Game'", mWidth / 2.0f - 200, mHeight / 2.0f + 90, 1, {{1, 0.5, 0.5}});
 		}
 		mApi->postFrame();

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Snake.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arxcel <arxcel@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vkozlov <vkozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/16 23:21:00 by vkozlov           #+#    #+#             */
-/*   Updated: 2018/09/30 17:13:48 by arxcel           ###   ########.fr       */
+/*   Updated: 2018/10/28 13:38:29 by vkozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,12 @@ public:
 	void	setDirection(Direction d);
 	int		&getSpeed();
 	void	grow();
+	void	reset();
 private:
 	Snake();
 	std::array<float, 3> mColor;
+	std::array<float, 2> mBasicPos;
+	int					mBasicLength;
 	Direction	mCurrentDir;
 	Direction	mNextDir;
 	size_t		mLength;
