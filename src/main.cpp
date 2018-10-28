@@ -1,4 +1,5 @@
 #include "Game.hpp"
+#include <array>
 
 namespace
 {
@@ -60,17 +61,23 @@ int main(int ac, char *av[])
 	int w{0}, h{0}, s{0};
 	unsigned lib{0};
 	bool hardMod;
+
 	try
 	{
 		if (processCommand(ac, av, w, h, s, lib, hardMod))
+		{
+			std::array<float, 2> position{{static_cast<float>(w % 2 == 0 ? w : w + 1), static_cast<float>(h % 2 == 0 ? h : h + 1)}};
+			auto snake = std::make_shared<Snake>(position, s, 5);
+			GameState state = GAME_START;
 			while (lib != static_cast<unsigned >(-1))
 			{
 				Game game;
-				if (game.init(lib, w, h, s, hardMod))
+				if (game.init(snake, lib, w, h, s, hardMod, state))
 					lib = game.start();
 				else
 					break;
 			}
+		}
 	} catch (...)
 	{}
 	return 0;

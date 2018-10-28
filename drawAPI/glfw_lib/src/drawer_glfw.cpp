@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   drawer_glfw.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arxcel <arxcel@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vkozlov <vkozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/08 00:04:00 by vkozlov           #+#    #+#             */
-/*   Updated: 2018/09/30 17:20:33 by arxcel           ###   ########.fr       */
+/*   Updated: 2018/10/28 13:12:38 by vkozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,10 @@ void Drawer::init(std::string const &winName)
 	mIsBtnPressed.emplace(GLFW_KEY_S, std::pair<bool, std::string>(false, "DOWN"));
 	mIsBtnPressed.emplace(GLFW_KEY_A, std::pair<bool, std::string>(false, "LEFT"));
 	mIsBtnPressed.emplace(GLFW_KEY_D, std::pair<bool, std::string>(false, "RIGHT"));
+	mIsBtnPressed.emplace(GLFW_KEY_UP, std::pair<bool, std::string>(false, "UP"));
+	mIsBtnPressed.emplace(GLFW_KEY_DOWN, std::pair<bool, std::string>(false, "DOWN"));
+	mIsBtnPressed.emplace(GLFW_KEY_LEFT, std::pair<bool, std::string>(false, "LEFT"));
+	mIsBtnPressed.emplace(GLFW_KEY_RIGHT, std::pair<bool, std::string>(false, "RIGHT"));
 	mIsBtnPressed.emplace(GLFW_KEY_MINUS, std::pair<bool, std::string>(false, "Slower"));
 	mIsBtnPressed.emplace(GLFW_KEY_EQUAL, std::pair<bool, std::string>(false, "Faster"));
 	mIsBtnPressed.emplace(GLFW_KEY_SPACE, std::pair<bool, std::string>(true, "Pause"));

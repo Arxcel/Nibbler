@@ -4,7 +4,7 @@
 
 std::vector<std::string> cActions = { "UP", "DOWN", "RIGHT", "LEFT", "Faster", "Slower", "Pause", "LIB1", "LIB2", "LIB3"};
 
-bool	Game::init(unsigned lib, int w, int h, int s, bool hardMod)
+bool	Game::init(std::shared_ptr<Snake> snake, unsigned lib, int w, int h, int s, bool hardMod, GameState state)
 {
 	try
 	{
@@ -14,12 +14,12 @@ bool	Game::init(unsigned lib, int w, int h, int s, bool hardMod)
 		mScore = 0;
 		mApi = std::make_shared<MediaAPI>(mWidth, mHeight, lib);
 		mCurrLib = static_cast<int>(lib);
-		std::array<float, 2> pos{{static_cast<float>(mWidth % 2 == 0 ? mWidth : mWidth + 1), static_cast<float>(mHeight % 2 == 0 ? mHeight : mHeight + 1)}};
-		mSnake = std::make_shared<Snake>(pos, mSize, 5);
+		// std::array<float, 2> pos{{static_cast<float>(mWidth % 2 == 0 ? mWidth : mWidth + 1), static_cast<float>(mHeight % 2 == 0 ? mHeight : mHeight + 1)}};
+		mSnake = snake;//std::make_shared<Snake>(pos, mSize, 5);
 		mBefore = std::chrono::high_resolution_clock::now();
 		mLevel = std::make_shared<GameLevel>(mWidth * 2, mHeight * 2, mSize, hardMod);
 		mCommands.clear();
-		mState = GameState::GAME_START;
+		mState = state;
 		addFood();
 		return true;
 	}

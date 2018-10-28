@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   drawer_sdl.cpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arxcel <arxcel@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vkozlov <vkozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/08 00:04:00 by vkozlov           #+#    #+#             */
-/*   Updated: 2018/10/01 23:18:23 by arxcel           ###   ########.fr       */
+/*   Updated: 2018/10/28 13:13:26 by vkozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,10 @@ void Drawer::init(int width, int height, std::string const &winName)
 	mIsBtnPressed.emplace(SDLK_s, "DOWN");
 	mIsBtnPressed.emplace(SDLK_a, "LEFT");
 	mIsBtnPressed.emplace(SDLK_d, "RIGHT");
+	mIsBtnPressed.emplace(SDLK_UP, "UP");
+	mIsBtnPressed.emplace(SDLK_DOWN, "DOWN");
+	mIsBtnPressed.emplace(SDLK_LEFT, "LEFT");
+	mIsBtnPressed.emplace(SDLK_RIGHT, "RIGHT");
 	mIsBtnPressed.emplace(SDLK_MINUS, "Slower");
 	mIsBtnPressed.emplace(SDLK_EQUALS, "Faster");
 	mIsBtnPressed.emplace(SDLK_SPACE, "Pause");

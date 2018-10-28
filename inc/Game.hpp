@@ -25,7 +25,7 @@ public:
 	~Game();
 	Game(Game const &);
 	Game &operator=(Game const &);
-	bool		init(unsigned lib = 0, int w = 800, int h = 600, int s = 50, bool hardMod = false);
+	bool		init(std::shared_ptr<Snake> snake, unsigned lib = 0, int w = 800, int h = 600, int s = 50, bool hardMod = false, GameState state = GAME_PAUSED);
 	unsigned	start();
 
 private:

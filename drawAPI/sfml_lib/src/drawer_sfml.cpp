@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   drawer_sfml.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arxcel <arxcel@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vkozlov <vkozlov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/08 00:04:00 by vkozlov           #+#    #+#             */
-/*   Updated: 2018/10/01 23:18:12 by arxcel           ###   ########.fr       */
+/*   Updated: 2018/10/28 13:14:06 by vkozlov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,10 @@ void Drawer::init(int width, int height, std::string const &winName)
 	mIsBtnPressed.emplace(sf::Keyboard::S, "DOWN");
 	mIsBtnPressed.emplace(sf::Keyboard::A, "LEFT");
 	mIsBtnPressed.emplace(sf::Keyboard::D, "RIGHT");
+	mIsBtnPressed.emplace(sf::Keyboard::Up, "UP");
+	mIsBtnPressed.emplace(sf::Keyboard::Down, "DOWN");
+	mIsBtnPressed.emplace(sf::Keyboard::Left, "LEFT");
+	mIsBtnPressed.emplace(sf::Keyboard::Right, "RIGHT");
 	mIsBtnPressed.emplace(sf::Keyboard::Subtract, "Slower");
 	mIsBtnPressed.emplace(sf::Keyboard::Equal, "Faster");
 	mIsBtnPressed.emplace(sf::Keyboard::Space, "Pause");
