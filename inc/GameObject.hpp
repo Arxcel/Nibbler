@@ -19,7 +19,7 @@
 class GameObject
 {
 public:
-	~GameObject();
+	virtual ~GameObject();
 	GameObject(int, float, float, float, float, std::array<float, 3>);
 	// Object state
 	int						mType;
